@@ -1,4 +1,3 @@
-
 package br.senai.F1Devs.entidade.Usuario;
 
 import java.sql.Connection;
@@ -34,44 +33,45 @@ public class Usuario {
         return true;
     }
 
+    // Autenticação do usuário
     public boolean autenticarUsuario() throws ClassNotFoundException {
-    Connection con = Conexao.conectar();
-    String sql = "SELECT id, username, password, bloqueado, tentativas FROM usuario WHERE username = ?";
-    try {
-        PreparedStatement stm = con.prepareStatement(sql);
-        stm.setString(1, this.getUsername());
-        ResultSet rs = stm.executeQuery();
-        if (rs.next()) {
-            int userId = rs.getInt("id");
-            boolean bloqueado = rs.getBoolean("bloqueado");
-            this.tentativas = rs.getInt("tentativas"); // Carrega tentativas do banco
+        Connection con = Conexao.conectar();
+        String sql = "SELECT id, username, password, bloqueado, tentativas FROM usuario WHERE username = ?";
+        try {
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, this.getUsername());
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                int userId = rs.getInt("id");
+                boolean bloqueado = rs.getBoolean("bloqueado");
+                this.tentativas = rs.getInt("tentativas"); // Carrega tentativas do banco
 
-            if (bloqueado) {
-                return false; // Usuário está bloqueado
-            }
+                if (bloqueado) {
+                    return false; // Usuário está bloqueado
+                }
 
-            // Verifica a senha
-            if (rs.getString("password").equals(this.getPassword())) {
-                resetarTentativas(); // Reseta tentativas ao logar
-                atualizarTentativas(userId, 0); // Reseta tentativas no banco
-                return true; // Login bem-sucedido
-            } else {
-                incrementarTentativas();
-                if (this.tentativas >= 3) {
-                    bloquearUsuario(userId); // Bloqueia o usuário após 3 tentativas
+                // Verifica a senha
+                if (rs.getString("password").equals(this.getPassword())) {
+                    resetarTentativas(); // Reseta tentativas ao logar
+                    atualizarTentativas(userId, 0); // Reseta tentativas no banco
+                    return true; // Login bem-sucedido
                 } else {
-                    atualizarTentativas(userId, this.tentativas); // Atualiza tentativas no banco
+                    incrementarTentativas();
+                    if (this.tentativas >= 3) {
+                        bloquearUsuario(userId); // Bloqueia o usuário após 3 tentativas
+                    } else {
+                        atualizarTentativas(userId, this.tentativas); // Atualiza tentativas no banco
+                    }
                 }
             }
+        } catch (SQLException e) {
+            System.out.println("Erro na consulta do usuario: " + e.getMessage());
+            return false;
         }
-    } catch (SQLException e) {
-        System.out.println("Erro na consulta do usuario: " + e.getMessage());
-        return false;
+        return false; // Login mal-sucedido
     }
-    return false; // Login mal-sucedido
-}
 
-
+    // Atualizar tentativas
     public void atualizarTentativas(int id, int tentativas) throws ClassNotFoundException {
         String sql = "UPDATE usuario SET tentativas = ? WHERE id = ?";
         try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
@@ -83,6 +83,7 @@ public class Usuario {
         }
     }
 
+    // Bloquear usuário
     public boolean bloquearUsuario(int id) throws ClassNotFoundException {
         String sql = "UPDATE usuario SET bloqueado = ?, tentativas = ? WHERE id = ?";
         try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
@@ -97,6 +98,7 @@ public class Usuario {
         }
     }
 
+    // Desbloquear usuário
     public boolean desbloquearUsuario(String username, String novaSenha) throws ClassNotFoundException {
         String sql = "UPDATE usuario SET bloqueado = ?, password = ?, tentativas = ? WHERE username = ?";
         try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
@@ -112,6 +114,7 @@ public class Usuario {
         }
     }
 
+    // Listar usuários ativos
     public List<Usuario> listarUsuariosAtivos() throws ClassNotFoundException {
         List<Usuario> listarUsuarios = new ArrayList<>();
         Connection con = Conexao.conectar();
@@ -133,6 +136,7 @@ public class Usuario {
         return listarUsuarios;
     }
 
+    // Listar usuários bloqueados
     public List<Usuario> listarUsuariosBloqueados() throws ClassNotFoundException {
         List<Usuario> listarUsuarios = new ArrayList<>();
         Connection con = Conexao.conectar();
@@ -154,14 +158,17 @@ public class Usuario {
         return listarUsuarios;
     }
 
+    // Incrementar tentativas
     public void incrementarTentativas() {
         this.tentativas++;
     }
 
+    // Resetar tentativas
     public void resetarTentativas() {
         this.tentativas = 0;
     }
 
+    // Getters e Setters
     public int getTentativas() {
         return tentativas;
     }

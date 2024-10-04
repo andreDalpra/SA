@@ -1,17 +1,22 @@
 package br.senai.F1Devs.controle.Servlet;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import br.senai.F1Devs.entidade.Usuario.Usuario;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/")
+@WebServlet("/Servlet") // Define o servlet para ser acessado em /Servlet
 public class Servlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+
+    // Construtor padrão do Servlet
+    public Servlet() {
+        super();
+    }
 
     // Método que instancia o objeto Usuario
     private Usuario instanciarUsuario(HttpServletRequest request) {
@@ -21,6 +26,7 @@ public class Servlet extends HttpServlet {
         return usu;
     }
 
+    // Método para tratar requisições POST
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -31,33 +37,35 @@ public class Servlet extends HttpServlet {
             switch (action) {
                 case "logar":
                     if (usuario.autenticarUsuario()) {
-                        // Login bem-sucedido
+                        // Login bem-sucedido, redireciona para a página home
                         response.sendRedirect("home.jsp");
                     } else {
-                        // Falha no login
+                        // Login falhou, redireciona de volta para a página de login com erro
                         response.sendRedirect("index.jsp?error=true");
                     }
                     break;
 
                 case "registrar":
-                    // Implemente a lógica para registro de usuário aqui
+                    // Lógica de registro (a ser implementada)
                     break;
 
                 case "desbloquear":
-                    // Implemente a lógica para desbloquear usuário aqui
+                    // Lógica de desbloqueio (a ser implementada)
                     break;
 
                 default:
-                    // Caso ação não seja reconhecida, redirecionar para uma página de erro
+                    // Caso ação não seja reconhecida, redireciona para uma página de erro
                     response.sendRedirect("error.jsp");
                     break;
             }
 
         } catch (Exception ex) {
-            throw new ServletException(ex);
+            ex.printStackTrace();
+            response.sendRedirect("index.jsp?error=exception");
         }
     }
 
+    // Método para tratar requisições GET
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response); // Redireciona para o doPost
