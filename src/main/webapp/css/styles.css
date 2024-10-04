@@ -1,1 +1,154 @@
-@charset "ISO-8859-1";
+/* Estilos gerais */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Arial', sans-serif;
+	background-color: #eef2f5;
+	/* Fundo suave */
+	height: 100vh;
+	/* Define a altura da viewport */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+form {
+	background-color: #ffffff;
+	/* Fundo branco */
+	padding: 40px;
+	border-radius: 12px;
+	/* Borda arredondada */
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+	/* Sombra suave */
+	width: 100%;
+	max-width: 400px;
+	/* Largura máxima do formulário */
+	transition: transform 0.2s;
+	/* Transição suave */
+}
+
+form:hover {
+	transform: translateY(-5px);
+	/* Eleva levemente o formulário ao passar o mouse */
+}
+
+/* Estilo das labels */
+label {
+	font-size: 16px;
+	color: #555;
+	/* Cor mais suave para as labels */
+	display: block;
+	margin-bottom: 8px;
+}
+
+/* Estilo dos inputs */
+input {
+	width: 100%;
+	padding: 12px;
+	font-size: 16px;
+	margin-bottom: 20px;
+	border: 2px solid #ddd;
+	/* Borda mais grossa */
+	border-radius: 8px;
+	/* Borda arredondada */
+	transition: border-color 0.3s ease;
+	/* Transição suave para foco */
+}
+
+input:focus {
+	border-color: #3498db;
+	/* Cor azul no foco */
+	outline: none;
+	/* Remove o contorno padrão */
+}
+
+/* Estilo dos botões */
+button,
+.btn-register {
+	width: 100%;
+	padding: 14px;
+	font-size: 18px;
+	border: none;
+	border-radius: 8px;
+	/* Borda arredondada */
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	/* Transição suave de cor */
+}
+
+/* Estilo do botão Login */
+button.btn-login {
+	background-color: #28a745;
+	/* Verde vibrante */
+	color: white;
+	/* Texto branco */
+	font-weight: bold;
+	/* Texto em negrito */
+}
+
+button.btn-login:hover {
+	background-color: #218838;
+	/* Verde mais escuro no hover */
+}
+
+/* Estilo do link "Esqueceu sua senha?" */
+a.btn-senha {
+	display: inline-block;
+	/* Mostra o link como um bloco */
+	text-align: center;
+	/* Centraliza o texto */
+	color: #007bff;
+	/* Cor do link */
+	text-decoration: none;
+	/* Remove o sublinhado */
+	margin-top: 10px;
+	/* Espaço acima do link */
+	font-weight: bold;
+	/* Texto em negrito */
+}
+
+a.btn-senha:hover {
+	text-decoration: underline;
+	/* Sublinha no hover */
+	color: #0056b3;
+	/* Cor mais escura no hover */
+}
+
+
+/* Estilo do botão Cadastrar */
+a.btn-register {
+	display: inline-block;
+	text-align: center;
+	background-color: #007bff;
+	/* Azul vibrante */
+	color: white;
+	/* Texto branco */
+	text-decoration: none;
+	margin-top: 10px;
+	padding: 14px;
+	border-radius: 8px;
+	/* Borda arredondada */
+	font-weight: bold;
+	/* Texto em negrito */
+}
+
+a.btn-register:hover {
+	background-color: #0056b3;
+	/* Azul mais escuro no hover */
+}
+
+/* Estilo do texto do título */
+h2.card-title {
+	font-size: 32px;
+	/* Aumenta o tamanho da fonte do título */
+	text-align: center;
+	/* Centraliza o texto do título */
+	margin-bottom: 20px;
+	/* Espaço abaixo do título */
+	color: #333;
+	/* Cor do título */
+}
