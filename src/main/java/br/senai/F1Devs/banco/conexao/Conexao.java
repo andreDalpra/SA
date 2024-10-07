@@ -1,5 +1,5 @@
 
-package br.senai.F1Devs.banco.Conexao;
+package br.senai.F1Devs.banco.conexao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -22,17 +22,5 @@
         <a href="cadastro.html" class="btn-register">Cadastrar-se</a> 
         <a href="resetarSenha.html" class="btn-senha">Esqueceu sua senha?</a>
     </form>
-
-    <!-- Mensagem de erro opcional -->
-    <%
-        String error = request.getParameter("error");
-        if (error != null) {
-    %>
-    <div class="error-message">
-        <p>Login ou senha incorretos, ou conta bloqueada.</p>
-    </div>
-    <%
-        }
-    %>
 </body>
 </html>

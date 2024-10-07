@@ -1,15 +1,15 @@
-package br.senai.F1Devs.controle.Servlet;
+package br.senai.F1Devs.controle.servlet;
 
 import java.io.IOException;
 
-import br.senai.F1Devs.entidade.Usuario.Usuario;
+import br.senai.F1Devs.entidade.usuario.Usuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/Servlet") // Define o servlet para ser acessado em /Servlet
+@WebServlet("") // Define o servlet para ser acessado em /Servlet
 public class Servlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

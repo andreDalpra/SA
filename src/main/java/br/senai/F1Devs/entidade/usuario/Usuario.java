@@ -1,4 +1,4 @@
-package br.senai.F1Devs.entidade.Usuario;
+package br.senai.F1Devs.entidade.usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.senai.F1Devs.banco.Conexao.Conexao;
+import br.senai.F1Devs.banco.conexao.Conexao;
 
 public class Usuario {
 
