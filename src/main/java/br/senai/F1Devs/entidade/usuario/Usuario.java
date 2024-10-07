@@ -1,6 +1,7 @@
 package br.senai.F1Devs.entidade.usuario;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -115,12 +116,11 @@ public class Usuario {
     }
 
     // Listar usuários ativos
-    public List<Usuario> listarUsuariosAtivos() throws ClassNotFoundException {
+    private List<Usuario> listarUsuarios(boolean bloqueado) throws ClassNotFoundException {
         List<Usuario> listarUsuarios = new ArrayList<>();
-        Connection con = Conexao.conectar();
-        String sql = "SELECT id, username, password FROM usuario WHERE bloqueado = 0 ORDER BY id";
-        try {
-            PreparedStatement stm = con.prepareStatement(sql);
+        String sql = "SELECT id, username, password FROM usuario WHERE bloqueado = ? ORDER BY id";
+        try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
+            stm.setBoolean(1, bloqueado);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Usuario u = new Usuario();
@@ -130,33 +130,21 @@ public class Usuario {
                 listarUsuarios.add(u);
             }
         } catch (SQLException e) {
-            System.out.println("Erro na lista de usuários");
+            System.out.println("Erro na lista de usuários: " + e.getMessage());
             return null;
         }
         return listarUsuarios;
     }
 
-    // Listar usuários bloqueados
-    public List<Usuario> listarUsuariosBloqueados() throws ClassNotFoundException {
-        List<Usuario> listarUsuarios = new ArrayList<>();
-        Connection con = Conexao.conectar();
-        String sql = "SELECT id, username, password FROM usuario WHERE bloqueado = 1 ORDER BY id";
-        try {
-            PreparedStatement stm = con.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Usuario u = new Usuario();
-                u.setId(rs.getInt("id"));
-                u.setUsername(rs.getString("username"));
-                u.setPassword(rs.getString("password"));
-                listarUsuarios.add(u);
-            }
-        } catch (SQLException e) {
-            System.out.println("Erro na lista de usuários");
-            return null;
-        }
-        return listarUsuarios;
+    // Métodos públicos
+    public List<Usuario> listarUsuariosAtivos() throws ClassNotFoundException {
+        return listarUsuarios(false);
     }
+
+    public List<Usuario> listarUsuariosBloqueados() throws ClassNotFoundException {
+        return listarUsuarios(true);
+    }
+
 
     // Incrementar tentativas
     public void incrementarTentativas() {

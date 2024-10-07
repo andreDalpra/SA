@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Portfolio</title>
-    <style><%@ include file="../css/styles.css" %></style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
 </head>
 <body>
-    <form action="${pageContext.request.contextPath}/Servlet" method="post">
+    <form action="${pageContext.request.contextPath}/servlet" method="post">
         <input type="hidden" name="action" value="logar"> <!-- Define a ação como 'logar' -->
         <h2 class="card-title text-center">Login</h2>
         <div class="form-group">

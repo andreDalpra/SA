@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("") // Define o servlet para ser acessado em /Servlet
+@WebServlet("/servlet") // Define o servlet para ser acessado em /Servlet
 public class Servlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -61,7 +61,7 @@ public class Servlet extends HttpServlet {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            response.sendRedirect("index.jsp?error=exception");
+            response.sendRedirect("index.jsp");
         }
     }
 
