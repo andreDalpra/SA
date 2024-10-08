@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Portfolio</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
     <form action="${pageContext.request.contextPath}/servlet" method="post">
@@ -19,8 +19,8 @@
             <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
         </div>
         <button type="submit" class="btn-login">Login</button>
-        <a href="cadastro.html" class="btn-register">Cadastrar-se</a> 
-        <a href="resetarSenha.html" class="btn-senha">Esqueceu sua senha?</a>
+        <a href="." class="btn-register">Cadastrar-se</a> 
+        <a href="resetarSenha.jsp" class="btn-senha">Esqueceu sua senha?</a>
     </form>
 </body>
 </html>

@@ -12,12 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/servlet") // Define o servlet para ser acessado em /Servlet
 public class Servlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    // Construtor padrão do Servlet
-    public Servlet() {
-        super();
-    }
-
     // Método que instancia o objeto Usuario
     private Usuario instanciarUsuario(HttpServletRequest request) {
         Usuario usu = new Usuario();
@@ -46,11 +40,21 @@ public class Servlet extends HttpServlet {
                     break;
 
                 case "registrar":
-                    // Lógica de registro (a ser implementada)
+                    if(usuario.incluirUsuario()) {
+                    	response.sendRedirect("index.jsp");
+                    }
+                    else {
+                    	response.sendRedirect("cadastro.jsp?error=true");
+                    }
                     break;
 
                 case "desbloquear":
-                    // Lógica de desbloqueio (a ser implementada)
+                	String novaSenha = (request.getParameter("novaSenha"));
+       
+                    if(usuario.desbloquearUsuario(usuario.getUsername(), novaSenha)) {
+                    	response.sendRedirect("desbloqueado.html");
+                    }
+                    	
                     break;
 
                 default:

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
-    <form action="${pageContext.request.contextPath}/" method="post">
+    <form action="${pageContext.request.contextPath}/servlet" method="post">
         <input type="hidden" name="action" value="registrar"> <!-- Define a ação como 'logar' -->
         <h2 class="card-title text-center">Cadastro</h2> <!-- Adicionando um título para o formulário -->
         <div class="form-group">
@@ -19,7 +19,7 @@
             <input type="password" id="password" name="password" placeholder="Crie uma senha">
         </div>
         <button type="submit" class="btn-login">Cadastrar</button>
-        <a href="index.html" class="btn-register">Voltar</a>
+        <a href="index.jsp" class="btn-register">Voltar</a>
     </form>
 </body>
 </html>
