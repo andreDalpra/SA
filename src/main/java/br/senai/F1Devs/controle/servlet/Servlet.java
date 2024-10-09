@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/servlet") // Define o servlet para ser acessado em /Servlet
+@WebServlet("/servlet") // Define o servlet para ser acessado em /servlet
 public class Servlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     // Método que instancia o objeto Usuario
@@ -50,7 +50,7 @@ public class Servlet extends HttpServlet {
 
                 case "desbloquear":
                 	String novaSenha = (request.getParameter("novaSenha"));
-       
+                    
                     if(usuario.desbloquearUsuario(usuario.getUsername(), novaSenha)) {
                     	response.sendRedirect("desbloqueado.html");
                     }

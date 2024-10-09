@@ -19,8 +19,8 @@
             <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
         </div>
         <button type="submit" class="btn-login">Login</button>
-        <a href="." class="btn-register">Cadastrar-se</a> 
-        <a href="resetarSenha.jsp" class="btn-senha">Esqueceu sua senha?</a>
+        <a href="${pageContext.request.contextPath}/paginas/usuario/cadastro.jsp" class="btn-register">Cadastrar-se</a> 
+        <a href="${pageContext.request.contextPath}/paginas/usuario/resetarSenha.jsp" class="btn-senha">Esqueceu sua senha?</a>
     </form>
 </body>
 </html>

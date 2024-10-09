@@ -8,8 +8,8 @@
 </head>
 <body>
     <form action="${pageContext.request.contextPath}/servlet" method="post">
-        <input type="hidden" name="action" value="registrar"> <!-- Define a ação como 'logar' -->
-        <h2 class="card-title text-center">Cadastro</h2> <!-- Adicionando um título para o formulário -->
+        <input type="hidden" name="action" value="registrar"> 
+        <h2 class="card-title text-center">Cadastro</h2> 
         <div class="form-group">
             <b><label for="username">User :</label></b>
             <input type="text" id="username" name="username" placeholder="Crie seu username">
@@ -19,7 +19,7 @@
             <input type="password" id="password" name="password" placeholder="Crie uma senha">
         </div>
         <button type="submit" class="btn-login">Cadastrar</button>
-        <a href="index.jsp" class="btn-register">Voltar</a>
+        <a href="${pageContext.request.contextPath}/index.jsp" class="btn-register">Voltar</a>
     </form>
 </body>
 </html>
