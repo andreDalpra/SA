@@ -17,18 +17,18 @@ public class Usuario {
     private String password;
     private boolean bloqueado = false;
     private boolean ativo = true;
-    private boolean adm = false;
+    private int nivel = 0;
     private int tentativas = 0; // Contador de tentativas
 
     // Inclusão de Usuario
     public boolean incluirUsuario() throws ClassNotFoundException {
-        String sql = "INSERT INTO usuario (username, password, bloqueado, ativo, adm, tentativas) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario (username, password, bloqueado, ativo, nivel, tentativas) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
             stm.setString(1, this.getUsername());
             stm.setString(2, this.getPassword());
             stm.setBoolean(3, this.isBloqueado());
             stm.setBoolean(4, this.isAtivo());
-            stm.setBoolean(5, this.isAdm());
+            stm.setInt(5,this.getNvel());
             stm.setInt(6, this.getTentativas()); // Armazena tentativas ao incluir
             stm.executeUpdate(); // Use executeUpdate() para INSERT
         } catch (SQLException e) {
@@ -41,7 +41,7 @@ public class Usuario {
     // Autenticação do usuário
     public boolean autenticarUsuario() throws ClassNotFoundException {
         Connection con = Conexao.conectar();
-        String sql = "SELECT id, username, password, bloqueado, ativo, adm, tentativas FROM usuario WHERE username = ?";
+        String sql = "SELECT id, username, password, bloqueado, ativo, nivel, tentativas FROM usuario WHERE username = ?";
         try {
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, this.getUsername());
@@ -205,12 +205,12 @@ public class Usuario {
 		this.ativo = ativo;
 	}
 
-	public boolean isAdm() {
-		return adm;
+	public int getNvel() {
+		return nivel;
 	}
 
-	public void setAdm(boolean adm) {
-		this.adm = adm;
+	public void setnivel(int nivel) {
+		this.nivel = nivel;
 	}
         
 }
