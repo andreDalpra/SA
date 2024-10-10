@@ -19,19 +19,20 @@ public class Servlet extends HttpServlet {
 		usu.setUsername(request.getParameter("username"));
 		usu.setPassword(request.getParameter("password"));
 		String cargo = request.getParameter("cargo");
-		int nivel = 2;
+		int nivel = 10;
 		switch (cargo) {
-		
+
 		case "adm":
 			nivel = 0;
 			break;
 
-		case "desenvolvedor":
+		case "dev":
 			nivel = 1;
 			break;
 
 		case "analista":
-			nivel = 2;;
+			nivel = 2;
+			;
 			break;
 		default:
 			break;
@@ -51,16 +52,13 @@ public class Servlet extends HttpServlet {
 			switch (action) {
 			case "logar":
 				if (usuario.autenticarUsuario()) {
-					if (usuario.getNvel() == 0) {
+					if (usuario.getNivel() == 0) {
 						response.sendRedirect("home.jsp");
-					}
-					if (usuario.getNvel() == 1) {
+					} else if (usuario.getNivel() == 1) {
 						response.sendRedirect("homeDev.jsp");
-					}
-					if (usuario.getNvel() == 2) {
+					} else if (usuario.getNivel() == 2) {
 						response.sendRedirect("homeAnalista.jsp");
 					}
-					
 				} else {
 					// Login falhou, redireciona de volta para a página de login com erro
 					response.sendRedirect("index.jsp?error=true");
@@ -92,7 +90,7 @@ public class Servlet extends HttpServlet {
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("index.jsp?error");
 		}
 	}
 

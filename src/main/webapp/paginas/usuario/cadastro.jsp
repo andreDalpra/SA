@@ -24,7 +24,7 @@
                 <option value="">Selecione o cargo</option> 
                 <option value="analista">Analista</option>
                 <option value="adm">Adm</option>
-                <option value="desenvolvedor">Desenvolvedor</option>
+                <option value="dev">Desenvolvedor</option>
             </select>
         </div>
 

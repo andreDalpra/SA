@@ -28,7 +28,7 @@ public class Usuario {
             stm.setString(2, this.getPassword());
             stm.setBoolean(3, this.isBloqueado());
             stm.setBoolean(4, this.isAtivo());
-            stm.setInt(5,this.getNvel());
+            stm.setInt(5,this.getNivel());
             stm.setInt(6, this.getTentativas()); // Armazena tentativas ao incluir
             stm.executeUpdate(); // Use executeUpdate() para INSERT
         } catch (SQLException e) {
@@ -57,6 +57,7 @@ public class Usuario {
 
                 // Verifica a senha
                 if (rs.getString("password").equals(this.getPassword())) {
+                    this.nivel = rs.getInt("nivel"); // Armazena o nível do usuário após autenticar
                     resetarTentativas(); // Reseta tentativas ao logar
                     atualizarTentativas(userId, 0); // Reseta tentativas no banco
                     return true; // Login bem-sucedido
@@ -75,6 +76,7 @@ public class Usuario {
         }
         return false; // Login mal-sucedido
     }
+
 
     // Atualizar tentativas
     public void atualizarTentativas(int id, int tentativas) throws ClassNotFoundException {
@@ -205,7 +207,7 @@ public class Usuario {
 		this.ativo = ativo;
 	}
 
-	public int getNvel() {
+	public int getNivel() {
 		return nivel;
 	}
 
