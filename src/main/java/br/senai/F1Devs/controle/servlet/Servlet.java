@@ -19,22 +19,24 @@ public class Servlet extends HttpServlet {
 		usu.setUsername(request.getParameter("username"));
 		usu.setPassword(request.getParameter("password"));
 		String cargo = request.getParameter("cargo");
-
+		int nivel = 2;
 		switch (cargo) {
+		
 		case "adm":
-			usu.setnivel(0);
+			nivel = 0;
 			break;
 
 		case "desenvolvedor":
-			usu.setnivel(1);
+			nivel = 1;
 			break;
 
 		case "analista":
-			usu.setnivel(2);
+			nivel = 2;;
 			break;
 		default:
 			break;
 		}
+		usu.setnivel(nivel);
 		return usu;
 	}
 
@@ -49,8 +51,16 @@ public class Servlet extends HttpServlet {
 			switch (action) {
 			case "logar":
 				if (usuario.autenticarUsuario()) {
-					// Login bem-sucedido, redireciona para a página home
-					response.sendRedirect("home.jsp");
+					if (usuario.getNvel() == 0) {
+						response.sendRedirect("home.jsp");
+					}
+					if (usuario.getNvel() == 1) {
+						response.sendRedirect("homeDev.jsp");
+					}
+					if (usuario.getNvel() == 2) {
+						response.sendRedirect("homeAnalista.jsp");
+					}
+					
 				} else {
 					// Login falhou, redireciona de volta para a página de login com erro
 					response.sendRedirect("index.jsp?error=true");
