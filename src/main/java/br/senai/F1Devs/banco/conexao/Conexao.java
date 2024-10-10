@@ -9,7 +9,7 @@ public class Conexao {
         Connection con = null;
         String url = "jdbc:mysql://localhost:3306/softleve?useSSL=false&serverTimezone=UTC";
         String user = "root";
-        String password = ""; 
+        String password = "12345"; 
         
         try {
            

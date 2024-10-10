@@ -15,6 +15,7 @@ public class Usuario {
     private int id;
     private String username;
     private String password;
+    private String email;
     private boolean bloqueado = false;
     private boolean ativo = true;
     private int nivel = 0;
@@ -22,14 +23,15 @@ public class Usuario {
 
     // Inclusão de Usuario
     public boolean incluirUsuario() throws ClassNotFoundException {
-        String sql = "INSERT INTO usuario (username, password, bloqueado, ativo, nivel, tentativas) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario (username, password, email, bloqueado, ativo, nivel, tentativas) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
             stm.setString(1, this.getUsername());
             stm.setString(2, this.getPassword());
-            stm.setBoolean(3, this.isBloqueado());
-            stm.setBoolean(4, this.isAtivo());
-            stm.setInt(5,this.getNivel());
-            stm.setInt(6, this.getTentativas()); // Armazena tentativas ao incluir
+            stm.setString(3, this.getEmail());
+            stm.setBoolean(4, this.isBloqueado());
+            stm.setBoolean(5, this.isAtivo());
+            stm.setInt(6,this.getNivel());
+            stm.setInt(7, this.getTentativas()); // Armazena tentativas ao incluir
             stm.executeUpdate(); // Use executeUpdate() para INSERT
         } catch (SQLException e) {
             System.out.println("Erro na inclusão do usuário: " + e.getMessage());
@@ -41,7 +43,7 @@ public class Usuario {
     // Autenticação do usuário
     public boolean autenticarUsuario() throws ClassNotFoundException {
         Connection con = Conexao.conectar();
-        String sql = "SELECT id, username, password, bloqueado, ativo, nivel, tentativas FROM usuario WHERE username = ?";
+        String sql = "SELECT id, username, password, email, bloqueado, ativo, nivel, tentativas FROM usuario WHERE username = ?";
         try {
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, this.getUsername());
@@ -191,7 +193,15 @@ public class Usuario {
         this.password = password;
     }
 
-    public boolean isBloqueado() {
+    public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public boolean isBloqueado() {
         return bloqueado;
     }
 

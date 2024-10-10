@@ -18,6 +18,7 @@ public class Servlet extends HttpServlet {
         Usuario usu = new Usuario();
         usu.setUsername(request.getParameter("username"));
         usu.setPassword(request.getParameter("password"));
+        usu.setEmail(request.getParameter("email"));
         String cargo = request.getParameter("cargo"); // Pega o valor do campo "cargo"
 
         if (cargo == null) {
@@ -56,7 +57,7 @@ public class Servlet extends HttpServlet {
             case "logar":
                 if (usuario.autenticarUsuario()) {
                     if (usuario.getNivel() == 0) {
-                        response.sendRedirect(request.getContextPath() + "home.jsp");
+                        response.sendRedirect("home.jsp");
                     } else if (usuario.getNivel() == 1) {
                         response.sendRedirect(request.getContextPath() + "/paginas/desenvolvedor/homeDev.jsp");
                     } else if (usuario.getNivel() == 2) {

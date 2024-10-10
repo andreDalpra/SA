@@ -12,6 +12,10 @@
 		<input type="hidden" name="action" value="registrar">
 		<h2 class="card-title text-center">Cadastro</h2>
 		<div class="form-group">
+			<b><label for="email">Email:</label></b> <input type="text"
+				id="email" name="email" placeholder="Insira seu email">
+		</div>
+		<div class="form-group">
 			<b><label for="username">User :</label></b> <input type="text"
 				id="username" name="username" placeholder="Crie seu username">
 		</div>
