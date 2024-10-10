@@ -18,6 +18,16 @@
             <b><label for="password">Senha:</label></b>
             <input type="password" id="password" name="password" placeholder="Crie uma senha">
         </div>
+        <div class="form-group">
+            <b><label for="cargo">Cargo:</label></b>
+            <select id="cargo" name="cargo" required>
+                <option value="">Selecione o cargo</option> 
+                <option value="analista">Analista</option>
+                <option value="adm">Adm</option>
+                <option value="desenvolvedor">Desenvolvedor</option>
+            </select>
+        </div>
+
         <button type="submit" class="btn-login">Cadastrar</button>
         <a href="${pageContext.request.contextPath}/index.jsp" class="btn-register">Voltar</a>
     </form>
