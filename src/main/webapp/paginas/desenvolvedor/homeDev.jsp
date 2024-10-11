@@ -12,7 +12,7 @@
         <h1>Bem-vindo Desenvolvedor</h1> 
         <a href="usuariosAtivos.jsp"><button class="btn">Usuários Ativos</button></a>
         <a href="usuariosBloqueados.jsp"><button class="btn">Usuários Bloqueados</button></a>
-        <a href="index.jsp"><button class="btn">Voltar</button></a>
+        <a href="${pageContext.request.contextPath}/index.jsp"><button class="btn">Voltar</button></a>
     </div>
 </body>
 </html>
