@@ -181,7 +181,7 @@ public class Servlet extends HttpServlet {
 			if (dev.incluirDev()) {
 			    response.sendRedirect(request.getContextPath() + "/index.jsp");
 			} else {
-			    response.sendRedirect(request.getContextPath() + "/cadastro.jsp?error=true");
+			    response.sendRedirect(request.getContextPath() + "/home.jsp?error");
 			}
 		} catch (ClassNotFoundException e) {
             e.printStackTrace(); // Loga a exceção para debug
