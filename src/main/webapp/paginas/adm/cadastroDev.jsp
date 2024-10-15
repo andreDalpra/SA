@@ -23,7 +23,7 @@
             <input type="number" id="usuarioId" name="usuarioId" placeholder="ID do usuário" required>
         </div>
         <button type="submit" class="btn-login">Cadastrar</button>
-        <a href="${pageContext.request.contextPath}/index.jsp" class="btn-register">Voltar</a>
+        <a href="${pageContext.request.contextPath}/home.jsp" class="btn-register">Voltar</a>
     </form>
 </body>
 </html>
