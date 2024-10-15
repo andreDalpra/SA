@@ -2,6 +2,7 @@ package br.senai.SoftLeve.controle.servlet;
 
 import java.io.IOException;
 
+import br.senai.SoftLeve.entidade.desenvolvedor.Desenvolvedor;
 import br.senai.SoftLeve.entidade.usuario.Usuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -51,6 +52,22 @@ public class Servlet extends HttpServlet {
         usu.setnivel(nivel);
         return usu;
     }
+    
+    private Desenvolvedor instanciarDev(HttpServletRequest request) {
+        Desenvolvedor dev = new Desenvolvedor();
+        
+        String vNome = request.getParameter("nomeDev");
+        String vUsuarioEmail = request.getParameter("emailDev");
+        int vUsuarioId = Integer.parseInt(request.getParameter("usuarioId")); // Certifique-se de que o ID é passado corretamente
+        
+        dev.setNome(vNome);
+        dev.setUsuario_email(vUsuarioEmail);
+        dev.setUsuario_id(vUsuarioId); // Atribuindo o ID do usuário
+
+        return dev;
+    }
+
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -76,6 +93,9 @@ public class Servlet extends HttpServlet {
 
                 case "desbloquear":
                     desbloquear(request, response);
+                    
+                case "cadastrar-dev":
+                	cadastrarDev(request, response);
 
                     break;
 
@@ -146,6 +166,22 @@ public class Servlet extends HttpServlet {
         try {
 			if (usuario.desbloquearUsuario(usuario.getUsername(), novaSenha)) {
 			    response.sendRedirect(request.getContextPath() + "/desbloqueado.html");
+			}
+		} catch (ClassNotFoundException e) {
+            e.printStackTrace(); // Loga a exceção para debug
+            response.sendRedirect(request.getContextPath() + "/error.jsp"); // Redireciona para uma página de erro
+        }
+    }
+    
+    private void cadastrarDev(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	Desenvolvedor dev = instanciarDev(request);
+    	
+    	try {
+			if (dev.incluirDev()) {
+			    response.sendRedirect(request.getContextPath() + "/index.jsp");
+			} else {
+			    response.sendRedirect(request.getContextPath() + "/cadastro.jsp?error=true");
 			}
 		} catch (ClassNotFoundException e) {
             e.printStackTrace(); // Loga a exceção para debug
