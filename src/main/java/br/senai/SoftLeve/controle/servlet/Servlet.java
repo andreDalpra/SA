@@ -13,209 +13,195 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/servlet") // Define o servlet para ser acessado em /servlet
 public class Servlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    // Método que instancia o objeto Usuario
-    private Usuario instanciarUsuario(HttpServletRequest request) {
-        Usuario usu = new Usuario();
-        
-        String vUser = request.getParameter("username");
-        String vPass = request.getParameter("password");
-        String vEmail = request.getParameter("email");
-        
-        usu.setUsername(vUser);
-        usu.setPassword(vPass);
-        usu.setEmail(vEmail);
-        
-        String cargo = request.getParameter("cargo"); // Pega o valor do campo "cargo"
+	// Método que instancia o objeto Usuario
+	private Usuario instanciarUsuario(HttpServletRequest request) {
+		Usuario usu = new Usuario();
 
-        if (cargo == null) {
-            System.out.println("Cargo não foi especificado. Definindo como 'desconhecido'.");
-            cargo = "desconhecido"; // Valor padrão, se necessário
-        }
+		String vUser = request.getParameter("username");
+		String vPass = request.getParameter("password");
+		String vEmail = request.getParameter("email");
 
-        int nivel = 10; // Nível padrão, caso o cargo não seja reconhecido
-        switch (cargo) {
-            case "adm":
-                nivel = 0;
-                break;
-            case "dev":
-                nivel = 1;
-                break;
-            case "analista":
-                nivel = 2;
-                break;
-            default:
-                System.out.println("Cargo não reconhecido: " + cargo);
-                break;
-        }
-        usu.setnivel(nivel);
-        return usu;
-    }
-    
-    private Desenvolvedor instanciarDev(HttpServletRequest request) {
-        Desenvolvedor dev = new Desenvolvedor();
-        
-        String vNome = request.getParameter("nomeDev");
-        String vUsuarioEmail = request.getParameter("emailDev");
-        int vUsuarioId = Integer.parseInt(request.getParameter("usuarioId")); // Certifique-se de que o ID é passado corretamente
-        
-        dev.setNome(vNome);
-        dev.setUsuario_email(vUsuarioEmail);
-        dev.setUsuario_id(vUsuarioId); // Atribuindo o ID do usuário
+		usu.setUsername(vUser);
+		usu.setPassword(vPass);
+		usu.setEmail(vEmail);
 
-        return dev;
-    }
+		String cargo = request.getParameter("cargo"); // Pega o valor do campo "cargo"
 
+		if (cargo == null) {
+			System.out.println("Cargo não foi especificado. Definindo como 'desconhecido'.");
+			cargo = "desconhecido"; // Valor padrão, se necessário
+		}
 
+		int nivel = 10; // Nível padrão, caso o cargo não seja reconhecido
+		switch (cargo) {
+		case "adm":
+			nivel = 0;
+			break;
+		case "dev":
+			nivel = 1;
+			break;
+		case "analista":
+			nivel = 2;
+			break;
+		default:
+			System.out.println("Cargo não reconhecido: " + cargo);
+			break;
+		}
+		usu.setnivel(nivel);
+		return usu;
+	}
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doGet(request, response); // Redireciona para o doGet
-    }
+	private Desenvolvedor instanciarDev(HttpServletRequest request) {
+		Desenvolvedor dev = new Desenvolvedor();
 
-    // Método para tratar requisições GET
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String action = request.getParameter("action");
+		String vNome = request.getParameter("nomeDev");
+		String vUsuarioEmail = request.getParameter("emailDev");
+		int vUsuarioId = Integer.parseInt(request.getParameter("usuarioId")); // Certifique-se de que o ID é passado
+																				// corretamente
 
-        try {
-            Usuario usuario = instanciarUsuario(request);
+		dev.setNome(vNome);
+		dev.setUsuario_email(vUsuarioEmail);
+		dev.setUsuario_id(vUsuarioId); // Atribuindo o ID do usuário
 
-            switch (action) {
-                case "logar":
-                    logar(request, response);
-                    break;
+		return dev;
+	}
 
-                case "registrar":
-                    registrar(request, response);
-                    break;
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response); // Redireciona para o doGet
+	}
 
-                case "desbloquear":
-                    desbloquear(request, response);
-                    
-                case "cadastrar-dev":
-                	cadastrarDev(request, response);
+	// Método para tratar requisições GET
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String action = request.getParameter("action");
 
-                    break;
+		try {
+			Usuario usuario = instanciarUsuario(request);
 
-                default:
-                    // Caso ação não seja reconhecida, redireciona para uma página de erro
-                    response.sendRedirect(request.getContextPath() + "/error.jsp");
-                    break;
-            }
+			switch (action) {
+			case "logar":
+				logar(request, response);
+				break;
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/index.jsp?error");
-        }
-    }
+			case "registrar":
+				registrar(request, response);
+				break;
 
-    // Método para realizar o login
- // Método para realizar o login
-    private void logar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            Usuario usuario = instanciarUsuario(request);
-            if (usuario.autenticarUsuario()) {
-                // Obtém a sessão (cria uma nova se não existir)
-                HttpSession session = request.getSession();
-                
-                // Armazena o objeto usuario na sessão
-                session.setAttribute("usuarioLogado", usuario);
-                
-                // Verifica o nível de acesso e redireciona para a página correspondente
-                if (usuario.getNivel() == 0) {
-                    response.sendRedirect("home.jsp");
-                } else if (usuario.getNivel() == 1) {
-                    response.sendRedirect(request.getContextPath() + "/paginas/desenvolvedor/homeDev.jsp");
-                } else if (usuario.getNivel() == 2) {
-                    response.sendRedirect(request.getContextPath() + "/paginas/usuario/homeAnalista.jsp");
-                }
-            } else {
-                // Login falhou, redireciona de volta para a página de login com erro
-                response.sendRedirect(request.getContextPath() + "/index.jsp?error=true");
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace(); // Loga a exceção para debug
-            response.sendRedirect(request.getContextPath() + "/error.jsp"); // Redireciona para uma página de erro
-        }
-    }
+			case "desbloquear":
+				desbloquear(request, response);
 
-    
-    private void registrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
-    	Usuario usuario = instanciarUsuario(request);
-    	
-    	try {
+			case "cadastrar-dev":
+				cadastrarDev(request, response);
+
+				break;
+
+			default:
+				// Caso ação não seja reconhecida, redireciona para uma página de erro
+				response.sendRedirect(request.getContextPath() + "/error.jsp");
+				break;
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			response.sendRedirect(request.getContextPath() + "/index.jsp?error");
+		}
+	}
+
+	// Método para realizar o login
+	// Método para realizar o login
+	private void logar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			Usuario usuario = instanciarUsuario(request);
+			if (usuario.autenticarUsuario()) {
+				// Obtém a sessão (cria uma nova se não existir)
+				HttpSession session = request.getSession();
+
+				// Armazena o objeto usuario na sessão
+				session.setAttribute("usuarioLogado", usuario);
+
+				// Verifica o nível de acesso e redireciona para a página correspondente
+				if (usuario.getNivel() == 0) {
+					response.sendRedirect("home.jsp");
+				} else if (usuario.getNivel() == 1) {
+					response.sendRedirect(request.getContextPath() + "/paginas/desenvolvedor/homeDev.jsp");
+				} else if (usuario.getNivel() == 2) {
+					response.sendRedirect(request.getContextPath() + "/paginas/usuario/homeAnalista.jsp");
+				}
+			} else {
+				// Login falhou, redireciona de volta para a página de login com erro
+				response.sendRedirect(request.getContextPath() + "/index.jsp?error=true");
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace(); // Loga a exceção para debug
+			response.sendRedirect(request.getContextPath() + "/error.jsp"); // Redireciona para uma página de erro
+		}
+	}
+
+	private void registrar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Usuario usuario = instanciarUsuario(request);
+
+		try {
 			if (usuario.incluirUsuario()) {
-			    response.sendRedirect(request.getContextPath() + "/index.jsp");
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
 			} else {
-			    response.sendRedirect(request.getContextPath() + "/cadastro.jsp?error=true");
+				response.sendRedirect(request.getContextPath() + "/cadastro.jsp?error=true");
 			}
 		} catch (ClassNotFoundException e) {
-            e.printStackTrace(); // Loga a exceção para debug
-            response.sendRedirect(request.getContextPath() + "/error.jsp"); // Redireciona para uma página de erro
-        }
-    }
-    
-    private void desbloquear(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
-    	Usuario usuario = instanciarUsuario(request);
-    	String novaSenha = request.getParameter("novaSenha");
+			e.printStackTrace(); // Loga a exceção para debug
+			response.sendRedirect(request.getContextPath() + "/error.jsp"); // Redireciona para uma página de erro
+		}
+	}
 
-        try {
+	private void desbloquear(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Usuario usuario = instanciarUsuario(request);
+		String novaSenha = request.getParameter("novaSenha");
+
+		try {
 			if (usuario.desbloquearUsuario(usuario.getUsername(), novaSenha)) {
-			    response.sendRedirect(request.getContextPath() + "/desbloqueado.html");
+				response.sendRedirect(request.getContextPath() + "/desbloqueado.html");
 			}
 		} catch (ClassNotFoundException e) {
-            e.printStackTrace(); // Loga a exceção para debug
-            response.sendRedirect(request.getContextPath() + "/error.jsp"); // Redireciona para uma página de erro
-        }
-    }
-    
-    private void cadastrarDev(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
-    	Desenvolvedor dev = instanciarDev(request);
-    	
-    	try {
+			e.printStackTrace(); // Loga a exceção para debug
+			response.sendRedirect(request.getContextPath() + "/error.jsp"); // Redireciona para uma página de erro
+		}
+	}
+
+	private void cadastrarDev(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Desenvolvedor dev = instanciarDev(request);
+
+		try {
 			if (dev.incluirDev()) {
-			    response.sendRedirect(request.getContextPath() + "/index.jsp");
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
 			} else {
-			    response.sendRedirect(request.getContextPath() + "/home.jsp?error");
+				response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroDev.jsp?error");
 			}
 		} catch (ClassNotFoundException e) {
-            e.printStackTrace(); // Loga a exceção para debug
-            response.sendRedirect(request.getContextPath() + "/error.jsp"); // Redireciona para uma página de erro
-        }
-    }
+			e.printStackTrace(); // Loga a exceção para debug
+			response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroDev.jsp?error"); // Redireciona para
+																									// uma página de
+																									// erro
+		}
+	}
+
+	private void editarDev(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Desenvolvedor dev = instanciarDev(request);
+		
+		try {
+				if(dev.alterarDev()) {
+					response.sendRedirect(request.getContextPath() + "/index.jsp");
+				}
+		} catch (Exception e) {
+			
+		}	
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

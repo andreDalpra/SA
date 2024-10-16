@@ -8,5 +8,7 @@
 </head>
 <body>
 
+	 <a href="${pageContext.request.contextPath}/paginas/adm/listaDev.jsp"><button class="btn">Lista</button></a> 
+	 <a href="${pageContext.request.contextPath}/paginas/adm/cadastroDev.jsp"><button class="btn">Desenvolvedores</button></a> 
 </body>
 </html>
