@@ -54,7 +54,7 @@ public class Servlet extends HttpServlet {
         Desenvolvedor dev = new Desenvolvedor();
              
         String vNome = request.getParameter("nomeDev");
-        String vUsuarioEmail = request.getParameter("emailDev");
+        String vUsuarioEmail = request.getParameter("usuarioEmail");
         int vUsuarioId = Integer.parseInt(request.getParameter("usuarioId")); // Certifique-se de que o ID é passado
 
         dev.setNome(vNome);

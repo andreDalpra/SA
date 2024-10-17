@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
             <b><label for="emailDev">Email :</label></b> 
-            <input type="email" id="emailDev" name="emailDev" placeholder="Coloque o email do desenvolvedor" required>
+            <input type="email" id="usuarioEmail" name="usuarioEmail" placeholder="Coloque o email do desenvolvedor" required>
         </div>
         <div class="form-group">
             <b><label for="usuarioId">ID do Usuário:</label></b> 
