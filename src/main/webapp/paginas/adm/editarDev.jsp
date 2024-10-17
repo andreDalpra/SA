@@ -28,6 +28,8 @@
             }
         } catch (SQLException e) {
             out.println("<div class='alert alert-danger'>Erro ao carregar os dados do desenvolvedor: " + e.getMessage() + "</div>");
+        } catch (ClassNotFoundException e) {
+            out.println("<div class='alert alert-danger'>Erro ao carregar o driver do banco de dados: " + e.getMessage() + "</div>");
         }
     }
 %>
@@ -45,6 +47,7 @@
         <h1>Editar Desenvolvedor</h1>
         <form action="${pageContext.request.contextPath}/servlet" method="POST">
             <input type="hidden" name="id" value="<%= id %>">
+            <input type="hidden" name="usuarioId" value="<%= usuarioId %>">
             <input type="hidden" name="action" value="atualizar-dev">
             <div class="form-group">
                 <label for="nome">Nome:</label>
@@ -52,7 +55,7 @@
             </div>
             <div class="form-group">
                 <label for="usuarioEmail">Email:</label>
-                <input type="email" id="usuarioEmail" name="usuario_email" class="form-control" value="<%= usuarioEmail %>" required> <!-- Corrigido para usuario_email -->
+                <input type="email" id="usuarioEmail" name="usuarioEmail" class="form-control" value="<%= usuarioEmail %>" required>
             </div>
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
             <a href="listaDev.jsp" class="btn btn-secondary">Cancelar</a>

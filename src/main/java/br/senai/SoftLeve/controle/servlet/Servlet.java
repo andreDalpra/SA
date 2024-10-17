@@ -200,7 +200,7 @@ public class Servlet extends HttpServlet {
         dev.setId(id); // Defina o ID do desenvolvedor a ser atualizado
 
         try {
-            if (dev.alterarDev()) { // Supondo que você tenha um método para atualizar
+            if (dev.alterarDev()) { // Chamada correta para o método
                 response.sendRedirect(request.getContextPath() + "/paginas/adm/listaDev.jsp?message=Atualização realizada com sucesso!");
             } else {
                 response.sendRedirect(request.getContextPath() + "/paginas/adm/editarDev.jsp?id=" + id + "&message=Falha na atualização!");
@@ -210,5 +210,6 @@ public class Servlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/paginas/adm/editarDev.jsp?id=" + id + "&message=Erro ao atualizar: " + e.getMessage());
         }
     }
+
 
 }
