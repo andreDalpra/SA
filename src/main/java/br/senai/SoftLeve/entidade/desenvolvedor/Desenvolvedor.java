@@ -55,12 +55,15 @@ public class Desenvolvedor {
 	}
 	
 	public boolean alterarDev() throws ClassNotFoundException {
-	    String sql = "UPDATE desenvolvedor SET nome = ?,  WHERE id = ?";
+	    String sql = "UPDATE desenvolvedor SET nome = ?, usuario_email = ? WHERE id = ?"; // Corrigido
 	    Connection con = Conexao.conectar();
 	    try {
 	        PreparedStatement stm = con.prepareStatement(sql);
-	        stm.setString(1, this.getNome());  
-	        stm.executeUpdate(); 
+	        stm.setString(1, this.getNome());
+	        stm.setString(2, this.getUsuario_email()); // Adiciona o email do usuário
+	        stm.setInt(3, this.getId()); // Define o ID do desenvolvedor a ser atualizado
+	        int rowsUpdated = stm.executeUpdate(); // Execute o update
+	        return rowsUpdated > 0; // Retorna true se a atualização for bem-sucedida
 	    } catch (SQLException e) {
 	        System.out.println("Erro na alteração do desenvolvedor: " + e.getMessage());
 	        return false;
@@ -71,8 +74,8 @@ public class Desenvolvedor {
 	            e.printStackTrace();
 	        }
 	    }
-	    return true;
 	}
+
 	
 	 public boolean excluirDev() throws ClassNotFoundException {
 	        String sql = "DELETE FROM desenvolvedor ";

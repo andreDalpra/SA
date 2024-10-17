@@ -90,6 +90,9 @@ public class Servlet extends HttpServlet {
                 case "excluir-dev":
                     excluirDev(request, response);
                     break;
+                case "atualizar-dev":    
+					atualizarDev(request, response);
+					break;
                 default:
                     response.sendRedirect(request.getContextPath() + "/error.jsp");
                     break;
@@ -187,6 +190,24 @@ public class Servlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect(request.getContextPath() + "/paginas/adm/listaDev.jsp?error");
+        }
+    }
+    
+    private void atualizarDev(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Desenvolvedor dev = instanciarDev(request);
+        dev.setId(id); // Defina o ID do desenvolvedor a ser atualizado
+
+        try {
+            if (dev.alterarDev()) { // Supondo que você tenha um método para atualizar
+                response.sendRedirect(request.getContextPath() + "/paginas/adm/listaDev.jsp?message=Atualização realizada com sucesso!");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/paginas/adm/editarDev.jsp?id=" + id + "&message=Falha na atualização!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/paginas/adm/editarDev.jsp?id=" + id + "&message=Erro ao atualizar: " + e.getMessage());
         }
     }
 
