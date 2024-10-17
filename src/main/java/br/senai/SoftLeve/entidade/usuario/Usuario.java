@@ -79,7 +79,6 @@ public class Usuario {
         return false; // Login mal-sucedido
     }
 
-
     // Atualizar tentativas
     public void atualizarTentativas(int id, int tentativas) throws ClassNotFoundException {
         String sql = "UPDATE usuario SET tentativas = ? WHERE id = ?";

@@ -1,0 +1,30 @@
+body {
+	background-color: #f9f9f9;
+}
+
+.container {
+	max-width: 800px;
+	margin: 40px auto;
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+	border-collapse: separate;
+	border-spacing: 0;
+	border-radius: 10px;
+}
+
+.table th,
+.table td {
+	border: none;
+	padding: 15px;
+}
+
+.btn {
+	border-radius: 10px;
+	padding: 10px 20px;
+}

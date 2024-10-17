@@ -74,46 +74,45 @@ public class Desenvolvedor {
 	    return true;
 	}
 	
-	public boolean excluirDev() throws ClassNotFoundException {
-	    String sql = "DELETE FROM desenvolvedor WHERE id = ?";
-	    Connection con = Conexao.conectar();
-	    try {
-	        PreparedStatement stm = con.prepareStatement(sql);
-	        stm.setInt(1, this.getId()); 
-	        stm.executeUpdate(); 
-	    } catch (SQLException e) {
-	        System.out.println("Erro na exclusão do desenvolvedor: " + e.getMessage());
-	        return false;
-	    } finally {
+	 public boolean excluirDev() throws ClassNotFoundException {
+	        String sql = "DELETE FROM desenvolvedor ";
+	        sql += "WHERE id = ? ";
+	        Connection con = Conexao.conectar();
 	        try {
-	            con.close();
+	            PreparedStatement stm = con.prepareStatement(sql);
+	            stm.setInt(1, this.getId());
+	            stm.execute();
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            System.out.println("Erro na exclusão do desenvoldedor");
+	            return false;
 	        }
+	        return true;
 	    }
-	    return true;
-	}
+
 
 	public List<Desenvolvedor> listarDev() throws ClassNotFoundException {
-        List<Desenvolvedor> listarDev = new ArrayList<>();
-        Connection con = Conexao.conectar();
-        String sql = "SELECT id, nome, usuario_email, usuario_id FROM desenvolvedor ORDER BY id";
-        try {
-            PreparedStatement stm = con.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Desenvolvedor dev = new Desenvolvedor();
-                dev.setId(rs.getInt("id"));
-                dev.setUsuario_email(rs.getString("emailDev"));
-                dev.setUsuario_id(rs.getInt("usuarioId"));
-                listarDev.add(dev);
-            }
-        } catch (SQLException e) {
-            System.out.println("Erro na lista de usuários");
-            return null;
-        }
-        return listarDev;
-    }
+	    List<Desenvolvedor> listarDev = new ArrayList<>();
+	    Connection con = Conexao.conectar();
+	    String sql = "SELECT id, nome, usuario_email, usuario_id FROM desenvolvedor ORDER BY id";
+	    try {
+	        PreparedStatement stm = con.prepareStatement(sql);
+	        ResultSet rs = stm.executeQuery();
+	        while (rs.next()) {
+	            Desenvolvedor dev = new Desenvolvedor();
+	            dev.setId(rs.getInt("id"));
+	            dev.setNome(rs.getString("nome"));
+	            dev.setUsuario_email(rs.getString("usuario_email"));
+	            dev.setUsuario_id(rs.getInt("usuario_id"));
+	            listarDev.add(dev);
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Erro na lista de Desenvolvedores: " + e.getMessage());
+	        e.printStackTrace(); // Adicionado para detalhar a exceção no console.
+	        return null;
+	    }
+	    return listarDev;
+	}
+
 
 	public int getId() {
 		return id;
