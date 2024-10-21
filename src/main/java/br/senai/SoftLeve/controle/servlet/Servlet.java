@@ -88,11 +88,8 @@ public class Servlet extends HttpServlet {
     private TipoTarefa instanciarTipoTarefa(HttpServletRequest request) {
         TipoTarefa tipoTarefa = new TipoTarefa();
         
-        String vNome = request.getParameter("nomeTipoTarefa");
-        int vId = Integer.parseInt(request.getParameter("tipoTarefaId")); // ID do tipo de tarefa
-
-        tipoTarefa.setId(vId);
-        tipoTarefa.setNome(vNome);
+        String vDescricao = request.getParameter("descricaoTipoTarefa"); // Nome do parâmetro
+        tipoTarefa.setDescricao(vDescricao);
 
         return tipoTarefa;
     }
@@ -126,6 +123,12 @@ public class Servlet extends HttpServlet {
                 case "atualizar-dev":    
 					atualizarDev(request, response);
 					break;
+                case "cadastrar-tipo-tarefa":    
+					cadastrarTipoTarefa(request, response);
+					break;
+                case "cadastrar--tarefa":    
+					cadastrarTarefa(request, response);
+					break;	
                 default:
                     response.sendRedirect(request.getContextPath() + "/error.jsp");
                     break;
@@ -244,19 +247,19 @@ public class Servlet extends HttpServlet {
         }
     }
 
-    private void cadastrarTarefa(HttpServletRequest request, HttpServletResponse response)
+    private void cadastrarTipoTarefa(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Desenvolvedor dev = instanciarDev(request);
+        TipoTarefa tt = instanciarTipoTarefa(request);
 
         try {
-            if (dev.incluirDev()) {
-                response.sendRedirect(request.getContextPath() + "/index.jsp");
+            if (tt.incluirTipoTarefa()) {
+                response.sendRedirect(request.getContextPath() + "/home.jsp");
             } else {
-                response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroDev.jsp?error");
+                response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTipoTarefa.jsp?error");
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroDev.jsp?error");
+            response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTipoTarefa.jsp?error");
         }
     }
 }
