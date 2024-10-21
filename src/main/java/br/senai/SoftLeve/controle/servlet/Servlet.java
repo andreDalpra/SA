@@ -1,8 +1,11 @@
 package br.senai.SoftLeve.controle.servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import br.senai.SoftLeve.entidade.desenvolvedor.Desenvolvedor;
+import br.senai.SoftLeve.entidade.tarefa.Tarefa;
+import br.senai.SoftLeve.entidade.tipotarefa.TipoTarefa;
 import br.senai.SoftLeve.entidade.usuario.Usuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -62,6 +65,36 @@ public class Servlet extends HttpServlet {
         dev.setUsuario_id(vUsuarioId);
 
         return dev;
+    }
+    
+    private Tarefa instanciarTarefa(HttpServletRequest request) {
+        Tarefa tarefa = new Tarefa();
+        
+        String vDescricao = request.getParameter("descricao");
+        String vStatus = request.getParameter("status");
+        Date vPrazo = Date.valueOf(request.getParameter("prazo")); // Certifique-se de que o formato da data está correto
+        int vDesenvolvedorId = Integer.parseInt(request.getParameter("desenvolvedorId"));
+        int vTipoTarefaId = Integer.parseInt(request.getParameter("tipoTarefaId"));
+        
+        tarefa.setDescricao(vDescricao);
+        tarefa.setStatus(Tarefa.Status.valueOf(vStatus.toUpperCase())); // Converte a string para o enum
+        tarefa.setPrazo(vPrazo);
+        tarefa.setDesenvolvedor_id(vDesenvolvedorId);
+        tarefa.setTipotarefa_id(vTipoTarefaId);
+
+        return tarefa;
+    }
+    
+    private TipoTarefa instanciarTipoTarefa(HttpServletRequest request) {
+        TipoTarefa tipoTarefa = new TipoTarefa();
+        
+        String vNome = request.getParameter("nomeTipoTarefa");
+        int vId = Integer.parseInt(request.getParameter("tipoTarefaId")); // ID do tipo de tarefa
+
+        tipoTarefa.setId(vId);
+        tipoTarefa.setNome(vNome);
+
+        return tipoTarefa;
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -211,5 +244,19 @@ public class Servlet extends HttpServlet {
         }
     }
 
+    private void cadastrarTarefa(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Desenvolvedor dev = instanciarDev(request);
 
+        try {
+            if (dev.incluirDev()) {
+                response.sendRedirect(request.getContextPath() + "/index.jsp");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroDev.jsp?error");
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroDev.jsp?error");
+        }
+    }
 }
