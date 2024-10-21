@@ -12,13 +12,13 @@
         <h2 class="card-title text-center">Cadastro de Tarefa</h2>
 
         <div class="form-group">
-            <b><label for="descricaoTarefa">Descrição</label></b> 
-            <input type="text" id="descricaoTarefa" name="descricaoTarefa" placeholder="Insira a descrição da tarefa" required>
+            <b><label for="descricao">Descrição</label></b> 
+            <input type="text" id="descricao" name="descricao" placeholder="Insira a descrição da tarefa" required>
         </div>
 
         <div class="form-group">
-            <b><label for="statusTarefa">Status</label></b> 
-            <select id="statusTarefa" name="statusTarefa" required>
+            <b><label for="status">Status</label></b> 
+            <select id="status" name="status" required>
                 <option value="">Selecione o status</option>
                 <option value="PENDENTE">Pendente</option>
                 <option value="EM_ANDAMENTO">Em Andamento</option>
@@ -28,8 +28,8 @@
         </div>
 
         <div class="form-group">
-            <b><label for="prazoTarefa">Prazo</label></b> 
-            <input type="date" id="prazoTarefa" name="prazoTarefa" required>
+            <b><label for="prazo">Prazo</label></b> 
+            <input type="date" id="prazo" name="prazo" required>
         </div>
 
         <div class="form-group">

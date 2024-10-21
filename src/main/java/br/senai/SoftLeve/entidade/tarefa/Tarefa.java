@@ -10,7 +10,6 @@ import java.util.List;
 
 import br.senai.SoftLeve.banco.conexao.Conexao;
 
-
 public class Tarefa {
     
     private int id;
@@ -20,15 +19,17 @@ public class Tarefa {
     private int desenvolvedor_id;
     private int tipotarefa_id;
     
+    // Atualizando o enum para corresponder aos valores do banco de dados
     public enum Status {
-        CONCLUIDO, PENDENTE, ATRASADO, EM_ANDAMENTO
+        PENDENTE, EM_ANDAMENTO, CONCLUIDA, ATRASADA
     }
+
     
     public boolean incluirTarefa() throws ClassNotFoundException {
         String sql = "INSERT INTO Tarefa (descricao, status, prazo, desenvolvedor_id, tipo_tarefa_id) VALUES (?, ?, ?, ?, ?)";
         try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
             stm.setString(1, this.getDescricao());
-            stm.setString(2, this.getStatus().name());
+            stm.setString(2, this.getStatus().name()); // Mantém o valor do enum
             stm.setDate(3, this.getPrazo());
             stm.setInt(4, this.getDesenvolvedor_id());
             stm.setInt(5, this.getTipotarefa_id());
@@ -44,7 +45,7 @@ public class Tarefa {
         String sql = "UPDATE tarefa SET descricao = ?, status = ?, prazo = ?, desenvolvedor_id = ?, tipo_tarefa_id = ? WHERE id = ?";
         try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
             stm.setString(1, this.getDescricao());
-            stm.setString(2, this.getStatus().name());
+            stm.setString(2, this.getStatus().name()); // Mantém o valor do enum
             stm.setDate(3, this.getPrazo());
             stm.setInt(4, this.getDesenvolvedor_id());
             stm.setInt(5, this.getTipotarefa_id());
@@ -77,7 +78,7 @@ public class Tarefa {
                 Tarefa tarefa = new Tarefa();
                 tarefa.setId(rs.getInt("id"));
                 tarefa.setDescricao(rs.getString("descricao"));
-                tarefa.setStatus(Status.valueOf(rs.getString("status")));
+                tarefa.setStatus(Status.valueOf(rs.getString("status"))); // Converte para o enum
                 tarefa.setPrazo(rs.getDate("prazo"));
                 tarefa.setDesenvolvedor_id(rs.getInt("desenvolvedor_id"));
                 tarefa.setTipotarefa_id(rs.getInt("tipo_tarefa_id"));

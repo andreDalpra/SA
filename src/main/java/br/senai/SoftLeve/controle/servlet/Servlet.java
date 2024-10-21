@@ -72,13 +72,25 @@ public class Servlet extends HttpServlet {
         
         String vDescricao = request.getParameter("descricao");
         String vStatus = request.getParameter("status");
-        Date vPrazo = Date.valueOf(request.getParameter("prazo")); // Certifique-se de que o formato da data está correto
+        
+        // Tratamento da data
+        String prazoTarefaStr = request.getParameter("prazo");
+        Date prazoTarefa = null;
+        if (prazoTarefaStr != null && !prazoTarefaStr.isEmpty()) {
+            try {
+                prazoTarefa = Date.valueOf(prazoTarefaStr); // Converte para java.sql.Date
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+                // Aqui você pode lidar com a exceção, como redirecionar ou enviar uma mensagem de erro
+            }
+        }
+
         int vDesenvolvedorId = Integer.parseInt(request.getParameter("desenvolvedorId"));
         int vTipoTarefaId = Integer.parseInt(request.getParameter("tipoTarefaId"));
         
         tarefa.setDescricao(vDescricao);
         tarefa.setStatus(Tarefa.Status.valueOf(vStatus.toUpperCase())); // Converte a string para o enum
-        tarefa.setPrazo(vPrazo);
+        tarefa.setPrazo(prazoTarefa); // Define a data tratada
         tarefa.setDesenvolvedor_id(vDesenvolvedorId);
         tarefa.setTipotarefa_id(vTipoTarefaId);
 
@@ -265,17 +277,17 @@ public class Servlet extends HttpServlet {
     
     private void cadastrarTarefa(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        TipoTarefa tt = instanciarTipoTarefa(request);
+        Tarefa t = instanciarTarefa(request);
 
         try {
-            if (tt.incluirTipoTarefa()) {
+            if (t.incluirTarefa()) {
                 response.sendRedirect(request.getContextPath() + "/home.jsp");
             } else {
-                response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTipoTarefa.jsp?error");
+                response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTarefa.jsp?error");
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTipoTarefa.jsp?error");
+            response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTarefa.jsp?error");
         }
     }
 }
