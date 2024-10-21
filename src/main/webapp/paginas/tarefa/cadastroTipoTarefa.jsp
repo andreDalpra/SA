@@ -9,7 +9,7 @@
 <body>
     <form action="${pageContext.request.contextPath}/servlet" method="post">
         <input type="hidden" name="action" value="cadastrar-tipo-tarefa">
-        <h2 class="card-title text-center">Cadastro Tipo tarefa</h2>
+        <h2 class="card-title text-center">Cadastro Tipo tarefa</h2>      
         <div class="form-group">
             <b><label for="descricaoTipoTarefa">Nome</label></b> 
             <input type="text" id="descricaoTipoTarefa" name="descricaoTipoTarefa" placeholder="Insira o nome do tipo de tarefa" required>
