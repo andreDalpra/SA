@@ -35,8 +35,8 @@
                 <th>Descrição</th>
                 <th>Status</th>
                 <th>Prazo</th>
-                <th>ID Desenvolvedor</th>
-                <th>ID Tipo Tarefa</th>
+                <th>Desenvolvedor ID</th>
+                <th>Tipo de Tarefa ID</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -44,14 +44,14 @@
         <%
         // Recuperando a lista de tarefas
         Tarefa tarefa = new Tarefa();
-        List<Tarefa> listarTarefas = tarefa.listarTarefas();
-        if (listarTarefas != null && !listarTarefas.isEmpty()) {
-            for (Tarefa t : listarTarefas) {
+        List<Tarefa> listaTarefas = tarefa.listarTarefas(); // Chama o método para listar as tarefas
+        if (listaTarefas != null && !listaTarefas.isEmpty()) {
+            for (Tarefa t : listaTarefas) {
         %>
             <tr>
                 <td><%= t.getId() %></td>
                 <td><%= t.getDescricao() %></td>
-                <td><%= t.getStatus().name() %></td>
+                <td><%= t.getStatus() %></td>
                 <td><%= t.getPrazo() %></td>
                 <td><%= t.getDesenvolvedor_id() %></td>
                 <td><%= t.getTipotarefa_id() %></td>
