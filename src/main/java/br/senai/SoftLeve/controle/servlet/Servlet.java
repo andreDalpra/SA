@@ -126,7 +126,7 @@ public class Servlet extends HttpServlet {
                 case "cadastrar-tipo-tarefa":    
 					cadastrarTipoTarefa(request, response);
 					break;
-                case "cadastrar--tarefa":    
+                case "cadastrar-tarefa":    
 					cadastrarTarefa(request, response);
 					break;	
                 default:
@@ -248,6 +248,22 @@ public class Servlet extends HttpServlet {
     }
 
     private void cadastrarTipoTarefa(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        TipoTarefa tt = instanciarTipoTarefa(request);
+
+        try {
+            if (tt.incluirTipoTarefa()) {
+                response.sendRedirect(request.getContextPath() + "/home.jsp");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTipoTarefa.jsp?error");
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTipoTarefa.jsp?error");
+        }
+    }
+    
+    private void cadastrarTarefa(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         TipoTarefa tt = instanciarTipoTarefa(request);
 

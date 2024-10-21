@@ -48,8 +48,7 @@ public class TipoTarefa {
 	}
 	
 	public boolean excluirTipoTarefa() throws ClassNotFoundException {
-        String sql = "DELETE FROM tipotarefa ";
-        sql += "WHERE id = ? ";
+		String sql = "DELETE FROM tipotarefa WHERE id = ?";
         Connection con = Conexao.conectar();
         try {
             PreparedStatement stm = con.prepareStatement(sql);

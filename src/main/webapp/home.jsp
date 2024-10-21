@@ -27,7 +27,7 @@
         <a href="usuariosBloqueados.jsp"><button class="btn">Usuários Bloqueados</button></a>
         <a href="${pageContext.request.contextPath}/index.jsp"><button class="btn">Voltar</button></a>
         <a href="${pageContext.request.contextPath}/paginas/adm/desenvolvedores.jsp"><button class="btn">Desenvolvedores</button></a>
-        <a href="${pageContext.request.contextPath}/paginas/tarefa/cadastroTipoTarefa.jsp"><button class="btn">Tipo Tarefa</button></a>
+        <a href="${pageContext.request.contextPath}/paginas/tarefa/tarefa.jsp"><button class="btn">Tarefas</button></a>
 
     </div>
 </body>
