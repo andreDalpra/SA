@@ -85,8 +85,8 @@ public class Servlet extends HttpServlet {
             }
         }
 
-        int vDesenvolvedorId = Integer.parseInt(request.getParameter("desenvolvedorId"));
-        int vTipoTarefaId = Integer.parseInt(request.getParameter("tipoTarefaId"));
+        int vDesenvolvedorId = Integer.parseInt(request.getParameter("desenvolvedor_id"));
+        int vTipoTarefaId = Integer.parseInt(request.getParameter("tipoTarefa_id"));
         
         tarefa.setDescricao(vDescricao);
         
@@ -154,6 +154,12 @@ public class Servlet extends HttpServlet {
 					break;	
                 case "cadastrar-tarefa":    
 					cadastrarTarefa(request, response);
+					break;
+                case "excluir-tarefa":    
+					excluirTarefa(request, response);
+					break;
+                case "atualizar-tarefa":    
+					atualizarTarefa(request, response);
 					break;	
                 default:
                     response.sendRedirect(request.getContextPath() + "/error.jsp");
@@ -288,23 +294,7 @@ public class Servlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTipoTarefa.jsp?error");
         }
     }
-    
-    private void cadastrarTarefa(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Tarefa t = instanciarTarefa(request);
-
-        try {
-            if (t.incluirTarefa()) {
-                response.sendRedirect(request.getContextPath() + "/home.jsp");
-            } else {
-                response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTarefa.jsp?error");
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTarefa.jsp?error");
-        }
-    }
-    
+   
     private void excluirTipoTarefa(HttpServletRequest request, HttpServletResponse response)
 
             throws ServletException, IOException {
@@ -341,6 +331,61 @@ public class Servlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTipoTarefa.jsp?error" + e.getMessage());
+        }
+    }
+    
+    private void cadastrarTarefa(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Tarefa t = instanciarTarefa(request);
+
+        try {
+            if (t.incluirTarefa()) {
+                response.sendRedirect(request.getContextPath() + "/home.jsp");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTarefa.jsp?error");
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTarefa.jsp?error");
+        }
+    }
+    
+    private void excluirTarefa(HttpServletRequest request, HttpServletResponse response)
+
+            throws ServletException, IOException {
+        // Obtenha o ID diretamente do request
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        try {
+            Tarefa t = new Tarefa();
+            t.setId(id); 
+
+            if (t.excluirTarefa()) { // Chamada correta para o método
+                response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTarefa.jsp");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTarefa.jsp?error");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTarefa.jsp?error");
+        }
+    }
+    
+    private void atualizarTarefa(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Tarefa t = instanciarTarefa(request);
+        t.setId(id); // Defina o ID do desenvolvedor a ser atualizado
+
+        try {
+            if (t.alterarTarefa()) { // Chamada correta para o método
+                response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTarefa.jsp");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTarefa.jsp?error");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTarefa.jsp?error" + e.getMessage());
         }
     }
 }

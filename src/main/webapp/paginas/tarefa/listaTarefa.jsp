@@ -1,5 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="br.senai.SoftLeve.entidade.tarefa.Tarefa" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -45,14 +47,19 @@
         // Recuperando a lista de tarefas
         Tarefa tarefa = new Tarefa();
         List<Tarefa> listarTarefas = tarefa.listarTarefas(); // Chama o método para listar as tarefas
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         if (listarTarefas != null && !listarTarefas.isEmpty()) {
             for (Tarefa t : listarTarefas) {
+                String prazoFormatado = "";
+                if (t.getPrazo() != null) {
+                    prazoFormatado = sdf.format(t.getPrazo());
+                }
         %>
             <tr>
                 <td><%= t.getId() %></td>
                 <td><%= t.getDescricao() %></td>
                 <td><%= t.getStatus() %></td>
-                <td><%= t.getPrazo() %></td>
+                <td><%= prazoFormatado %></td>
                 <td><%= t.getDesenvolvedor_id() %></td>
                 <td><%= t.getTipotarefa_id() %></td>
                 <td>
