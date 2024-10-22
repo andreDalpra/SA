@@ -86,7 +86,7 @@ public class Servlet extends HttpServlet {
         }
 
         int vDesenvolvedorId = Integer.parseInt(request.getParameter("desenvolvedor_id"));
-        int vTipoTarefaId = Integer.parseInt(request.getParameter("tipoTarefa_id"));
+        int vTipoTarefaId = Integer.parseInt(request.getParameter("tipo_tarefa_id"));
         
         tarefa.setDescricao(vDescricao);
         

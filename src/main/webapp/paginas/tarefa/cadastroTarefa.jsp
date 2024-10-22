@@ -33,13 +33,13 @@
         </div>
 
         <div class="form-group">
-            <b><label for="desenvolvedorId">Desenvolvedor ID</label></b> 
-            <input type="number" id="desenvolvedorId" name="desenvolvedorId" placeholder="Insira o ID do desenvolvedor" required>
+            <b><label for="desenvolvedor_id">Desenvolvedor ID</label></b> 
+            <input type="number" id="desenvolvedor_id" name="desenvolvedor_id" placeholder="Insira o ID do desenvolvedor" required>
         </div>
 
         <div class="form-group">
-            <b><label for="tipoTarefaId">Tipo de Tarefa ID</label></b> 
-            <input type="number" id="tipoTarefaId" name="tipoTarefaId" placeholder="Insira o ID do tipo de tarefa" required>
+            <b><label for="tipo_tarefa_id">Tipo de Tarefa ID</label></b> 
+            <input type="number" id="tipo_tarefa_id" name="tipo_tarefa_id" placeholder="Insira o ID do tipo de tarefa" required>
         </div>
 
         <button type="submit" class="btn-login">Cadastrar</button>

@@ -62,9 +62,9 @@
                 <select id="status" name="status" class="form-control" required>
                     <%
                         for (Status s : Status.values()) {
-                            String selected = s.name().equals(status) ? "selected" : "";
+                            String selected = s.getValue().equals(status) ? "selected" : "";
                     %>
-                        <option value="<%= s.name() %>" <%= selected %>><%= s.name() %></option>
+                        <option value="<%= s.getValue() %>" <%= selected %>><%= s.getValue() %></option>
                     <%
                         }
                     %>
@@ -75,12 +75,12 @@
                 <input type="date" id="prazo" name="prazo" class="form-control" value="<%= prazo %>" required>
             </div>
             <div class="form-group">
-                <label for="desenvolvedor_Id">ID do Desenvolvedor:</label>
-                <input type="number" id="desenvolvedor_Id" name="desenvolvedor_Id" class="form-control" value="<%= desenvolvedorId %>" required>
+                <label for="desenvolvedor_id">ID do Desenvolvedor:</label>
+                <input type="number" id="desenvolvedor_id" name="desenvolvedor_id" class="form-control" value="<%= desenvolvedorId %>" required>
             </div>
             <div class="form-group">
-                <label for="tipoTarefa_Id">ID do Tipo de Tarefa:</label>
-                <input type="number" id="tipoTarefa_Id" name="tipoTarefa_Id" class="form-control" value="<%= tipoTarefaId %>" required>
+                <label for="tipo_tarefa_id">ID do Tipo de Tarefa:</label>
+                <input type="number" id="tipo_tarefa_id" name="tipo_tarefa_id" class="form-control" value="<%= tipoTarefaId %>" required>
             </div>
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
             <a href="listaTarefa.jsp" class="btn btn-secondary">Cancelar</a>

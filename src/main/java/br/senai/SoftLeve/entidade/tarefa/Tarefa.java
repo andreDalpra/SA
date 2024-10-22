@@ -46,7 +46,6 @@ public class Tarefa {
         }
     }
 
-    
     public boolean incluirTarefa() throws ClassNotFoundException {
         if (this.getStatus() == null) {
             System.out.println("Erro: Status da tarefa não pode ser nulo.");
@@ -56,7 +55,7 @@ public class Tarefa {
         String sql = "INSERT INTO Tarefa (descricao, status, prazo, desenvolvedor_id, tipo_tarefa_id) VALUES (?, ?, ?, ?, ?)";
         try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
             stm.setString(1, this.getDescricao());
-            stm.setString(2, this.getStatus().name());
+            stm.setString(2, this.getStatus().getValue()); // Usa getValue() para garantir a correspondência
             stm.setDate(3, this.getPrazo());
             stm.setInt(4, this.getDesenvolvedor_id());
             stm.setInt(5, this.getTipotarefa_id());
@@ -68,12 +67,11 @@ public class Tarefa {
         return true;
     }
 
-    
     public boolean alterarTarefa() throws ClassNotFoundException {
         String sql = "UPDATE tarefa SET descricao = ?, status = ?, prazo = ?, desenvolvedor_id = ?, tipo_tarefa_id = ? WHERE id = ?";
         try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
             stm.setString(1, this.getDescricao());
-            stm.setString(2, this.getStatus().name()); // Mantém o valor do enum
+            stm.setString(2, this.getStatus().getValue()); // Usa getValue() para garantir a correspondência
             stm.setDate(3, this.getPrazo());
             stm.setInt(4, this.getDesenvolvedor_id());
             stm.setInt(5, this.getTipotarefa_id());
@@ -121,7 +119,6 @@ public class Tarefa {
         return listaTarefas;
     }
 
-    
     // Getters e Setters
     public int getId() {
         return id;
