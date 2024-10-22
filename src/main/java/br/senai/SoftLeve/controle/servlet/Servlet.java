@@ -89,13 +89,21 @@ public class Servlet extends HttpServlet {
         int vTipoTarefaId = Integer.parseInt(request.getParameter("tipoTarefaId"));
         
         tarefa.setDescricao(vDescricao);
-        tarefa.setStatus(Tarefa.Status.valueOf(vStatus.toUpperCase())); // Converte a string para o enum
+        
+        try {
+            tarefa.setStatus(Tarefa.Status.fromString(vStatus)); // Converte a string para o enum usando fromString()
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            // Trate o erro de status inválido, por exemplo, definindo um valor padrão ou redirecionando com uma mensagem de erro
+        }
+
         tarefa.setPrazo(prazoTarefa); // Define a data tratada
         tarefa.setDesenvolvedor_id(vDesenvolvedorId);
         tarefa.setTipotarefa_id(vTipoTarefaId);
 
         return tarefa;
     }
+
     
     private TipoTarefa instanciarTipoTarefa(HttpServletRequest request) {
         TipoTarefa tipoTarefa = new TipoTarefa();
@@ -138,6 +146,12 @@ public class Servlet extends HttpServlet {
                 case "cadastrar-tipo-tarefa":    
 					cadastrarTipoTarefa(request, response);
 					break;
+                case "excluir-tipo-tarefa":    
+					excluirTipoTarefa(request, response);
+					break;
+                case "atualizar-tipo-tarefa":    
+					atualizarTipoTarefa(request, response);
+					break;	
                 case "cadastrar-tarefa":    
 					cadastrarTarefa(request, response);
 					break;	
@@ -288,6 +302,45 @@ public class Servlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTarefa.jsp?error");
+        }
+    }
+    
+    private void excluirTipoTarefa(HttpServletRequest request, HttpServletResponse response)
+
+            throws ServletException, IOException {
+        // Obtenha o ID diretamente do request
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        try {
+            TipoTarefa tt = new TipoTarefa();
+            tt.setId(id); 
+
+            if (tt.excluirTipoTarefa()) { // Chamada correta para o método
+                response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTipoTarefa.jsp");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTipoTarefa.jsp?error");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTipoTarefa.jsp?error");
+        }
+    }
+    
+    private void atualizarTipoTarefa(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        TipoTarefa tt = instanciarTipoTarefa(request);
+        tt.setId(id); // Defina o ID do desenvolvedor a ser atualizado
+
+        try {
+            if (tt.alterarTipoTarefa()) { // Chamada correta para o método
+                response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTipoTarefa.jsp");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTipoTarefa.jsp?error");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTipoTarefa.jsp?error" + e.getMessage());
         }
     }
 }

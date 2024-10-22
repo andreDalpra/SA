@@ -44,9 +44,9 @@
         <%
         // Recuperando a lista de tarefas
         Tarefa tarefa = new Tarefa();
-        List<Tarefa> listaTarefas = tarefa.listarTarefas(); // Chama o método para listar as tarefas
-        if (listaTarefas != null && !listaTarefas.isEmpty()) {
-            for (Tarefa t : listaTarefas) {
+        List<Tarefa> listarTarefas = tarefa.listarTarefas(); // Chama o método para listar as tarefas
+        if (listarTarefas != null && !listarTarefas.isEmpty()) {
+            for (Tarefa t : listarTarefas) {
         %>
             <tr>
                 <td><%= t.getId() %></td>

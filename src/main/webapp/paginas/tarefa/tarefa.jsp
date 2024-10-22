@@ -12,6 +12,7 @@
 	 <a href="${pageContext.request.contextPath}/paginas/tarefa/cadastroTarefa.jsp"><button class="btn">Tarefa</button></a> 
 	 <a href="${pageContext.request.contextPath}/paginas/tarefa/listaTarefa.jsp"><button class="btn">Ver Tarefas</button></a>
 	 <a href="${pageContext.request.contextPath}/paginas/tarefa/cadastroTipoTarefa.jsp"><button class="btn">Tipo Tarefa</button></a> 
-	 <a href="${pageContext.request.contextPath}/paginas/tarefa/listaTipoTarefa.jsp"><button class="btn">Ver Tipos de Tarefa</button></a> 
+	 <a href="${pageContext.request.contextPath}/paginas/tarefa/listaTipoTarefa.jsp"><button class="btn">Ver Tipos de Tarefa</button></a>
+	 <a href="${pageContext.request.contextPath}/home.jsp"><button class="btn">Voltar</button></a> 
 </body>
 </html>

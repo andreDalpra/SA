@@ -21,15 +21,42 @@ public class Tarefa {
     
     // Atualizando o enum para corresponder aos valores do banco de dados
     public enum Status {
-        PENDENTE, EM_ANDAMENTO, CONCLUIDA, ATRASADA
+        PENDENTE("Pendente"),
+        EM_ANDAMENTO("Em andamento"),
+        CONCLUIDA("Concluída"),
+        ATRASADA("Atrasada");
+
+        private String value;
+
+        Status(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public static Status fromString(String statusStr) {
+            for (Status status : Status.values()) {
+                if (status.getValue().equalsIgnoreCase(statusStr)) {
+                    return status;
+                }
+            }
+            throw new IllegalArgumentException("Status inválido: " + statusStr);
+        }
     }
 
     
     public boolean incluirTarefa() throws ClassNotFoundException {
+        if (this.getStatus() == null) {
+            System.out.println("Erro: Status da tarefa não pode ser nulo.");
+            return false;
+        }
+
         String sql = "INSERT INTO Tarefa (descricao, status, prazo, desenvolvedor_id, tipo_tarefa_id) VALUES (?, ?, ?, ?, ?)";
         try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
             stm.setString(1, this.getDescricao());
-            stm.setString(2, this.getStatus().name()); // Mantém o valor do enum
+            stm.setString(2, this.getStatus().name());
             stm.setDate(3, this.getPrazo());
             stm.setInt(4, this.getDesenvolvedor_id());
             stm.setInt(5, this.getTipotarefa_id());
@@ -40,6 +67,7 @@ public class Tarefa {
         }
         return true;
     }
+
     
     public boolean alterarTarefa() throws ClassNotFoundException {
         String sql = "UPDATE tarefa SET descricao = ?, status = ?, prazo = ?, desenvolvedor_id = ?, tipo_tarefa_id = ? WHERE id = ?";
@@ -78,7 +106,8 @@ public class Tarefa {
                 Tarefa tarefa = new Tarefa();
                 tarefa.setId(rs.getInt("id"));
                 tarefa.setDescricao(rs.getString("descricao"));
-                tarefa.setStatus(Status.valueOf(rs.getString("status"))); // Converte para o enum
+                // Converte o status usando o método fromString para lidar com diferenças nos valores
+                tarefa.setStatus(Tarefa.Status.fromString(rs.getString("status")));
                 tarefa.setPrazo(rs.getDate("prazo"));
                 tarefa.setDesenvolvedor_id(rs.getInt("desenvolvedor_id"));
                 tarefa.setTipotarefa_id(rs.getInt("tipo_tarefa_id"));
@@ -91,6 +120,7 @@ public class Tarefa {
         }
         return listaTarefas;
     }
+
     
     // Getters e Setters
     public int getId() {
