@@ -6,7 +6,7 @@
 
 <%
     String id = request.getParameter("id");
-    String nomeTipoTarefa = "";
+    String descricaoTipoTarefa = "";
 
     if (id == null || id.isEmpty()) {
         out.println("<div class='alert alert-danger'>ID do tipo de tarefa não foi fornecido!</div>");
@@ -17,7 +17,7 @@
             stmt.setInt(1, Integer.parseInt(id));
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    nomeTipoTarefa = rs.getString("nome");
+                	descricaoTipoTarefa = rs.getString("descricao");
                 } else {
                     out.println("<div class='alert alert-danger'>Tipo de tarefa não encontrado!</div>");
                 }
@@ -45,8 +45,8 @@
             <input type="hidden" name="id" value="<%= id %>">
             <input type="hidden" name="action" value="atualizar-tipo-tarefa">
             <div class="form-group">
-                <label for="nomeTipoTarefa">Nome do Tipo de Tarefa:</label>
-                <input type="text" id="nomeTipoTarefa" name="nomeTipoTarefa" class="form-control" value="<%= nomeTipoTarefa %>" required>
+                <label for="descricaoTipoTarefa">Nome do Tipo de Tarefa:</label>
+                <input type="text" id="descricaoTipoTarefa" name="descricaoTipoTarefa" class="form-control" value="<%= descricaoTipoTarefa %>" required>
             </div>
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
             <a href="listaTipoTarefa.jsp" class="btn btn-secondary">Cancelar</a>
