@@ -11,7 +11,7 @@
     <div class="container">
         <h1>Você está desbloqueado!</h1>
         <div class="btn-margin">
-            <a href="${pageContext.request.contextPath}index.jsp" class="btn">Voltar</a>
+            <a href="${pageContext.request.contextPath}/index.jsp" class="btn">Voltar</a>
         </div>
     </div>
 </body>
