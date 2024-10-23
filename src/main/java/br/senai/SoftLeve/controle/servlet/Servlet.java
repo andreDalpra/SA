@@ -217,7 +217,7 @@ public class Servlet extends HttpServlet {
 
         try {
             if (usuario.desbloquearUsuario(usuario.getUsername(), novaSenha)) {
-                response.sendRedirect(request.getContextPath() + "/desbloqueado.html");
+                response.sendRedirect(request.getContextPath() + "/paginas/usuario/desbloqueado.jsp");
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

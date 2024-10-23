@@ -8,7 +8,8 @@
     <script src="${pageContext.request.contextPath}/js/main.js"></script> <!-- Incluindo o main.js -->
 </head>
 <body>
-    <form action="desbloquear.jsp" method="post" onsubmit="return validarSenhas()"> 
+    <form action="${pageContext.request.contextPath}/servlet" method="post" onsubmit="return validarSenhas()">
+    <input type="hidden" name="action" value="desbloquear"> 
         <h2 class="card-title text-center">Resetar Senha</h2>
         
         <!-- Campo para o nome do usuário -->

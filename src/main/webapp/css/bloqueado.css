@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 92vh; /* Adicionado para que o body ocupe toda a altura da tela */
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.btn-margin {
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: #6200ea;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+    text-decoration: none; /* Removido o sublinhado */
+}
+
+.btn:hover {
+    background-color: #3700b3;
+}@charset "ISO-8859-1";
