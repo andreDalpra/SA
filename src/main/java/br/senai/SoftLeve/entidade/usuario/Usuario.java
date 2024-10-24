@@ -154,13 +154,14 @@ public class Usuario {
     
     public List<Usuario> listarUsuariosDev() throws ClassNotFoundException { 
         List<Usuario> listarUsuariosDev = new ArrayList<>();
-        String sql = "SELECT id, username FROM usuario ORDER BY id";
+        String sql = "SELECT id, username, nivel  FROM usuario WHERE nivel = 1 ORDER BY id";
         try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Usuario u = new Usuario();
-                u.setId(rs.getInt("id"));
+                u.setId(rs.getInt("id"));             
                 u.setUsername(rs.getString("username"));
+                u.setnivel(rs.getInt("nivel"));
                 listarUsuariosDev.add(u);
             }
             System.out.println("Total de usuários encontrados: " + listarUsuariosDev.size());

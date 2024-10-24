@@ -239,11 +239,7 @@ public class Servlet extends HttpServlet {
             if (dev.incluirDev()) {
                 response.sendRedirect(request.getContextPath() + "/index.jsp");
             } else {
-                // Se a inclusão falhar, carrega a lista de usuários
-                Usuario usuario = new Usuario();
-                List<Usuario> listaUsuariosDev = usuario.listarUsuariosDev(); // Carrega a lista de usuários
-                request.setAttribute("listaUsuariosDev", listaUsuariosDev); // Passa a lista com o nome correto
-                request.getRequestDispatcher("/paginas/adm/cadastroDev.jsp?error=true").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroDev.jsp?error");
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace(); // Adicionei para debugar
