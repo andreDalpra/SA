@@ -2,6 +2,7 @@ package br.senai.SoftLeve.controle.servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 
 import br.senai.SoftLeve.entidade.desenvolvedor.Desenvolvedor;
 import br.senai.SoftLeve.entidade.tarefa.Tarefa;
@@ -55,17 +56,22 @@ public class Servlet extends HttpServlet {
 
     private Desenvolvedor instanciarDev(HttpServletRequest request) {
         Desenvolvedor dev = new Desenvolvedor();
-             
+
         String vNome = request.getParameter("nomeDev");
         String vUsuarioEmail = request.getParameter("usuarioEmail");
-        int vUsuarioId = Integer.parseInt(request.getParameter("usuarioId")); // Certifique-se de que o ID é passado
+        String usuarioIdStr = request.getParameter("usuarioId");
 
         dev.setNome(vNome);
         dev.setUsuario_email(vUsuarioEmail);
-        dev.setUsuario_id(vUsuarioId);
+
+        // Converte o ID do usuário e define no objeto Desenvolvedor
+        if (usuarioIdStr != null && !usuarioIdStr.isEmpty()) {
+            dev.setUsuario_id(Integer.parseInt(usuarioIdStr));
+        }
 
         return dev;
     }
+
     
     private Tarefa instanciarTarefa(HttpServletRequest request) {
         Tarefa tarefa = new Tarefa();
@@ -233,11 +239,15 @@ public class Servlet extends HttpServlet {
             if (dev.incluirDev()) {
                 response.sendRedirect(request.getContextPath() + "/index.jsp");
             } else {
-                response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroDev.jsp?error");
+                // Se a inclusão falhar, carrega a lista de usuários
+                Usuario usuario = new Usuario();
+                List<Usuario> listaUsuariosDev = usuario.listarUsuariosDev(); // Carrega a lista de usuários
+                request.setAttribute("listaUsuariosDev", listaUsuariosDev); // Passa a lista com o nome correto
+                request.getRequestDispatcher("/paginas/adm/cadastroDev.jsp?error=true").forward(request, response);
             }
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroDev.jsp?error");
+            e.printStackTrace(); // Adicionei para debugar
+            response.sendRedirect(request.getContextPath() + "/paginas/adm/desenvolvedores.jsp");
         }
     }
 
