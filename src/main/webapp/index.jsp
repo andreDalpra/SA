@@ -14,24 +14,25 @@
 <body>
     <div class="main-container">
         <div class="left-login">
-            <img src="sua-imagem-da-empresa.jpg" alt="Imagem da Empresa" class="empresa-imagem">
+            <h1> Bem Vindo a Soft Leve</h1>
+            <img src="img/Logo.png" alt="Imagem da Empresa" class="empresa-imagem">
         </div>
         <div class="right-login">
             <form action="${pageContext.request.contextPath}/servlet" method="post">
                 <input type="hidden" name="action" value="logar"> <!-- Define a ação como 'logar' -->
                 <h1 class="titulo-center">Login</h1>
                 <div class="form-group">
-                    <b><label for="username">User   :</label></b>
+                    <b><label for="username">User       :</label></b>
                     <div style="position: relative;">
                         <input type="text" id="username" name="username" placeholder="Digite seu username" required>
-                        <img width="25" height="27" src="https://img.icons8.com/puffy-filled/32/user.png" alt="user" class=""/>
+                        <img width="25" height="27" src="https://img.icons8.com/forma-thin/24/user.png" alt="user"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <b><label for="password">Senha:</label></b>
                     <div style="position: relative;">
                         <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
-                        <img width="25" height="25" src="https://img.icons8.com/material-rounded/24/lock--v1.png" alt="lock--v1" />
+                        <img width="25" height="27" src="https://img.icons8.com/ios/50/lock--v1.png" alt="lock--v1"/>
                     </div>
                 </div>
                 <button type="submit" class="btn-login">Login</button>

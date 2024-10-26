@@ -9,34 +9,48 @@
 body {
     background-color: #eef2f5; /* Fundo suave */
     height: 100vh; /* Define a altura da viewport */
+    margin: 0; /* Certifique-se de que não há margem no body */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .main-container {
+    background-color: black;
     display: flex; /* Flexbox para layout em duas colunas */
-    width: 80%; /* Ajuste conforme necessário */
-    height: 70%; /* Ajuste conforme necessário */
+    width: 100vw; /* Ajuste conforme necessário */
+    height: 100vh; /* Ajuste conforme necessário */
     border-radius: 10px; /* Bordas arredondadas */
     overflow: hidden; /* Esconde qualquer conteúdo que ultrapasse as bordas */
 }
 
 .left-login {
-    flex: 1; /* Ocupa 50% do espaço */
-    background-color: #f0f0f0; /* Cor de fundo para a imagem */
+    width: 50vw;
+    height: 100vh;
+    background-color: #cfcccc; /* Cor de fundo para a imagem */
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .left-login img {
     max-width: 100%; /* Faz a imagem se ajustar ao tamanho da div */
-    height: auto; /* Mantém a proporção da imagem */
+    height: auto;
+    margin-left: 140px;
+}
+
+.left-login h1{
+    color: #3498db;
+    margin-bottom: 100px;
+    margin-left: 140px;
+    font-size: 50px;
 }
 
 .right-login {
-    flex: 1; /* Ocupa 50% do espaço */
+    background-color: #cfcccc;
+    width: 50vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,21 +59,23 @@ body {
 }
 
 form {
-    background-color: #ffffff; /* Fundo branco */
-    padding: 40px; /* Mantém o padding */
-    border-radius: 12px; /* Borda arredondada */
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    width: 100%;
-    max-width: 400px; /* Largura máxima do formulário */
-    height: auto; /* Altura automática */
-    min-height: 500px; /* Aumenta a altura mínima para o formulário */
-    transition: transform 0.2s; /* Transição suave */
-    margin-left: 200px; /* Adiciona margem à esquerda para empurrar o formulário para a direita */
+    box-sizing: border-box; /* Inclui padding e borda nas dimensões */
+    background-color: #f0f0f0;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    margin-left: 200px;
 }
 
 form:hover {
     transform: translateY(-5px); /* Eleva levemente o formulário ao passar o mouse */
 }
+
 
 /* Estilo das labels */
 label {
@@ -67,11 +83,12 @@ label {
     color: #555; /* Cor mais suave para as labels */
     display: block;
     margin-bottom: 8px;
+    margin-left: 15px;
 }
 
 /* Estilo dos inputs */
 input {
-    width: 100%;
+    width: 95%;
     padding: 12px;
     font-size: 16px;
     margin-bottom: 20px;
@@ -79,7 +96,7 @@ input {
     border-radius: 12px; /* Borda arredondada */
     transition: border-color 0.3s ease; /* Transição suave para foco */
     margin-left: 10px; /* Margem esquerda */
-    margin-right: 10px; /* Margem direita */
+    margin-right: 40px; /* Margem direita */
 }
 
 input:focus {
@@ -89,7 +106,7 @@ input:focus {
 
 form img {
     position: absolute;
-    right: 15px; /* Ajuste conforme necessário */
+    right: 35px; /* Ajuste conforme necessário */
     top: 35%; /* Centraliza verticalmente */
     transform: translateY(-50%); /* Ajusta para centralização */
 }
@@ -99,24 +116,30 @@ button,
 .btn-register {
     width: calc(100% - 20px); /* Ajusta a largura para incluir margens */
     padding: 14px;
-    font-size: 18px;
+    letter-spacing: 1px;
+    font-size: 17px;
+    text-transform: uppercase;
     border: none;
     border-radius: 8px; /* Borda arredondada */
     cursor: pointer;
     transition: background-color 0.7s ease; /* Transição suave de cor */
     margin-left: 10px; /* Margem esquerda */
     margin-right: 10px; /* Margem direita */
+    
 }
 
 /* Estilo do botão Login */
 button.btn-login {
-    background-color: #28a745; /* Verde vibrante */
+    background-color: #007bff; /* Verde vibrante */
     color: white; /* Texto branco */
     font-weight: bold; /* Texto em negrito */
+    letter-spacing: 1px;
+    font-size: 17px;
+    box-shadow: 0px 3px 10px -1px #0d81fd;
 }
 
 button.btn-login:hover {
-    background-color: #218838; /* Verde mais escuro no hover */
+    background-color: #0a407a; /* Verde mais escuro no hover */
 }
 
 /* Estilo do link "Esqueceu sua senha?" */
@@ -140,7 +163,7 @@ a.btn-senha:hover {
 a.btn-register {
     display: inline-block;
     text-align: center;
-    background-color: #007bff; /* Azul vibrante */
+    background-color: #38383e; /* Azul vibrante */
     color: white; /* Texto branco */
     text-decoration: none;
     margin-top: 10px;
@@ -152,12 +175,12 @@ a.btn-register {
 }
 
 a.btn-register:hover {
-    background-color: #0056b3; /* Azul mais escuro no hover */
+    background-color: #1d1d1f; /* Azul mais escuro no hover */
 }
 
 /* Estilo do texto do título */
 h1.titulo-center {
-    font-size: 32px; /* Aumenta o tamanho da fonte do título */
+    font-size: 37px; /* Aumenta o tamanho da fonte do título */
     text-align: center; /* Centraliza o texto do título */
     margin-bottom: 20px; /* Espaço abaixo do título */
     color: #333; /* Cor do título */
