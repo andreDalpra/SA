@@ -1,177 +1,183 @@
 /* Estilos gerais */
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
 body {
-	font-family: 'Arial', sans-serif;
-	background-color: #eef2f5;
-	/* Fundo suave */
-	height: 100vh;
-	/* Define a altura da viewport */
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    background-color: #eef2f5; /* Fundo suave */
+    height: 100vh; /* Define a altura da viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container {
+    display: flex; /* Flexbox para layout em duas colunas */
+    width: 80%; /* Ajuste conforme necessário */
+    height: 70%; /* Ajuste conforme necessário */
+    border-radius: 10px; /* Bordas arredondadas */
+    overflow: hidden; /* Esconde qualquer conteúdo que ultrapasse as bordas */
+}
+
+.left-login {
+    flex: 1; /* Ocupa 50% do espaço */
+    background-color: #f0f0f0; /* Cor de fundo para a imagem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-login img {
+    max-width: 100%; /* Faz a imagem se ajustar ao tamanho da div */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+.right-login {
+    flex: 1; /* Ocupa 50% do espaço */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px; /* Espaçamento interno */
+    margin-left: auto; /* Move o container para a direita */
 }
 
 form {
-	background-color: #ffffff;
-	/* Fundo branco */
-	padding: 40px;
-	border-radius: 12px;
-	/* Borda arredondada */
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-	/* Sombra suave */
-	width: 100%;
-	max-width: 400px;
-	/* Largura máxima do formulário */
-	transition: transform 0.2s;
-	/* Transição suave */
+    background-color: #ffffff; /* Fundo branco */
+    padding: 40px; /* Mantém o padding */
+    border-radius: 12px; /* Borda arredondada */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 100%;
+    max-width: 400px; /* Largura máxima do formulário */
+    height: auto; /* Altura automática */
+    min-height: 500px; /* Aumenta a altura mínima para o formulário */
+    transition: transform 0.2s; /* Transição suave */
+    margin-left: 200px; /* Adiciona margem à esquerda para empurrar o formulário para a direita */
 }
 
 form:hover {
-	transform: translateY(-5px);
-	/* Eleva levemente o formulário ao passar o mouse */
+    transform: translateY(-5px); /* Eleva levemente o formulário ao passar o mouse */
 }
 
 /* Estilo das labels */
 label {
-	font-size: 16px;
-	color: #555;
-	/* Cor mais suave para as labels */
-	display: block;
-	margin-bottom: 8px;
+    font-size: 16px;
+    color: #555; /* Cor mais suave para as labels */
+    display: block;
+    margin-bottom: 8px;
 }
 
 /* Estilo dos inputs */
 input {
-	width: 100%;
-	padding: 12px;
-	font-size: 16px;
-	margin-bottom: 20px;
-	border: 2px solid #ddd;
-	/* Borda mais grossa */
-	border-radius: 8px;
-	/* Borda arredondada */
-	transition: border-color 0.3s ease;
-	/* Transição suave para foco */
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd; /* Borda mais grossa */
+    border-radius: 12px; /* Borda arredondada */
+    transition: border-color 0.3s ease; /* Transição suave para foco */
+    margin-left: 10px; /* Margem esquerda */
+    margin-right: 10px; /* Margem direita */
 }
 
 input:focus {
-	border-color: #3498db;
-	/* Cor azul no foco */
-	outline: none;
-	/* Remove o contorno padrão */
+    border-color: #3498db; /* Cor azul no foco */
+    outline: none; /* Remove o contorno padrão */
+}
+
+form img {
+    position: absolute;
+    right: 15px; /* Ajuste conforme necessário */
+    top: 35%; /* Centraliza verticalmente */
+    transform: translateY(-50%); /* Ajusta para centralização */
 }
 
 /* Estilo dos botões */
 button,
 .btn-register {
-	width: 100%;
-	padding: 14px;
-	font-size: 18px;
-	border: none;
-	border-radius: 8px;
-	/* Borda arredondada */
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-	/* Transição suave de cor */
+    width: calc(100% - 20px); /* Ajusta a largura para incluir margens */
+    padding: 14px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px; /* Borda arredondada */
+    cursor: pointer;
+    transition: background-color 0.7s ease; /* Transição suave de cor */
+    margin-left: 10px; /* Margem esquerda */
+    margin-right: 10px; /* Margem direita */
 }
 
 /* Estilo do botão Login */
 button.btn-login {
-	background-color: #28a745;
-	/* Verde vibrante */
-	color: white;
-	/* Texto branco */
-	font-weight: bold;
-	/* Texto em negrito */
+    background-color: #28a745; /* Verde vibrante */
+    color: white; /* Texto branco */
+    font-weight: bold; /* Texto em negrito */
 }
 
 button.btn-login:hover {
-	background-color: #218838;
-	/* Verde mais escuro no hover */
+    background-color: #218838; /* Verde mais escuro no hover */
 }
 
 /* Estilo do link "Esqueceu sua senha?" */
 a.btn-senha {
-	display: inline-block;
-	/* Mostra o link como um bloco */
-	text-align: center;
-	/* Centraliza o texto */
-	color: #007bff;
-	/* Cor do link */
-	text-decoration: none;
-	/* Remove o sublinhado */
-	margin-top: 10px;
-	/* Espaço acima do link */
-	font-weight: bold;
-	/* Texto em negrito */
+    display: inline-block; /* Mostra o link como um bloco */
+    text-align: center; /* Centraliza o texto */
+    color: #007bff; /* Cor do link */
+    text-decoration: none; /* Remove o sublinhado */
+    margin-top: 10px; /* Espaço acima do link */
+    font-weight: bold; /* Texto em negrito */
+    margin-left: 10px; /* Margem esquerda */
+    margin-right: 10px; /* Margem direita */
 }
 
 a.btn-senha:hover {
-	text-decoration: underline;
-	/* Sublinha no hover */
-	color: #0056b3;
-	/* Cor mais escura no hover */
+    text-decoration: underline; /* Sublinha no hover */
+    color: #0056b3; /* Cor mais escura no hover */
 }
-
 
 /* Estilo do botão Cadastrar */
 a.btn-register {
-	display: inline-block;
-	text-align: center;
-	background-color: #007bff;
-	/* Azul vibrante */
-	color: white;
-	/* Texto branco */
-	text-decoration: none;
-	margin-top: 10px;
-	padding: 14px;
-	border-radius: 8px;
-	/* Borda arredondada */
-	font-weight: bold;
-	/* Texto em negrito */
+    display: inline-block;
+    text-align: center;
+    background-color: #007bff; /* Azul vibrante */
+    color: white; /* Texto branco */
+    text-decoration: none;
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 8px; /* Borda arredondada */
+    font-weight: bold; /* Texto em negrito */
+    margin-left: 10px; /* Margem esquerda */
+    margin-right: 10px; /* Margem direita */
 }
 
 a.btn-register:hover {
-	background-color: #0056b3;
-	/* Azul mais escuro no hover */
+    background-color: #0056b3; /* Azul mais escuro no hover */
 }
 
 /* Estilo do texto do título */
-h2.card-title {
-	font-size: 32px;
-	/* Aumenta o tamanho da fonte do título */
-	text-align: center;
-	/* Centraliza o texto do título */
-	margin-bottom: 20px;
-	/* Espaço abaixo do título */
-	color: #333;
-	/* Cor do título */
+h1.titulo-center {
+    font-size: 32px; /* Aumenta o tamanho da fonte do título */
+    text-align: center; /* Centraliza o texto do título */
+    margin-bottom: 20px; /* Espaço abaixo do título */
+    color: #333; /* Cor do título */
 }
 
 /* Estilo do select (menu drop-down) */
 select {
-	width: 100%;
-	padding: 12px;
-	font-size: 16px;
-	margin-bottom: 20px;
-	border: 2px solid #ddd;
-	/* Borda mais grossa */
-	border-radius: 8px;
-	/* Borda arredondada */
-	transition: border-color 0.3s ease;
-	/* Transição suave para foco */
-	background-color: white;
-	/* Fundo branco */
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd; /* Borda mais grossa */
+    border-radius: 8px; /* Borda arredondada */
+    transition: border-color 0.3s ease; /* Transição suave para foco */
+    background-color: white; /* Fundo branco */
+    margin-left: 10px; /* Margem esquerda */
+    margin-right: 10px; /* Margem direita */
 }
 
 select:focus {
-	border-color: #3498db;
-	/* Cor azul no foco */
-	outline: none;
-	/* Remove o contorno padrão */
+    border-color: #3498db; /* Cor azul no foco */
+    outline: none; /* Remove o contorno padrão */
 }
