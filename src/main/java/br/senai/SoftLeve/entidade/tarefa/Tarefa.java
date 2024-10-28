@@ -20,11 +20,13 @@ public class Tarefa {
     private int tipotarefa_id;
     
     // Atualizando o enum para corresponder aos valores do banco de dados
-    public enum Status {
-        PENDENTE("Pendente"),
-        EM_ANDAMENTO("Em andamento"),
-        CONCLUIDA("Concluída"),
-        ATRASADA("Atrasada");
+    public static enum Status {
+        PENDENTE("PENDENTE"),
+        EM_ANDAMENTO("EM_ANDAMENTO"),
+        CONCLUIDA("CONCLUIDA"),
+        ATRASADA("ATRASADA");
+    
+
 
         private String value;
 
@@ -37,14 +39,27 @@ public class Tarefa {
         }
 
         public static Status fromString(String statusStr) {
-            for (Status status : Status.values()) {
-                if (status.getValue().equalsIgnoreCase(statusStr)) {
-                    return status;
-                }
+            if (statusStr == null) {
+                throw new IllegalArgumentException("Status não pode ser nulo");
             }
-            throw new IllegalArgumentException("Status inválido: " + statusStr);
+            System.out.println("Status recebido para conversão: " + statusStr); // Para depuração
+            switch (statusStr.toUpperCase()) {
+                case "PENDENTE":
+                    return PENDENTE;
+                case "EM_ANDAMENTO":
+                    return EM_ANDAMENTO;
+                case "CONCLUIDA": // Verifique se a string está exatamente como no enum
+                    return CONCLUIDA;
+                case "ATRASADA":
+                    return ATRASADA;
+                default:
+                    throw new IllegalArgumentException("Status inválido: " + statusStr);
+            }
         }
+
+
     }
+
 
     public boolean incluirTarefa() throws ClassNotFoundException {
         if (this.getStatus() == null) {

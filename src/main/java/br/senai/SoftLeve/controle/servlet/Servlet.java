@@ -78,6 +78,9 @@ public class Servlet extends HttpServlet {
 		String vDescricao = request.getParameter("descricao");
 		String vStatus = request.getParameter("status");
 
+		// Adicione esta linha para depuração
+		System.out.println("Status recebido: " + vStatus); // Para depuração
+
 		// Tratamento da data
 		String prazoTarefaStr = request.getParameter("prazo");
 		Date prazoTarefa = null;
@@ -100,8 +103,14 @@ public class Servlet extends HttpServlet {
 			tarefa.setStatus(Tarefa.Status.fromString(vStatus)); // Converte a string para o enum usando fromString()
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
+			tarefa.setStatus(Tarefa.Status.fromString("CONCLUIDA")); // Teste direto
+
 			// Trate o erro de status inválido, por exemplo, definindo um valor padrão ou
 			// redirecionando com uma mensagem de erro
+			// Exemplo de redirecionamento:
+			// request.setAttribute("errorMessage", "Status inválido fornecido: " +
+			// vStatus);
+			// throw new ServletException("Status inválido fornecido: " + vStatus);
 		}
 
 		tarefa.setPrazo(prazoTarefa); // Define a data tratada
@@ -110,7 +119,7 @@ public class Servlet extends HttpServlet {
 
 		return tarefa;
 	}
-
+	
 	private TipoTarefa instanciarTipoTarefa(HttpServletRequest request) {
 		TipoTarefa tipoTarefa = new TipoTarefa();
 
