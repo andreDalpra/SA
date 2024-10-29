@@ -20,12 +20,21 @@ body {
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
+    border-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.header {
+    display: flex;
+    justify-content: space-between; /* Alinha o título e o botão nas extremidades */
+    align-items: center; /* Alinha verticalmente */
     margin-bottom: 20px;
-    text-align: center;
+}
+
+h1 {
+    margin: 0; /* Remove a margem padrão do h1 */
+    text-align: center; /* Centraliza o título */
+    flex-grow: 1; /* Faz o h1 crescer para ocupar o espaço disponível */
 }
 
 .table-container {
@@ -38,7 +47,8 @@ h1 {
     border-collapse: collapse;
 }
 
-.table th, .table td {
+.table th,
+.table td {
     padding: 15px;
     border: 1px solid #ddd;
 }
@@ -100,59 +110,67 @@ label {
     margin-bottom: 10px;
 }
 
-input[type="text"], input[type="date"], select {
+input[type="text"],
+input[type="date"],
+select {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
+button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
-}
-
-button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-.text-center {
-    text-align: center;
 }
 
 .btn {
     background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    color: white;
 }
 
-.btn:hover {
-    background-color: #0056b3;
+.btn:hover{
+	background-color: #0a407a;
 }
 
-.alert {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 20px;
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+.btn-danger:hover{
+	background-color: #c82333;
+}
+.btn-editar{
+	
+	background-color: #ffc107;
+	
+}
+.btn-editar:hover{
+	background-color: #e0a800;
 }
 
-.alert-danger {
-    background-color: #f2dede;
-    border-color: #ebccd1;
-    color: #a94442;
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
 }
 
-.text-center a {
-    text-decoration: none;
+a{
+    background-color: #007bff;
+	/* Cor vermelha para o botão de excluir */
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 10px;
+	text-decoration: none;
+}
+a:hover{
+    background-color: #0a407a;;
+}
+
+.text-center {
+    text-align: center;
 }

@@ -1,6 +1,5 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ taglib prefix="j" uri="jakarta.tags.core"%>
 <%@ page import="java.util.List"%>
 <%@ page import="br.senai.SoftLeve.entidade.usuario.Usuario"%>
 <!DOCTYPE html>
