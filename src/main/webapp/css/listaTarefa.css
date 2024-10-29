@@ -24,13 +24,13 @@ body {
 }
 
 h1 {
-    margin-bottom: 20px; /* Espaçamento abaixo do título */
-    text-align: center; /* Centraliza o título */
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .table-container {
     overflow-x: auto;
-    margin-bottom: 20px; /* Espaçamento abaixo da tabela */
+    margin-bottom: 20px;
 }
 
 .table {
@@ -39,7 +39,7 @@ h1 {
 }
 
 .table th, .table td {
-    padding: 15px; /* Aumenta o preenchimento nas células */
+    padding: 15px;
     border: 1px solid #ddd;
 }
 
@@ -61,12 +61,12 @@ h1 {
     display: none;
     justify-content: center;
     align-items: center;
-     z-index: 1000;
+    z-index: 1000;
 }
 
 .modal {
     background-color: #fff;
-    padding: 30px; /* Aumenta o preenchimento do modal */
+    padding: 30px;
     border: 1px solid #ddd;
     width: 50%;
     margin: 40px auto;
@@ -88,11 +88,11 @@ h1 {
 
 #modal-title {
     margin-top: 0;
-    margin-bottom: 20px; /* Espaçamento abaixo do título do modal */
+    margin-bottom: 20px;
 }
 
 .form-group {
-    margin-bottom: 20px; /* Espaçamento entre os grupos de formulário */
+    margin-bottom: 20px;
 }
 
 label {
@@ -103,22 +103,22 @@ label {
 input[type="text"], input[type="date"], select {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px; /* Espaçamento abaixo dos campos de entrada */
+    margin-bottom: 20px;
     border: 1px solid #ccc;
 }
 
 button[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px; /* Espaçamento acima do botão */
+    margin-top: 10px;
 }
 
 button[type="submit"]:hover {
-    background-color: #3e8e41;
+    background-color: #0056b3;
 }
 
 .text-center {
@@ -126,18 +126,18 @@ button[type="submit"]:hover {
 }
 
 .btn {
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 	10px;
-    margin-bottom: 10px; /* Espaçamento acima do botão */
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .btn:hover {
-    background-color: #3e8e41;
+    background-color: #0056b3;
 }
 
 .alert {
@@ -152,6 +152,7 @@ button[type="submit"]:hover {
     border-color: #ebccd1;
     color: #a94442;
 }
-.text-center a{
+
+.text-center a {
     text-decoration: none;
 }
