@@ -203,7 +203,6 @@
 							<option value="" disabled selected>Selecione o ID do
 								desenvolvedor</option>
 							<%
-							
 							if (listarDev != null && !listarDev.isEmpty()) {
 								for (Desenvolvedor d : listarDev) {
 							%>
@@ -225,7 +224,6 @@
 							<option value="" disabled selected>Selecione o ID do
 								tipo da tarefa</option>
 							<%
-							
 							if (listarTipoTarefas != null && !listarTipoTarefas.isEmpty()) {
 								for (TipoTarefa t : listarTipoTarefas) {
 							%>
@@ -249,14 +247,18 @@
 		<!-- Modal de confirmação de exclusão -->
 		<div id="delete-modal" class="modal-container" style="display: none;">
 			<div class="modal">
-				<p>Deseja realmente excluir esta tarefa?</p>
+				<span class="fechar" onclick="closeDeleteModal()">X</span>
+				<h2>Confirmação de Exclusão</h2>
+
 				<form action="${pageContext.request.contextPath}/servlet"
 					method="POST">
 					<input type="hidden" name="action" value="excluir-tarefa">
 					<input type="hidden" id="delete-task-id" name="id">
-					<button type="submit" class="btn btn-danger">Excluir</button>
-					<button type="button" class="btn btn-secondary"
-						onclick="closeDeleteModal()">Cancelar</button>
+					<div class="modal-buttons">
+						<button type="submit" class="btn btn-danger">Excluir</button>
+						<button type="button" class="btn btn-secondary"
+							onclick="closeDeleteModal()">Cancelar</button>
+					</div>
 				</form>
 			</div>
 		</div>
