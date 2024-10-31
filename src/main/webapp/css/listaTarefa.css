@@ -44,17 +44,21 @@ h1 {
 .table-container {
 	overflow-x: auto;
 	margin-bottom: 20px;
+	border-radius: 12px;;
 }
 
 .table {
 	width: 100%;
 	border-collapse: collapse;
+	border: 1px solid;
+	border-radius: 8px;
+	 box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 .table th,
 .table td {
 	padding: 15px;
-	border: 1px solid #ddd;
+	border: 2px solid #ddd;
 }
 
 .table th {
