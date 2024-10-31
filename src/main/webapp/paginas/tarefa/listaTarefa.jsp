@@ -12,12 +12,13 @@
 <title>Cadastro de Tarefa</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/listaTarefa.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 	<div class="container">
 		<div class="header">
 			<h1>Lista de Tarefas</h1>
-			<button class="btn btn-tela" onclick="openModal('create')">Adicionar
+			<button class="btn btn-tela" onclick="openModal('create')"> <i class="fa-solid fa-plus"></i> Adicionar
 				Tarefa</button>
 		</div>
 
@@ -63,9 +64,11 @@
                                 prazo: '<%=t.getPrazo()%>',
                                 desenvolvedor_id: '<%=t.getDesenvolvedor_id()%>',
                                 tipotarefa_id: '<%=t.getTipotarefa_id()%>'
-                            })">Editar</button>
+                            })" > 
+                            
+                            <i class="fa-regular fa-pen-to-square"></i> Editar</button>
 							<button type="button" class="btn btn-danger"
-								onclick="confirmDelete(<%=t.getId()%>)">Excluir</button>
+								onclick="confirmDelete(<%=t.getId()%>)"> <i class="fa-solid fa-trash-can"></i> Excluir</button>
 						</td>
 					</tr>
 					<%
