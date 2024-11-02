@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #eef2f5; /* Fundo suave */
+    background-color: #18181B; /* Fundo suave */
     height: 100vh; /* Define a altura da viewport */
     margin: 0; /* Certifique-se de que não há margem no body */
     display: flex;
@@ -16,7 +16,7 @@ body {
 }
 
 .main-container {
-    background-color: black;
+    background-color: 18181B;
     display: flex; /* Flexbox para layout em duas colunas */
     width: 100vw; /* Ajuste conforme necessário */
     height: 100vh; /* Ajuste conforme necessário */
@@ -27,7 +27,7 @@ body {
 .left-login {
     width: 50vw;
     height: 100vh;
-    background-color: #cfcccc; /* Cor de fundo para a imagem */
+    background-color: #18181B; /* Cor de fundo para a imagem */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,7 +48,7 @@ body {
 }
 
 .right-login {
-    background-color: #cfcccc;
+    background-color: #18181B;
     width: 50vw;
     height: 100vh;
     display: flex;
@@ -67,7 +67,12 @@ form {
     justify-content: center;
     padding: 30px 25px;
     border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 
+    0 0 15px rgba(13, 129, 253, 0.6),   /* Brilho intenso ao redor do form */
+    0 0 25px rgba(13, 129, 253, 0.8),   /* Sombra de brilho com maior alcance */
+    0 0 35px rgba(13, 129, 253, 0.9);   /* Camada final de brilho mais intenso */
+       
+
     transition: transform 0.3s;
     margin-left: 200px;
 }
