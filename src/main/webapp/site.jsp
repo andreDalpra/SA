@@ -110,7 +110,7 @@
     </div>
 
 
-    <script src="script.js"></script>
+    <script src="${pageContext.request.contextPath}/js/site.js"></script>
 </body>
 
 </html>
