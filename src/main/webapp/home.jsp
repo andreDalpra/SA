@@ -17,7 +17,7 @@
             if (usuarioLogado != null) {
                 out.println("<p>Olá, " + usuarioLogado.getUsername() +".</p>");
             } else {
-                // Se o usuárnão estiver logado, redireciona para a página de login
+                // Se o usuário não estiver logado, redireciona para a página de login
                 response.sendRedirect(request.getContextPath() + "/index.jsp?error=notLogged");
                 return; // Certifica-se de que o redirecionamento aconteça e o restante da página não seja executado
             }
