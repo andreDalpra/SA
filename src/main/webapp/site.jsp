@@ -1,5 +1,7 @@
+<%@ page import="br.senai.SoftLeve.entidade.usuario.Usuario"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -25,7 +27,26 @@
             <li id="link2" class="link"><a href="#">Tarefas</a></li>
             <li id="link3" class="link"><a href="#">Tipos de Tarefas</a></li>
         </ul>
-        <span>Olá</span>
+        <div class="profile">
+                <div>   
+                    <a href="#"><% 
+            // Recuperando o usuário da sessão
+            Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
+
+            if (usuarioLogado != null) {
+                out.println("<p>" + usuarioLogado.getUsername() +"</p>");
+            } else {
+                // Se o usuário não estiver logado, redireciona para a página de login
+                response.sendRedirect(request.getContextPath() + "/index.jsp?error=notLogged");
+                return; // Certifica-se de que o redirecionamento aconteça e o restante da página não seja executado
+            }
+        %></a>
+                    <p>Administrador</p>
+                </div>
+            </div>
+            <i class='bx bx-chevron-down'></i>
+        </div> 
+
         <button class="btn"><b>Logout</b></button>
     </nav>
 
@@ -33,7 +54,9 @@
         <div class="content">
             <span class="blur"></span>
             <span class="blur"></span>
-            <H1>Hi, I'm Reza, Web Developer</H1>
+            <H1><%            
+                out.println("<h1>Olá, " + usuarioLogado.getUsername() +".</h1>");
+        %></H1>
           
             <button class="btn"><b>Dashboard</b></button>
         </div>
@@ -71,7 +94,7 @@
                 <span><i class="ri-shake-hands-line"></i></span>
                 <h4>Cooperation</h4>
                 <p>
-                    You want we worrk together? Write email to us, we will read it.
+                    You want we work together? Write email to us, we will read it.
                 </p>
                 <a href="#">Join Now <i class="ri-arrow-right-line"></i></a>
             </div>
