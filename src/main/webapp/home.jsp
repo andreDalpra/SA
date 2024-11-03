@@ -11,7 +11,7 @@
         <h1>Bem-vindo</h1>
 
         <% 
-            // Recuperando o    usuário da sessão
+            // Recuperando o usuário da sessão
             Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
 
             if (usuarioLogado != null) {
