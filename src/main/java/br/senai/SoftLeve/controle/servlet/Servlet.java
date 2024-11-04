@@ -119,7 +119,7 @@ public class Servlet extends HttpServlet {
 
 		return tarefa;
 	}
-	
+
 	private TipoTarefa instanciarTipoTarefa(HttpServletRequest request) {
 		TipoTarefa tipoTarefa = new TipoTarefa();
 
@@ -142,6 +142,9 @@ public class Servlet extends HttpServlet {
 			switch (action) {
 			case "logar":
 				logar(request, response);
+				break;
+			case "logout":
+				logout(request, response);
 				break;
 			case "registrar":
 				registrar(request, response);
@@ -207,6 +210,17 @@ public class Servlet extends HttpServlet {
 			e.printStackTrace();
 			response.sendRedirect(request.getContextPath() + "/error.jsp");
 		}
+	}
+
+	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Invalida a sessão do usuário
+		HttpSession session = request.getSession(false); // Evita criar uma nova sessão
+		if (session != null) {
+			session.invalidate(); // Encerra a sessão
+		}
+
+		// Redireciona para a página de login
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
 	}
 
 	private void registrar(HttpServletRequest request, HttpServletResponse response)

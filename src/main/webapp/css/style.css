@@ -35,8 +35,8 @@ body {
 }
 
 .left-login img {
-    max-width: 100%; /* Faz a imagem se ajustar ao tamanho da div */
-    height: auto;
+     /* Faz a imagem se ajustar ao tamanho da div */
+    height: 500px;
     margin-left: 140px;
 }
 

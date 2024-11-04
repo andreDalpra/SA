@@ -15,47 +15,60 @@
 <body>
 
     <nav>
-        <div class="nav-logo">
+    <div class="nav-logo">
+        <a href="#">
+            <img src="img/Logo.png" alt="Logo">
+        </a>
+    </div>
+
+    <ul class="nav-links">
+        <li class="link">
+    <a href="#" id="usuarios-link" onclick="toggleDropdown(event, 'usuarios-dropdown')">
+        Usu√°rios <span class="arrow">‚ñæ</span>
+    </a>
+    <ul id="usuarios-dropdown" class="dropdown">
+        <li><a href="#">Usu√°rios Ativos</a></li>
+        <li><a href="#">Bloqueados</a></li>
+    </ul>
+</li>
+
+
+        <li id="link1" class="link"><a href="#">Desenvolvedores</a></li>
+        <li id="link2" class="link"><a href="#">Tarefas</a></li>
+        <li id="link3" class="link"><a href="#">Tipos de Tarefas</a></li>
+    </ul>
+
+    <div class="profile">
+        <div>
             <a href="#">
-                <img src="img/Logo.png">
+                <% 
+                    Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
+                    if (usuarioLogado != null) {
+                        out.println("<p>" + usuarioLogado.getUsername() +"</p>");
+                    } else {
+                        response.sendRedirect(request.getContextPath() + "/index.jsp?error=notLogged");
+                        return;
+                    }
+                %>
             </a>
+            <p>Administrador</p>
         </div>
+    </div>
 
-        <ul class="nav-links">
-            <li class="link"><a href="#">Usu·rios</a></li>
-            <li id="link1" class="link"><a href="#">Desenvolvedores</a></li>
-            <li id="link2" class="link"><a href="#">Tarefas</a></li>
-            <li id="link3" class="link"><a href="#">Tipos de Tarefas</a></li>
-        </ul>
-        <div class="profile">
-                <div>   
-                    <a href="#"><% 
-            // Recuperando o usu·rio da sess„o
-            Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
-
-            if (usuarioLogado != null) {
-                out.println("<p>" + usuarioLogado.getUsername() +"</p>");
-            } else {
-                // Se o usu·rio n„o estiver logado, redireciona para a p·gina de login
-                response.sendRedirect(request.getContextPath() + "/index.jsp?error=notLogged");
-                return; // Certifica-se de que o redirecionamento aconteÁa e o restante da p·gina n„o seja executado
-            }
-        %></a>
-                    <p>Administrador</p>
-                </div>
-            </div>
-            <i class='bx bx-chevron-down'></i>
-        </div> 
-
+    <a href="${pageContext.request.contextPath}/servlet?action=logout">
         <button class="btn"><b>Logout</b></button>
-    </nav>
+    </a>
+</nav>
+
+
+
 
     <header class="container">
         <div class="content">
             <span class="blur"></span>
             <span class="blur"></span>
             <H1><%            
-                out.println("<h1>Ol·, " + usuarioLogado.getUsername() +".</h1>");
+                out.println("<h1>Ol√°, " + usuarioLogado.getUsername() +".</h1>");
         %></H1>
           
             <button class="btn"><b>Dashboard</b></button>
@@ -64,39 +77,39 @@
     </header>
 
     <section class="container">
-        <h2 class="header">OUR FEATURES</h2>
+        <h2 class="header">TECNOLOGIAS USADAS</h2>
         <div class="features">
             <div class="card">
-                <span><i class="ri-money-dollar-box-line"></i></span>
-                <h4>Free Tutorials</h4>
+                <span><img width="48" height="48" src="https://img.icons8.com/color/48/html-5--v1.png" alt="html-5--v1"/></span>
+                <h4>HTML</h4>
                 <p>
-                    My tutorials in my channel "AsmrProg" are free and you don't need to pay anything.
+                	√© uma linguagem de marca√ß√£o utilizada na constru√ß√£o de p√°ginas na Web
                 </p>
-                <a href="#">Join Now <i class="ri-arrow-right-line"></i></a>
+                
             </div>
             <div class="card">
-                <span><i class="ri-bug-line"></i></span>
-                <h4>Fix Your Bugs</h4>
+                <span><img width="48" height="48" src="https://img.icons8.com/fluency/48/java-coffee-cup-logo.png" alt="java-coffee-cup-logo"/></span>
+                <h4>JAVA</h4>
                 <p>
-                    You have any problem in your codes? Tell me, i will help you fix it.
+                    √© uma linguagem orientada a objetos desenvolvida, por uma equipe de programadores chefiada por James Gosling.
                 </p>
-                <a href="#">Join Now <i class="ri-arrow-right-line"></i></a>
+                
             </div>
             <div class="card">
-                <span><i class="ri-history-line"></i></span>
-                <h4>On Time Videos</h4>
+                <span><img width="48" height="48" src="https://img.icons8.com/color/48/css3.png" alt="css3"/></span>
+                <h4>CSS</h4>
                 <p>
-                    We have video each 4 days, So check channel every 4 days to watch it!
+                    √© um mecanismo para adicionar estilos a uma p√°gina web, aplicado diretamente nas tags HTML ou ficar contido dentro das tags style.
                 </p>
-                <a href="#">Join Now <i class="ri-arrow-right-line"></i></a>
+                
             </div>
             <div class="card">
-                <span><i class="ri-shake-hands-line"></i></span>
-                <h4>Cooperation</h4>
+                <span><img width="48" height="48" src="https://img.icons8.com/fluency/48/javascript.png" alt="javascript"/></span>
+                <h4>JAVASCRIPT</h4>
                 <p>
-                    You want we work together? Write email to us, we will read it.
+                    √© uma linguagem de programa√ß√£o interpretada estruturada, de script em alto n√≠vel com tipagem din√¢mica fraca e multiparadigma
                 </p>
-                <a href="#">Join Now <i class="ri-arrow-right-line"></i></a>
+                
             </div>
         </div>
     </section>
@@ -106,7 +119,7 @@
   
 
     <div class="copyright">
-        Copyright © 2024 SoftLeve. All Rights Reserved.
+        Copyright ¬© 2024 SoftLeve. All Rights Reserved.
     </div>
 
 
