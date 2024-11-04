@@ -31,5 +31,17 @@ function toggleDropdown(event, dropdownId) {
     dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 }
 
+// Fecha o dropdown se o usuário clicar fora do menu
+document.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('usuarios-dropdown');
+    const link = document.getElementById('usuarios-link');
+
+    // Verifica se o clique foi fora do link e do dropdown
+    if (dropdown.style.display === 'block' && !link.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.style.display = 'none';
+    }
+});
+
+
 
 

@@ -1,5 +1,5 @@
 <%@ page import="br.senai.SoftLeve.entidade.usuario.Usuario"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -107,7 +107,7 @@
                 <span><img width="48" height="48" src="https://img.icons8.com/fluency/48/javascript.png" alt="javascript"/></span>
                 <h4>JAVASCRIPT</h4>
                 <p>
-                    é uma linguagem de programação interpretada estruturada, de script em alto nível com tipagem dinâmica fraca e multiparadigma
+                    é uma linguagem de programação interpretada estruturada , de script em alto nível com tipagem dinâmica fraca e multiparadigma
                 </p>
                 
             </div>
