@@ -197,7 +197,7 @@ public class Servlet extends HttpServlet {
 				session.setAttribute("usuarioLogado", usuario);
 
 				if (usuario.getNivel() == 0) {
-					response.sendRedirect("site.jsp");
+					response.sendRedirect(request.getContextPath() + "/paginas/adm/homeAdm.jsp");
 				} else if (usuario.getNivel() == 1) {
 					response.sendRedirect(request.getContextPath() + "/paginas/desenvolvedor/homeDev.jsp");
 				} else if (usuario.getNivel() == 2) {

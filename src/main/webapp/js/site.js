@@ -24,23 +24,46 @@ link2.addEventListener('click', () => {
 link3.addEventListener('click', () => {
     scrollToElement('.column');
 });
+document.addEventListener('DOMContentLoaded', function() {
+    let activeDropdown = null; // Variável para armazenar o dropdown atualmente aberto
 
-function toggleDropdown(event, dropdownId) {
-    event.preventDefault();
-    const dropdown = document.getElementById(dropdownId);
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-}
+    function toggleDropdown(event, dropdownId) {
+        event.preventDefault();
+        const dropdown = document.getElementById(dropdownId);
 
-// Fecha o dropdown se o usuário clicar fora do menu
-document.addEventListener('click', function(event) {
-    const dropdown = document.getElementById('usuarios-dropdown');
-    const link = document.getElementById('usuarios-link');
+        // Fecha o dropdown aberto, se for diferente do atual
+        if (activeDropdown && activeDropdown !== dropdown) {
+            activeDropdown.style.display = 'none';
+        }
 
-    // Verifica se o clique foi fora do link e do dropdown
-    if (dropdown.style.display === 'block' && !link.contains(event.target) && !dropdown.contains(event.target)) {
-        dropdown.style.display = 'none';
+        // Alterna o estado do dropdown atual
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+
+        // Define o activeDropdown para o dropdown atual se ele estiver visível, ou para null se estiver fechado
+        activeDropdown = dropdown.style.display === 'block' ? dropdown : null;
     }
+
+    // Fecha o dropdown se o usuário clicar fora dele
+    document.addEventListener('click', function(event) {
+        if (activeDropdown && !activeDropdown.contains(event.target) && 
+            !event.target.closest('.link')) { 
+            // fecha o dropdown aberto se o clique for fora do link e do dropdown ativo
+            activeDropdown.style.display = 'none';
+            activeDropdown = null;
+        }
+    });
+
+    // Adiciona os eventos de clique para os links de usuários e desenvolvedores
+    document.getElementById('usuarios-link').addEventListener('click', function(event) {
+        toggleDropdown(event, 'usuarios-dropdown');
+    });
+
+    document.getElementById('dev-link').addEventListener('click', function(event) {
+        toggleDropdown(event, 'dev-dropdown');
+    });
 });
+
+
 
 
 

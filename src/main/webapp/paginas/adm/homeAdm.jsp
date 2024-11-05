@@ -17,7 +17,7 @@
     <nav>
     <div class="nav-logo">
         <a href="#">
-            <img src="img/Logo.png" alt="Logo">
+            <img src="${pageContext.request.contextPath}/img/Logo.png" alt="Logo">
         </a>
     </div>
 
@@ -32,8 +32,16 @@
     </ul>
 </li>
 
+<li class="link">
+    <a href="#" id="dev-link" onclick="toggleDropdown(event, 'dev-dropdown')">
+        Desenvolvedores <span class="arrow">▾</span>
+    </a>
+    <ul id="dev-dropdown" class="dropdown">
+        <li><a href="#">Usuários Ativos</a></li>
+        <li><a href="#">Bloqueados</a></li>
+    </ul>
+</li>
 
-        <li id="link1" class="link"><a href="#">Desenvolvedores</a></li>
         <li id="link2" class="link"><a href="#">Tarefas</a></li>
         <li id="link3" class="link"><a href="#">Tipos de Tarefas</a></li>
     </ul>
