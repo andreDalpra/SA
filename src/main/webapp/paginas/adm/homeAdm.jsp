@@ -27,21 +27,59 @@
 		</div>
 
 		<ul class="nav-links">
-        <li class="link">
-    <a href="#" id="usuarios-link" onclick="toggleDropdown(event, 'usuarios-dropdown')">
-        Usuários <span class="arrow">▾</span>
-    </a>
-    <ul id="usuarios-dropdown" class="dropdown">
-        <li><a href="#">Usuários Ativos</a></li>
-        <li><a href="#">Bloqueados</a></li>
-    </ul>
-</li>
+			<!-- Menu Dropdown de Usuários -->
+			<li class="link"><a href="#" id="usuarios-link"
+				onclick="toggleDropdown(event, 'usuarios-dropdown')"> Usuários <span
+					class="arrow">▾</span>
+			</a>
+				<ul id="usuarios-dropdown" class="dropdown">
+					<li><a
+						href="${pageContext.request.contextPath}/paginas/usuario/usuariosAtivos.jsp">Usuários
+							Ativos</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/paginas/usuario/usuariosBloqueados.jsp">Bloqueados</a></li>
+				</ul></li>
 
+			<!-- Menu Dropdown de Desenvolvedores -->
+			<li class="link"><a href="#" id="desenvolvedores-link"
+				onclick="toggleDropdown(event, 'desenvolvedores-dropdown')">
+					Desenvolvedores <span class="arrow">▾</span>
+			</a>
+				<ul id="desenvolvedores-dropdown" class="dropdown">
+					<li><a
+						href="${pageContext.request.contextPath}/paginas/adm/cadastroDev.jsp">Cadastrar</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/paginas/adm/listaDev.jsp">Ver
+							mais</a></li>
+				</ul></li>
 
-        <li id="link1" class="link"><a href="#">Desenvolvedores</a></li>
-        <li id="link2" class="link"><a href="#">Tarefas</a></li>
-        <li id="link3" class="link"><a href="#">Tipos de Tarefas</a></li>
-    </ul>
+			<!-- Menu Dropdown de Tarefas -->
+			<li class="link"><a href="#" id="tarefas-link"
+				onclick="toggleDropdown(event, 'tarefas-dropdown')"> Tarefas <span
+					class="arrow">▾</span>
+			</a>
+				<ul id="tarefas-dropdown" class="dropdown">
+					<li><a
+						href="${pageContext.request.contextPath}/paginas/tarefa/cadastroTarefa.jsp">Cadastrar</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/paginas/tarefa/listaTarefa.jsp">Ver
+							Tarefas</a></li>
+				</ul></li>
+
+			<!-- Menu Dropdown de Tipos de Tarefas -->
+			<li class="link"><a href="#" id="tipos-tarefas-link"
+				onclick="toggleDropdown(event, 'tipos-tarefas-dropdown')"> Tipos
+					de Tarefas <span class="arrow">▾</span>
+			</a>
+				<ul id="tipos-tarefas-dropdown" class="dropdown">
+					<li><a
+						href="${pageContext.request.contextPath}/paginas/tarefa/cadastroTipoTarefa.jsp">Cadastrar</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/paginas/tarefa/listaTipoTarefa.jsp">Ver
+							tipos</a></li>
+				</ul></li>
+		</ul>
+
 
 		<div class="profile">
 			<div>
@@ -60,9 +98,7 @@
 		</div>
 
 		<a href="${pageContext.request.contextPath}/servlet?action=logout">
-			<button class="btn">
-				<b>Logout</b>
-			</button>
+			<button class="btn">Logout</button>
 		</a>
 	</nav>
 
@@ -75,9 +111,7 @@
 				%>
 			</H1>
 
-			<button class="btn">
-				<b>Dashboard</b>
-			</button>
+			<button class="btn">Dashboard</button>
 		</div>
 
 	</header>
