@@ -55,15 +55,15 @@
 							<button type="button" class="btn btn-editar"
 								onclick="openModal('edit-dev', null, {
         id: '<%=d.getId()%>',
-        nome: '<%=d.getNome()%>',
-        email: '<%=d.getUsuario_email()%>'
+        nome: '<%=d.getNome()%>'
+        
     })">
 								<i class="fa-regular fa-pen-to-square"></i> Editar
 							</button>
 
 
 							<button type="button" class="btn btn-danger"
-								onclick="confirmDelete(<%=d.getId()%>)">
+								onclick="confirmDevDelete(<%=d.getId()%>)">
 								<i class="fa-solid fa-trash-can"></i> Excluir
 							</button>
 						</td>
@@ -88,7 +88,7 @@
 		<!-- Modal para edição -->
 		<div id="edit-dev-modal-container" class="modal-container">
 			<div class="modal">
-				<span class="fechar" onclick="closeEditModal()">X</span>
+				<span class="fechar" onclick="closeEditDevModal()">X</span>
 				<h1 id="edit-dev-modal-title">Editar Desenvolvedor</h1>
 				<form action="${pageContext.request.contextPath}/servlet"
 					method="post" id="edit-task-form">
@@ -98,30 +98,7 @@
 
 					<div class="form-group">
 						<label for="edit-nome">Nome</label> <input type="text"
-							id="edit-nome" name="descricao" required>
-					</div>
-
-					<div class="form-group">
-						<b><label for="usuarioEmail">ID do Usuário:</label></b> <select
-							id="edit-usuario_email" name="usuarioEmail" required>
-							<option value="" disabled selected>Selecione o email do
-								usuário</option>
-							<%
-							Usuario usuario = new Usuario();
-							List<Usuario> listaUsuariosDevEmail = usuario.listarUsuariosDev();
-							if (listaUsuariosDevEmail != null && !listaUsuariosDevEmail.isEmpty()) {
-								for (Usuario usuarios : listaUsuariosDevEmail) {
-							%>
-							<option value="<%=usuarios.getId()%>"><%=usuarios.getId()%>
-								-
-								<%=usuarios.getEmail()%></option>
-							<%
-							}
-							} else {
-							out.println("<option value=''>Nenhum usuário encontrado</option>");
-							}
-							%>
-						</select>
+							id="edit-nome" name="nomeDev" required>
 					</div>
 
 					<button type="submit" id="edit-submit-button">Salvar
@@ -131,19 +108,19 @@
 		</div>
 
 		<!-- Modal de confirmação de exclusão -->
-		<div id="delete-modal" class="modal-container" style="display: none;">
+		<div id="delete-dev-modal" class="modal-container" style="display: none;">
 			<div class="modal">
-				<span class="fechar" onclick="closeDeleteModal()">X</span>
+				<span class="fechar" onclick="closeDeleteDevModal()">X</span>
 				<h2>Confirmação de Exclusão</h2>
 
 				<form action="${pageContext.request.contextPath}/servlet"
 					method="POST">
-					<input type="hidden" name="action" value="excluir-tarefa">
-					<input type="hidden" id="delete-task-id" name="id">
+					<input type="hidden" name="action" value="excluir-dev">
+					<input type="hidden" id="delete-dev-id" name="id">
 					<div class="modal-buttons">
 						<button type="submit" class="btn btn-danger">Excluir</button>
 						<button type="button" class="btn btn-secondary"
-							onclick="closeDeleteModal()">Cancelar</button>
+							onclick="closeDeleteDevModal()">Cancelar</button>
 					</div>
 				</form>
 			</div>

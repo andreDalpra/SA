@@ -15,7 +15,6 @@ function openModal(mode, task = null, dev = null) {
         // Modal de edição de desenvolvedor
         document.getElementById('edit-id-dev').value = dev.id;
         document.getElementById('edit-nome').value = dev.nome;
-        document.getElementById('edit-usuario_email').value = dev.email; 
         document.getElementById('edit-dev-modal-title').innerText = "Editar Desenvolvedor";
         document.getElementById('edit-dev-modal-container').style.display = "flex";
     }
@@ -38,6 +37,10 @@ function closeEditModal() {
     document.getElementById("edit-modal-container").style.display = "none";
 }
 
+function closeEditDevModal() {
+    document.getElementById("edit-dev-modal-container").style.display = "none";
+}
+
 // Função para abrir a modal de confirmação de exclusão
 function confirmDelete(taskId) {
     document.getElementById("delete-task-id").value = taskId;  // Definindo o ID da tarefa para exclusão
@@ -47,4 +50,15 @@ function confirmDelete(taskId) {
 // Função para fechar a modal de confirmação de exclusão
 function closeDeleteModal() {
     document.getElementById("delete-modal").style.display = "none";
+}
+
+// Função para abrir a modal de confirmação de exclusão
+function confirmDevDelete(devId) {
+    document.getElementById("delete-dev-id").value = devId;  // Definindo o ID da tarefa para exclusão
+    document.getElementById("delete-dev-modal").style.display = "flex";  // Mostra a modal de exclusão
+}
+
+// Função para fechar a modal de confirmação de exclusão
+function closeDeleteDevModal() {
+    document.getElementById("delete-dev-modal").style.display = "none";
 }

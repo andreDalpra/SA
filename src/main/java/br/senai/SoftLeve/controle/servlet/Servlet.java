@@ -103,14 +103,7 @@ public class Servlet extends HttpServlet {
 			tarefa.setStatus(Tarefa.Status.fromString(vStatus)); // Converte a string para o enum usando fromString()
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-			tarefa.setStatus(Tarefa.Status.fromString("CONCLUIDA")); // Teste direto
-
-			// Trate o erro de status inválido, por exemplo, definindo um valor padrão ou
-			// redirecionando com uma mensagem de erro
-			// Exemplo de redirecionamento:
-			// request.setAttribute("errorMessage", "Status inválido fornecido: " +
-			// vStatus);
-			// throw new ServletException("Status inválido fornecido: " + vStatus);
+			tarefa.setStatus(Tarefa.Status.fromString("CONCLUIDA")); // Teste diret
 		}
 
 		tarefa.setPrazo(prazoTarefa); // Define a data tratada
