@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cadastro de Tarefa</title>
+<title>Tarefas Adm</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/listaTarefa.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -18,7 +18,7 @@
 
 	<div class="container">
 		<div class="header">
-			<h1>Lista de Tarefas</h1>
+			<h1>Tarefas</h1>
 			<button class="btn btn-tela" onclick="openModal('create')"> <i class="fa-solid fa-plus"></i> Adicionar
 				Tarefa</button>
 		</div>
@@ -268,10 +268,10 @@
 		</div>
 
 		<div class="text-center">
-			<a href="${pageContext.request.contextPath}/home.jsp" class="btn">Voltar</a>
+			<a href="${pageContext.request.contextPath}/paginas/adm/homeAdm.jsp" class="btn">Voltar</a>
 		</div>
 
-		<script src="${pageContext.request.contextPath}/js/tabela.js" defer></script>
+		<script src="${pageContext.request.contextPath}/js/modal.js" defer></script>
 	</div>
 </body>
 </html>

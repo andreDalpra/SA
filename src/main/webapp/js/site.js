@@ -26,26 +26,9 @@ link3.addEventListener('click', () => {
 });
 
 
-let activeDropdown = null;
-
 function toggleDropdown(event, dropdownId) {
     event.preventDefault();
-
     const dropdown = document.getElementById(dropdownId);
-
-    // Fecha o dropdown ativo se ele for o mesmo clicado
-    if (activeDropdown === dropdown) {
-        dropdown.style.display = 'none';
-        activeDropdown = null;
-    } else {
-        // Fecha o dropdown ativo se for diferente do atual
-        if (activeDropdown) {
-            activeDropdown.style.display = 'none';
-        }
-        
-        // Abre o novo dropdown e define como ativo
-        dropdown.style.display = 'block';
-        activeDropdown = dropdown;
-    }
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 }
 

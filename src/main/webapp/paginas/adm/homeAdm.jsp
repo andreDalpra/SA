@@ -53,18 +53,11 @@
 							mais</a></li>
 				</ul></li>
 
-			<!-- Menu Dropdown de Tarefas -->
-			<li class="link"><a href="#" id="tarefas-link"
-				onclick="toggleDropdown(event, 'tarefas-dropdown')"> Tarefas <span
-					class="arrow">▾</span>
-			</a>
-				<ul id="tarefas-dropdown" class="dropdown">
-					<li><a
-						href="${pageContext.request.contextPath}/paginas/tarefa/cadastroTarefa.jsp">Cadastrar</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/paginas/tarefa/listaTarefa.jsp">Ver
-							Tarefas</a></li>
-				</ul></li>
+			</li>
+
+
+			<li id="link1" class="link"><a
+				href="${pageContext.request.contextPath}/paginas/tarefa/listaTarefa.jsp">Tarefas</a></li>
 
 			<!-- Menu Dropdown de Tipos de Tarefas -->
 			<li class="link"><a href="#" id="tipos-tarefas-link"

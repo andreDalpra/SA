@@ -15,7 +15,7 @@
             <input type="text" id="descricaoTipoTarefa" name="descricaoTipoTarefa" placeholder="Insira o nome do tipo de tarefa" required>
         </div>             
         <button type="submit" class="btn-login">Cadastrar</button>
-        <a href="${pageContext.request.contextPath}/home.jsp" class="btn-register">Voltar</a>
+        <a href="${pageContext.request.contextPath}/paginas/adm/homeAdm.jsp" class="btn-register">Voltar</a>
     </form>
 </body>
 </html>

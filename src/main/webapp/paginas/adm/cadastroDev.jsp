@@ -47,7 +47,7 @@
 
 
 		<button type="submit" class="btn-login">Cadastrar</button>
-		<a href="${pageContext.request.contextPath}/home.jsp"
+		<a href="${pageContext.request.contextPath}/paginas/adm/homeAdm.jsp"
 			class="btn-register">Voltar</a>
 	</form>
 </body>

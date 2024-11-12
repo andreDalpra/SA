@@ -316,7 +316,7 @@ public class Servlet extends HttpServlet {
 
 		try {
 			if (tt.incluirTipoTarefa()) {
-				response.sendRedirect(request.getContextPath() + "/home.jsp");
+				response.sendRedirect(request.getContextPath() + "//paginas/adm/homeAdm.jsp");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTipoTarefa.jsp?error");
 			}
@@ -372,7 +372,7 @@ public class Servlet extends HttpServlet {
 
 		try {
 			if (t.incluirTarefa()) {
-				response.sendRedirect(request.getContextPath() + "/home.jsp");
+				response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTarefa.jsp");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTarefa.jsp?error");
 			}

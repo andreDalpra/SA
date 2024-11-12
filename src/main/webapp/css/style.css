@@ -81,6 +81,13 @@ form:hover {
     transform: translateY(-5px); /* Eleva levemente o formulário ao passar o mouse */
 }
 
+h2{
+	font-size: 35px;
+	display:flex;
+	justify-content:center;
+	
+}
+
 
 /* Estilo das labels */
 label {
@@ -193,16 +200,15 @@ h1.titulo-center {
 
 /* Estilo do select (menu drop-down) */
 select {
-    width: 100%;
+    width: 95%;
     padding: 12px;
     font-size: 16px;
     margin-bottom: 20px;
     border: 2px solid #ddd; /* Borda mais grossa */
-    border-radius: 8px; /* Borda arredondada */
+    border-radius: 12px; /* Borda arredondada */
     transition: border-color 0.3s ease; /* Transição suave para foco */
-    background-color: white; /* Fundo branco */
     margin-left: 10px; /* Margem esquerda */
-    margin-right: 10px; /* Margem direita */
+    margin-right: 40px; /* Margem direita */
 }
 
 select:focus {

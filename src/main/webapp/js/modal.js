@@ -1,6 +1,7 @@
 // Função para abrir a modal de cadastro ou edição
-function openModal(mode, task = null) {
+function openModal(mode, task = null, dev = null) {
     if (mode === 'edit' && task) {
+        // Modal de edição de tarefa
         document.getElementById('edit-id').value = task.id;
         document.getElementById('edit-descricao').value = task.descricao;
         document.getElementById('edit-status').value = task.status;
@@ -9,12 +10,23 @@ function openModal(mode, task = null) {
         document.getElementById('edit-tipo_tarefa_id').value = task.tipotarefa_id;
         document.getElementById('edit-modal-title').innerText = "Editar Tarefa";
         document.getElementById('edit-modal-container').style.display = "flex";
-    } else {
+    } 
+    else if (mode === 'edit-dev' && dev) {
+        // Modal de edição de desenvolvedor
+        document.getElementById('edit-id-dev').value = dev.id;
+        document.getElementById('edit-nome').value = dev.nome;
+        document.getElementById('edit-usuario_email').value = dev.email; 
+        document.getElementById('edit-dev-modal-title').innerText = "Editar Desenvolvedor";
+        document.getElementById('edit-dev-modal-container').style.display = "flex";
+    }
+    else {
+        // Modal de cadastro de nova tarefa
         document.getElementById('task-form').reset();
         document.getElementById('modal-title').innerText = "Cadastro de Tarefa";
         document.getElementById('modal-container').style.display = "flex";
     }
 }
+
 
 // Função para fechar a modal de cadastro
 function closeModal() {

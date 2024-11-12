@@ -82,7 +82,7 @@
 
     <!-- Botão para voltar -->
     <div class="text-center">
-        <a href="${pageContext.request.contextPath}/home.jsp" class="btn btn-primary">Voltar</a>
+        <a href="${pageContext.request.contextPath}/paginas/adm/homeAdm.jsp" class="btn btn-primary">Voltar</a>
     </div>
 </div>
 

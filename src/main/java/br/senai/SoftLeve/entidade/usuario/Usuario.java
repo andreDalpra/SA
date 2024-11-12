@@ -171,6 +171,26 @@ public class Usuario {
         }
         return listarUsuariosDev;
     }
+    
+    public List<Usuario> listarUsuariosDevEmail() throws ClassNotFoundException { 
+        List<Usuario> listarUsuariosDev = new ArrayList<>();
+        String sql = "SELECT id, email, nivel  FROM usuario WHERE nivel = 1 ORDER BY id";
+        try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Usuario u = new Usuario();
+                u.setId(rs.getInt("id"));             
+                u.setEmail(rs.getString("email"));
+                u.setnivel(rs.getInt("nivel"));
+                listarUsuariosDev.add(u);
+            }
+            System.out.println("Total de usuários encontrados: " + listarUsuariosDev.size());
+        } catch (SQLException e) {
+            System.out.println("Erro na lista de usuários: " + e.getMessage());
+            return null;
+        }
+        return listarUsuariosDev;
+    }
     // Incrementar tentativas
     public void incrementarTentativas() {
         this.tentativas++;
