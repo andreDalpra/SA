@@ -1,5 +1,5 @@
 // Função para abrir a modal de cadastro ou edição
-function openModal(mode, task = null, dev = null) {
+function openModal(mode, task = null, dev = null, tipo = null) {
     if (mode === 'edit' && task) {
         // Modal de edição de tarefa
         document.getElementById('edit-id').value = task.id;
@@ -17,6 +17,14 @@ function openModal(mode, task = null, dev = null) {
         document.getElementById('edit-nome').value = dev.nome;
         document.getElementById('edit-dev-modal-title').innerText = "Editar Desenvolvedor";
         document.getElementById('edit-dev-modal-container').style.display = "flex";
+    }
+    
+    else if (mode === 'edit-tipo' && tipo) {
+        // Modal de edição de desenvolvedor
+        document.getElementById('edit-id-tipo').value = tipo.id;
+        document.getElementById('edit-desc').value = tipo.desc;
+        document.getElementById('edit-tipo-modal-title').innerText = "Editar Tipo Tarefa";
+        document.getElementById('edit-tipo-modal-container').style.display = "flex";
     }
     else {
         // Modal de cadastro de nova tarefa
@@ -41,6 +49,10 @@ function closeEditDevModal() {
     document.getElementById("edit-dev-modal-container").style.display = "none";
 }
 
+function closeEditTipoModal() {
+    document.getElementById("edit-tipo-modal-container").style.display = "none";
+}
+
 // Função para abrir a modal de confirmação de exclusão
 function confirmDelete(taskId) {
     document.getElementById("delete-task-id").value = taskId;  // Definindo o ID da tarefa para exclusão
@@ -61,4 +73,15 @@ function confirmDevDelete(devId) {
 // Função para fechar a modal de confirmação de exclusão
 function closeDeleteDevModal() {
     document.getElementById("delete-dev-modal").style.display = "none";
+}
+
+// Função para abrir a modal de confirmação de exclusão
+function confirmTipoDelete(tipoId) {
+    document.getElementById("delete-tipo-id").value = tipoId;  // Definindo o ID da tarefa para exclusão
+    document.getElementById("delete-tipo-modal").style.display = "flex";  // Mostra a modal de exclusão
+}
+
+// Função para fechar a modal de confirmação de exclusão
+function closeDeleteTipoModal() {
+    document.getElementById("delete-tipo-modal").style.display = "none";
 }
