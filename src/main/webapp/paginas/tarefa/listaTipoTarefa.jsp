@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tipos Tarefas Adm</title>
+<title>Tarefas Adm</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/listaTarefa.css">
 <link rel="stylesheet"
@@ -21,7 +21,7 @@
 
 	<div class="container">
 		<div class="header">
-			<h1>Tipos Tarefa</h1>
+			<h1>Tipo Tarefa Adm</h1>
 
 		</div>
 
@@ -48,13 +48,13 @@
 					<tr>
 						<td><%=tt.getId()%></td>
 						<td><%=tt.getDescricao()%></td>
-						
+
 						<td>
 							<button type="button" class="btn btn-editar"
-								onclick="openModal('edit-tipo', null, {
-        id: '<%=tt.getId()%>',
-        descricao '<%=tt.getDescricao()%>'
-    })">
+								onclick="openModalTipo({
+            id: '<%=tt.getId()%>',
+            descricao: '<%=tt.getDescricao()%>'
+        })">
 								<i class="fa-regular fa-pen-to-square"></i> Editar
 							</button>
 
@@ -83,7 +83,7 @@
 
 
 
-		<!-- Modal para edição -->
+		<!-- Modal par edição -->
 		<div id="edit-tipo-modal-container" class="modal-container">
 			<div class="modal">
 				<span class="fechar" onclick="closeEditTipoModal()">X</span>
@@ -95,8 +95,8 @@
 						id="edit-id-tipo" name="id">
 
 					<div class="form-group">
-						<label for="edit-desc">Descrição</label> <input type="text"
-							id="edit-desc" name="descricaoTipoTarefa" required>
+						<label for="edit-descricao">Nome</label> <input type="text"
+							id="edit-descricao" name="descricaoTipoTarefa" required>
 					</div>
 
 					<button type="submit" id="edit-submit-button">Salvar

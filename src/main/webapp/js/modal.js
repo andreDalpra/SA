@@ -1,5 +1,5 @@
 // Função para abrir a modal de cadastro ou edição
-function openModal(mode, task = null, dev = null, tipo = null) {
+function openModal(mode, task = null, dev = null) {
     if (mode === 'edit' && task) {
         // Modal de edição de tarefa
         document.getElementById('edit-id').value = task.id;
@@ -18,14 +18,7 @@ function openModal(mode, task = null, dev = null, tipo = null) {
         document.getElementById('edit-dev-modal-title').innerText = "Editar Desenvolvedor";
         document.getElementById('edit-dev-modal-container').style.display = "flex";
     }
-    
-    else if (mode === 'edit-tipo' && tipo) {
-        // Modal de edição de desenvolvedor
-        document.getElementById('edit-id-tipo').value = tipo.id;
-        document.getElementById('edit-desc').value = tipo.desc;
-        document.getElementById('edit-tipo-modal-title').innerText = "Editar Tipo Tarefa";
-        document.getElementById('edit-tipo-modal-container').style.display = "flex";
-    }
+   
     else {
         // Modal de cadastro de nova tarefa
         document.getElementById('task-form').reset();
@@ -33,6 +26,19 @@ function openModal(mode, task = null, dev = null, tipo = null) {
         document.getElementById('modal-container').style.display = "flex";
     }
 }
+ 
+function openModalTipo(tipo) {
+    // Verifica se o objeto tipo contém os valores esperados
+    if (tipo) {
+        document.getElementById('edit-id-tipo').value = tipo.id;
+        document.getElementById('edit-descricao').value = tipo.descricao;
+        document.getElementById('edit-tipo-modal-title').innerText = "Editar Tipo Tarefa";
+        document.getElementById('edit-tipo-modal-container').style.display = "flex";
+    } else {
+        console.warn("Objeto 'tipo' não fornecido ou inválido.");
+    }
+}
+
 
 
 // Função para fechar a modal de cadastro
@@ -77,7 +83,7 @@ function closeDeleteDevModal() {
 
 // Função para abrir a modal de confirmação de exclusão
 function confirmTipoDelete(tipoId) {
-    document.getElementById("delete-tipo-id").value = tipoId;  // Definindo o ID da tarefa para exclusão
+    document.getElementById("delete-tipo-id").value = tipoId;  // Definin	do o ID da tarefa para exclusão
     document.getElementById("delete-tipo-modal").style.display = "flex";  // Mostra a modal de exclusão
 }
 

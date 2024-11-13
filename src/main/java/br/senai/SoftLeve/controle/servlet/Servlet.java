@@ -252,7 +252,7 @@ public class Servlet extends HttpServlet {
 
 		try {
 			if (dev.incluirDev()) {
-				response.sendRedirect(request.getContextPath() + "/index.jsp");
+				response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroDev.jsp");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroDev.jsp?error");
 			}
