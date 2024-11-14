@@ -1,4 +1,4 @@
-package br.senai.SoftLeve.controle.servlet;
+ package br.senai.SoftLeve.controle.servlet;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -183,26 +183,35 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void logar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			Usuario usuario = instanciarUsuario(request);
-			if (usuario.autenticarUsuario()) {
-				HttpSession session = request.getSession();
-				session.setAttribute("usuarioLogado", usuario);
+	    try {
+	        Usuario usuario = instanciarUsuario(request);
+	        if (usuario.autenticarUsuario()) {
+	            HttpSession session = request.getSession();
+	            session.setAttribute("usuarioLogado", usuario);
+	            
+	            // Busca o usuario_id do desenvolvedor com base no usuario_id
+	            if (usuario.getNivel() == 1) {  // Verifica se é um desenvolvedor
+	                // Buscar o desenvolvedor pelo usuario_id
+	                Desenvolvedor desenvolvedor = usuario.buscarDesenvolvedorPorId(usuario.getId());
+	                if (desenvolvedor != null) {
+	                    session.setAttribute("idDev", desenvolvedor.getId()); // Adiciona o id do desenvolvedor
+	                }
+	            }
 
-				if (usuario.getNivel() == 0) {
-					response.sendRedirect(request.getContextPath() + "/paginas/adm/homeAdm.jsp");
-				} else if (usuario.getNivel() == 1) {
-					response.sendRedirect(request.getContextPath() + "/paginas/desenvolvedor/homeDev.jsp");
-				} else if (usuario.getNivel() == 2) {
-					response.sendRedirect(request.getContextPath() + "/paginas/usuario/homeAnalista.jsp");
-				}
-			} else {
-				response.sendRedirect(request.getContextPath() + "/index.jsp?error=true");
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			response.sendRedirect(request.getContextPath() + "/error.jsp");
-		}
+	            if (usuario.getNivel() == 0) {
+	                response.sendRedirect(request.getContextPath() + "/paginas/adm/homeAdm.jsp");
+	            } else if (usuario.getNivel() == 1) {
+	                response.sendRedirect(request.getContextPath() + "/paginas/desenvolvedor/homeDev.jsp");
+	            } else if (usuario.getNivel() == 2) {
+	                response.sendRedirect(request.getContextPath() + "/paginas/usuario/homeAnalista.jsp");
+	            }
+	        } else {
+	            response.sendRedirect(request.getContextPath() + "/index.jsp?error=true");
+	        }
+	    } catch (ClassNotFoundException e) {
+	        e.printStackTrace();
+	        response.sendRedirect(request.getContextPath() + "/error.jsp");
+	    }
 	}
 
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

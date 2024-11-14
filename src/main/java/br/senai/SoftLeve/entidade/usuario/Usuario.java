@@ -1,7 +1,6 @@
 package br.senai.SoftLeve.entidade.usuario;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.senai.SoftLeve.banco.conexao.Conexao;
+import br.senai.SoftLeve.entidade.desenvolvedor.Desenvolvedor;
 
 public class Usuario {
 
@@ -77,6 +77,27 @@ public class Usuario {
             return false;
         }
         return false; // Login mal-sucedido
+    }
+    
+    public static Desenvolvedor buscarDesenvolvedorPorId(int usuarioId) throws ClassNotFoundException {
+        Desenvolvedor desenvolvedor = null;
+        String sql = "SELECT id, usuario_id FROM desenvolvedor WHERE usuario_id = ?";
+
+        try (Connection con = Conexao.conectar();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, usuarioId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                desenvolvedor = new Desenvolvedor();
+                desenvolvedor.setId(rs.getInt("id"));
+                desenvolvedor.setUsuario_id(rs.getInt("usuario_id"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao obter desenvolvedor: " + e.getMessage());
+        }
+
+        return desenvolvedor;
     }
 
     // Atualizar tentativas
@@ -191,6 +212,8 @@ public class Usuario {
         }
         return listarUsuariosDev;
     }
+    
+    
     // Incrementar tentativas
     public void incrementarTentativas() {
         this.tentativas++;
