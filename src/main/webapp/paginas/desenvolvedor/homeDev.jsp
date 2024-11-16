@@ -1,4 +1,5 @@
 <%@ page import="br.senai.SoftLeve.entidade.usuario.Usuario"%>
+<%@ page import="br.senai.SoftLeve.entidade.desenvolvedor.Desenvolvedor"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -92,17 +93,11 @@
 				%>
 			</H1>
 
-			<%
-			
-			Integer idDev = (Integer) session.getAttribute("idDev");
-			if (idDev != null) {
-				out.println("ID do desenvolvedor: " + idDev); // Apenas para verificar
-			} else {
-				out.println("Desenvolvedor não encontrado na sessão.");
-			}
-			%>
-
-			<!-- Alterando para link dinâmico -->
+			<% 
+    // Recupera o ID do desenvolvedor da sessão
+    Integer idDev = (Integer) session.getAttribute("idDev");
+%>
+	
 			<a
 				href="${pageContext.request.contextPath}/paginas/desenvolvedor/tarefaDev.jsp?idDev=<%= idDev %>">
 				<button class="btn">Ver minhas Tarefas</button>

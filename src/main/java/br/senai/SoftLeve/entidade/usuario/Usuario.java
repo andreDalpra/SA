@@ -49,7 +49,7 @@ public class Usuario {
             stm.setString(1, this.getUsername());
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-                int userId = rs.getInt("id");
+                int userId = rs.getInt("id"); // Pega o ID do usuário
                 boolean bloqueado = rs.getBoolean("bloqueado");
                 this.tentativas = rs.getInt("tentativas"); // Carrega tentativas do banco
 
@@ -59,7 +59,9 @@ public class Usuario {
 
                 // Verifica a senha
                 if (rs.getString("password").equals(this.getPassword())) {
-                    this.nivel = rs.getInt("nivel"); // Armazena o nível do usuário após autenticar
+                    this.setId(userId); // Atribui o ID ao objeto Usuario
+                    this.setnivel(rs.getInt("nivel")); // Armazena o nível do usuário após autenticar
+                    this.setEmail(rs.getString("email")); // Armazena o email para futuras operações
                     resetarTentativas(); // Reseta tentativas ao logar
                     atualizarTentativas(userId, 0); // Reseta tentativas no banco
                     return true; // Login bem-sucedido
@@ -78,10 +80,12 @@ public class Usuario {
         }
         return false; // Login mal-sucedido
     }
+
     
-    public static Desenvolvedor buscarDesenvolvedorPorId(int usuarioId) throws ClassNotFoundException {
+    public Desenvolvedor buscarDesenvolvedorPorId(int usuarioId) throws ClassNotFoundException {
         Desenvolvedor desenvolvedor = null;
-        String sql = "SELECT id, usuario_id FROM desenvolvedor WHERE usuario_id = ?";
+
+        String sql = "SELECT id, nome, usuario_email, usuario_id FROM desenvolvedor WHERE usuario_id = ?";
 
         try (Connection con = Conexao.conectar();
              PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -91,14 +95,18 @@ public class Usuario {
             if (rs.next()) {
                 desenvolvedor = new Desenvolvedor();
                 desenvolvedor.setId(rs.getInt("id"));
+                desenvolvedor.setNome(rs.getString("nome"));
+                desenvolvedor.setUsuario_email(rs.getString("usuario_email"));
                 desenvolvedor.setUsuario_id(rs.getInt("usuario_id"));
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao obter desenvolvedor: " + e.getMessage());
+            System.err.println("Erro ao buscar desenvolvedor: " + e.getMessage());
         }
 
         return desenvolvedor;
     }
+
+
 
     // Atualizar tentativas
     public void atualizarTentativas(int id, int tentativas) throws ClassNotFoundException {

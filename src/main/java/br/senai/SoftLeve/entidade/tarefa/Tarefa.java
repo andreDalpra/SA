@@ -133,6 +133,34 @@ public class Tarefa {
         }
         return listaTarefas;
     }
+    
+    public static List<Tarefa> tarefasDevs(int desenvolvedorId) throws ClassNotFoundException {
+        List<Tarefa> tarefasDev = new ArrayList<>();
+        String sql = "SELECT id, descricao, status, prazo, desenvolvedor_id, tipo_tarefa_id FROM tarefa WHERE desenvolvedor_id = ?";
+
+        try (Connection con = Conexao.conectar();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, desenvolvedorId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+            	Tarefa tarefa = new Tarefa();
+                tarefa.setId(rs.getInt("id"));
+                tarefa.setDescricao(rs.getString("descricao"));
+                // Converte o status usando o método fromString para lidar com diferenças nos valores
+                tarefa.setStatus(Tarefa.Status.fromString(rs.getString("status")));
+                tarefa.setPrazo(rs.getDate("prazo"));
+                tarefa.setDesenvolvedor_id(rs.getInt("desenvolvedor_id"));
+                tarefa.setTipotarefa_id(rs.getInt("tipo_tarefa_id"));
+                tarefasDev.add(tarefa);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar tarefas: " + e.getMessage());
+        }
+
+        return tarefasDev;
+    }
+
 
     // Getters e Setters
     public int getId() {

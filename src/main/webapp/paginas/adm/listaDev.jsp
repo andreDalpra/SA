@@ -49,8 +49,8 @@
 					<tr>
 						<td><%=d.getId()%></td>
 						<td><%=d.getNome()%></td>
-						<td><%=d.getUsuario_id()%></td>
 						<td><%=d.getUsuario_email()%></td>
+						<td><%=d.getUsuario_id()%></td>
 						<td>
 							<button type="button" class="btn btn-editar"
 								onclick="openModal('edit-dev', null, {

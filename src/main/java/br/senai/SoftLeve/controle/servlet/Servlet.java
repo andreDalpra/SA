@@ -1,4 +1,4 @@
- package br.senai.SoftLeve.controle.servlet;
+package br.senai.SoftLeve.controle.servlet;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -8,6 +8,7 @@ import br.senai.SoftLeve.entidade.desenvolvedor.Desenvolvedor;
 import br.senai.SoftLeve.entidade.tarefa.Tarefa;
 import br.senai.SoftLeve.entidade.tipotarefa.TipoTarefa;
 import br.senai.SoftLeve.entidade.usuario.Usuario;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -185,22 +186,23 @@ public class Servlet extends HttpServlet {
 	private void logar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    try {
 	        Usuario usuario = instanciarUsuario(request);
+
 	        if (usuario.autenticarUsuario()) {
 	            HttpSession session = request.getSession();
 	            session.setAttribute("usuarioLogado", usuario);
-	            
-	            // Busca o usuario_id do desenvolvedor com base no usuario_id
-	            if (usuario.getNivel() == 1) {  // Verifica se é um desenvolvedor
-	                // Buscar o desenvolvedor pelo usuario_id
-	                Desenvolvedor desenvolvedor = usuario.buscarDesenvolvedorPorId(usuario.getId());
-	                if (desenvolvedor != null) {
-	                    session.setAttribute("idDev", desenvolvedor.getId()); // Adiciona o id do desenvolvedor
-	                }
-	            }
 
 	            if (usuario.getNivel() == 0) {
 	                response.sendRedirect(request.getContextPath() + "/paginas/adm/homeAdm.jsp");
 	            } else if (usuario.getNivel() == 1) {
+	                Desenvolvedor desenvolvedor = usuario.buscarDesenvolvedorPorId(usuario.getId());
+	                
+	                if (desenvolvedor != null) {
+	                    session.setAttribute("devLogado", desenvolvedor); // Salva o desenvolvedor completo
+	                    System.out.println("Desenvolvedor encontrado: ID = " + desenvolvedor.getId());
+	                } else {
+	                    System.out.println("Nenhum desenvolvedor encontrado para o usuário com ID = " + usuario.getId());
+	                }
+
 	                response.sendRedirect(request.getContextPath() + "/paginas/desenvolvedor/homeDev.jsp");
 	            } else if (usuario.getNivel() == 2) {
 	                response.sendRedirect(request.getContextPath() + "/paginas/usuario/homeAnalista.jsp");
@@ -213,6 +215,8 @@ public class Servlet extends HttpServlet {
 	        response.sendRedirect(request.getContextPath() + "/error.jsp");
 	    }
 	}
+
+
 
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Invalida a sessão do usuário
@@ -421,5 +425,12 @@ public class Servlet extends HttpServlet {
 			e.printStackTrace();
 			response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTarefa.jsp?error" + e.getMessage());
 		}
+		
+	
 	}
+	
+	
+
+	
+
 }
