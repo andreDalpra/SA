@@ -160,6 +160,46 @@ public class Tarefa {
 
         return tarefasDev;
     }
+    
+    public static String buscarNomePorDevId(int devId) throws ClassNotFoundException {
+        String nome = null;
+        String sql = "SELECT nome FROM desenvolvedor WHERE id = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, devId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    nome = rs.getString("nome");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return nome;
+    }
+    
+    public static String buscarTipoTarefaPorId(int tipoId) throws ClassNotFoundException {
+        String descricao = null;
+        String sql = "SELECT descricao FROM tipotarefa WHERE id = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, tipoId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    descricao = rs.getString("descricao");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return descricao;
+    }
 
 
     // Getters e Setters

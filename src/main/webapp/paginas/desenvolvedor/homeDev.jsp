@@ -46,7 +46,7 @@
 
 
 			<li id="link1" class="link"><a
-				href="${pageContext.request.contextPath}/paginas/tarefa/listaTarefa.jsp">Tarefas</a></li>
+				href="${pageContext.request.contextPath}/paginas/desenvolvedor/listaTarefasDev.jsp">Tarefas</a></li>
 
 			<!-- Menu Dropdown de Tipos de Tarefas -->
 			<li class="link"><a href="#" id="tipos-tarefas-link"

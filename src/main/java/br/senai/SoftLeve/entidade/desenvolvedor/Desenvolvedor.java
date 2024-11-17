@@ -109,11 +109,12 @@ public class Desenvolvedor {
 	        }
 	    } catch (SQLException e) {
 	        System.out.println("Erro na lista de Desenvolvedores: " + e.getMessage());
-	        e.printStackTrace(); // Adicionado para detalhar a exceção no console.
+	        e.printStackTrace(); // Adicionado para detalhar a exct53ção no console.
 	        return null;
 	    }
 	    return listarDev;
 	}
+	
 
 
 	public int getId() {
