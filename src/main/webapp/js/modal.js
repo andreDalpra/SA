@@ -39,6 +39,36 @@ function openModalTipo(tipo) {
     }
 }
 
+function openModalDev(devEdit) {
+    // Verifica se o objeto tipo contém os valores esperados
+    if (devEdit) {
+         // Modal de edição de tarefa
+        document.getElementById('edit-id').value = devEdit.id;
+        document.getElementById('edit-descricao').value = devEdit.descricao;
+        document.getElementById('edit-status').value = devEdit.status;
+        document.getElementById('edit-modal-title').innerText = "Editar Tarefa Dev";
+        document.getElementById('edit-modal-container').style.display = "flex";
+    } else {
+        console.warn("Objeto 'tipo' não fornecido ou inválido.");
+    }
+}
+
+function openModalVerDev(verDev) {
+   // Modal de edição de desenvolvedor
+        document.getElementById('edit-id-dev').value = verDev.id;
+        document.getElementById('edit-dev-modal-title').innerText = "Somente ADM";
+        document.getElementById('edit-dev-modal-container').style.display = "flex";
+}
+
+function openModalVerTipoDev(verTipoDev){
+ 		document.getElementById('edit-id-tipo').value = verTipoDev.id;
+        document.getElementById('edit-tipo-modal-title').innerText = "Somente ADM";
+        document.getElementById('edit-tipo-modal-container').style.display = "flex";
+}
+
+
+
+
 
 
 // Função para fechar a modal de cadastro
@@ -76,9 +106,19 @@ function confirmDevDelete(devId) {
     document.getElementById("delete-dev-modal").style.display = "flex";  // Mostra a modal de exclusão
 }
 
+function verDevDelete(devId) {
+    document.getElementById("delete-tipo-id").value = devId;  // Definindo o ID da tarefa para exclusão
+    document.getElementById("delete-tipo-modal").style.display = "flex";  // Mostra a modal de exclusão
+}
+
+function verTipoDevDelete(devId) {
+    document.getElementById("delete-tipo-id").value = devId;  // Definindo o ID da tarefa para exclusão
+    document.getElementById("delete-tipo-modal").style.display = "flex";  // Mostra a modal de exclusão
+}
+
 // Função para fechar a modal de confirmação de exclusão
 function closeDeleteDevModal() {
-    document.getElementById("delete-dev-modal").style.display = "none";
+    document.getElementById("delete-tipo-modal").style.display = "none";
 }
 
 // Função para abrir a modal de confirmação de exclusão

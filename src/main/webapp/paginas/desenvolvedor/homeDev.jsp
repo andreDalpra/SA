@@ -36,13 +36,11 @@
 			</a>
 				<ul id="desenvolvedores-dropdown" class="dropdown">
 					<li><a
-						href="${pageContext.request.contextPath}/paginas/adm/cadastroDev.jsp">Cadastrar</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/paginas/adm/listaDev.jsp">Ver
+						href="${pageContext.request.contextPath}/paginas/desenvolvedor/verDevs.jsp">Ver
 							mais</a></li>
 				</ul></li>
 
-			</li>
+			
 
 
 			<li id="link1" class="link"><a
@@ -55,9 +53,7 @@
 			</a>
 				<ul id="tipos-tarefas-dropdown" class="dropdown">
 					<li><a
-						href="${pageContext.request.contextPath}/paginas/tarefa/cadastroTipoTarefa.jsp">Cadastrar</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/paginas/tarefa/listaTipoTarefa.jsp">Ver
+						href="${pageContext.request.contextPath}/paginas/desenvolvedor/listaTipoDev.jsp">Ver
 							tipos</a></li>
 				</ul></li>
 		</ul>

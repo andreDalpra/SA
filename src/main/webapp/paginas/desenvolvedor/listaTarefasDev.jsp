@@ -22,9 +22,7 @@
 	<div class="container">
 		<div class="header">
 			<h1>Tarefas</h1>
-			<button class="btn btn-tela" onclick="openModal('create')">
-				<i class="fa-solid fa-plus"></i> Adicionar Tarefa
-			</button>
+			
 		</div>
 
 		<div id="error-message" class="alert alert-danger"
@@ -76,18 +74,15 @@
 						<td><%=descTipoTarefa != null ? descTipoTarefa :"Tipo Tarefa não encontrados"%></td>
 						<td>
 							<button type="button" class="btn btn-editar"
-								onclick="openModal('edit', {
+								onclick="openModalVerTipoDev({
                 id: '<%=t.getId()%>',
                 descricao: '<%=t.getDescricao()%>',
-                status: '<%=t.getStatus()%>',
-                prazo: '<%=t.getPrazo()%>',
-                desenvolvedor_id: '<%=t.getDesenvolvedor_id()%>',
-                tipotarefa_id: '<%=t.getTipotarefa_id()%>'
+                status: '<%=t.getStatus()%>'
             })">
 								<i class="fa-regular fa-pen-to-square"></i> Editar
 							</button>
 							<button type="button" class="btn btn-danger"
-								onclick="confirmDelete(<%=t.getId()%>)">
+								onclick="verTipoDevDelete(<%=t.getId()%>)">
 								<i class="fa-solid fa-trash-can"></i> Excluir
 							</button>
 						</td>
@@ -110,109 +105,45 @@
 
 
 		<!-- Modal para edição -->
-		<div id="edit-modal-container" class="modal-container">
+		<div id="edit-tipo-modal-container" class="modal-container">
 			<div class="modal">
-				<span class="fechar" onclick="closeEditModal()">X</span>
-				<h1 id="edit-modal-title">Editar Tarefa</h1>
-				<form action="${pageContext.request.contextPath}/servlet"
-					method="post" id="edit-task-form">
+				<span class="fechar" onclick="closeEditTipoModal()">X</span>
+				<h1 id="edit-tipo-modal-title">Somente ADM</h1>
+				
 					<input type="hidden" name="action" id="edit-form-action"
-						value="atualizar-tarefa"> <input type="hidden"
-						id="edit-id" name="id">
+						value="atualizar-tipo-tarefa"> <input type="hidden"
+						id="edit-id-tipo" name="id">
 
-					<div class="form-group">
-						<label for="edit-descricao">Descrição</label> <input type="text"
-							id="edit-descricao" name="descricao" required>
-					</div>
+					
 
-					<div class="form-group">
-						<label for="edit-status">Status</label> <select id="edit-status"
-							name="status" required>
-							<option value="">Selecionar status</option>
-							<option value="PENDENTE">Pendente</option>
-							<option value="EM_ANDAMENTO">Em Andamento</option>
-							<option value="CONCLUIDA">Concluída</option>
-							<option value="ATRASADA">Atrasada</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<label for="edit-prazo">Prazo</label> <input type="date"
-							id="edit-prazo" name="prazo" required>
-					</div>
-
-					<div class="form-group">
-						<label for="edit-desenvolvedor_id">Desenvolvedor ID</label> <select
-							id="edit-desenvolvedor_id" name="desenvolvedor_id" required>
-							<option value="" disabled selected>Selecione o ID do
-								desenvolvedor</option>
-							<%
-							Desenvolvedor dev = new Desenvolvedor();
-							List<Desenvolvedor> listarDev = dev.listarDev();	
-							if (listarDev != null && !listarDev.isEmpty()) {
-								for (Desenvolvedor d : listarDev) {
-							%>
-
-							<option value="<%=d.getId()%>"><%=d.getId()%> -
-								<%=d.getNome()%></option>
-							<%
-							}
-							} else {
-							out.println("<option value=''>Nenhum dev encontrado</option>");
-							}
-							%>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<label for="edit-tipo_tarefa_id">Tipo de Tarefa ID</label> <select
-							id="edit-tipo_tarefa_id" name="tipo_tarefa_id" required>
-							<option value="" disabled selected>Selecione o ID do
-								tipo da tarefa</option>
-							<%
-							TipoTarefa tt = new TipoTarefa();
-							List<TipoTarefa> listarTipoTarefas = tt.listarTiposTarefa();
-							if (listarTipoTarefas != null && !listarTipoTarefas.isEmpty()) {
-								for (TipoTarefa t : listarTipoTarefas) {
-							%>
-							<option value="<%=t.getId()%>"><%=t.getId()%> -
-								<%=t.getDescricao()%></option>
-							<%
-							}
-							} else {
-							out.println("<option value=''>Nenhum tipo de tarefa encontrado</option>");
-							}
-							%>
-						</select>
-					</div>
-
-					<button type="submit" id="edit-submit-button">Salvar
-						Alterações</button>
-				</form>
+					<button type="button" id="edit-submit-button" onclick="window.location.href='${pageContext.request.contextPath}/paginas/desenvolvedor/listaTarefasDev.jsp'" class="btn btn-secondary">
+    Voltar ao menu
+</button>
+				
 			</div>
 		</div>
 
 		<!-- Modal de confirmação de exclusão -->
-		<div id="delete-modal" class="modal-container" style="display: none;">
+		<div id="delete-tipo-modal" class="modal-container"
+			style="display: none;">
 			<div class="modal">
-				<span class="fechar" onclick="closeDeleteModal()">X</span>
-				<h2>Confirmação de Exclusão</h2>
+				<span class="fechar" onclick="closeDeleteTipoModal()">X</span>
+				<h2>Somente ADM</h2>
 
-				<form action="${pageContext.request.contextPath}/servlet"
-					method="POST">
-					<input type="hidden" name="action" value="excluir-tarefa">
-					<input type="hidden" id="delete-task-id" name="id">
+				
+					<input type="hidden" name="action" value="excluir-tipo-tarefa"> <input
+						type="hidden" id="delete-tipo-id" name="id">
 					<div class="modal-buttons">
-						<button type="submit" class="btn btn-danger">Excluir</button>
+						
 						<button type="button" class="btn btn-secondary"
-							onclick="closeDeleteModal()">Cancelar</button>
+							onclick="closeDeleteDevModal()">Voltar</button>
 					</div>
-				</form>
+				
 			</div>
 		</div>
 
 		<div class="text-center">
-			<a href="${pageContext.request.contextPath}/paginas/adm/homeAdm.jsp"
+			<a href="${pageContext.request.contextPath}/paginas/desenvolvedor/homeDev.jsp"
 				class="btn">Voltar</a>
 		</div>
 

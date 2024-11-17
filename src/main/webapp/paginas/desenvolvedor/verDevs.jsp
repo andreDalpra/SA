@@ -1,5 +1,5 @@
 <%@ page import="java.util.List"%>
-<%@ page import="br.senai.SoftLeve.entidade.tipotarefa.TipoTarefa"%>
+<%@ page import="br.senai.SoftLeve.entidade.tarefa.Tarefa"%>
 <%@ page import="br.senai.SoftLeve.entidade.usuario.Usuario"%>
 <%@ page import="br.senai.SoftLeve.entidade.desenvolvedor.Desenvolvedor"%>
 <%@ page import="java.text.SimpleDateFormat"%>
@@ -21,7 +21,7 @@
 
 	<div class="container">
 		<div class="header">
-			<h1>Tipo Tarefa Dev</h1>
+			<h1>Desenvolvedores</h1>
 
 		</div>
 
@@ -33,35 +33,35 @@
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Descrição</th>
+						<th>Nome</th>
+						<th>Email</th>
+						<th>ID usuário</th>
 						<th>Ações</th>
 					</tr>
 				</thead>
 				<tbody id="task-list">
 					<%
-					// Recuperando a lista de tipos de tarefa
-					TipoTarefa tipoTarefa = new TipoTarefa();
-					List<TipoTarefa> listarTipos = tipoTarefa.listarTiposTarefa();
-					if (listarTipos != null && !listarTipos.isEmpty()) {
-						for (TipoTarefa tt : listarTipos) {
+					Desenvolvedor dev = new Desenvolvedor();
+					List<Desenvolvedor> listarDev = dev.listarDev();
+					if (listarDev != null && !listarDev.isEmpty()) {
+						for (Desenvolvedor d : listarDev) {
 					%>
 					<tr>
-						<td><%=tt.getId()%></td>
-						<td><%=tt.getDescricao()%></td>
-
+						<td><%=d.getId()%></td>
+						<td><%=d.getNome()%></td>
+						<td><%=d.getUsuario_email()%></td>
+						<td><%=d.getUsuario_id()%></td>
 						<td>
 							<button type="button" class="btn btn-editar"
-								onclick="openModalTipo({
-            id: '<%=tt.getId()%>',
-            descricao: '<%=tt.getDescricao()%>'
-        })">
+								onclick="openModalVerDev({
+        id: '<%=d.getId()%>'
+    })">
 								<i class="fa-regular fa-pen-to-square"></i> Editar
 							</button>
 
 
-
 							<button type="button" class="btn btn-danger"
-								onclick="confirmTipoDelete(<%=tt.getId()%>)">
+								onclick="verDevDelete(<%=d.getId()%>)">
 								<i class="fa-solid fa-trash-can"></i> Excluir
 							</button>
 						</td>
@@ -81,52 +81,46 @@
 			</table>
 		</div>
 
-
-
-		<!-- Modal par edição -->
-		<div id="edit-tipo-modal-container" class="modal-container">
+		<!-- Modal para edição -->
+		<div id="edit-dev-modal-container" class="modal-container">
 			<div class="modal">
-				<span class="fechar" onclick="closeEditTipoModal()">X</span>
-				<h1 id="edit-tipo-modal-title">Editar Tipo Tarefa</h1>
-				<form action="${pageContext.request.contextPath}/servlet"
-					method="post" id="edit-task-form">
+				<span class="fechar" onclick="closeEditDevModal()">X</span>
+				<h1 id="edit-dev-modal-title">Somente ADM</h1>
+				
 					<input type="hidden" name="action" id="edit-form-action"
-						value="atualizar-tipo-tarefa"> <input type="hidden"
-						id="edit-id-tipo" name="id">
+						value="atualizar-dev"> <input type="hidden"
+						id="edit-id-dev" name="id">
 
-					<div class="form-group">
-						<label for="edit-descricao">Nome</label> <input type="text"
-							id="edit-descricao" name="descricaoTipoTarefa" required>
-					</div>
+					
 
-					<button type="submit" id="edit-submit-button">Salvar
-						Alterações</button>
-				</form>
+					<button type="button" id="edit-submit-button" onclick="window.location.href='${pageContext.request.contextPath}/paginas/desenvolvedor/verDevs.jsp'" class="btn btn-secondary">
+    Voltar ao menu
+</button>
+
+				
 			</div>
 		</div>
 
 		<!-- Modal de confirmação de exclusão -->
-		<div id="delete-tipo-modal" class="modal-container"
-			style="display: none;">
+		<div id="delete-tipo-modal" class="modal-container" style="display: none;">
 			<div class="modal">
-				<span class="fechar" onclick="closeDeleteTipoModal()">X</span>
-				<h2>Confirmação de Exclusão</h2>
+				<span class="fechar" onclick="closeDeleteDevModal()">X</span>
+				<h1>Somente ADM</h1>
 
-				<form action="${pageContext.request.contextPath}/servlet"
-					method="POST">
-					<input type="hidden" name="action" value="excluir-tipo-tarefa"> <input
-						type="hidden" id="delete-tipo-id" name="id">
+				
+					<input type="hidden" name="action" value="excluir-dev">
+					<input type="hidden" id="delete-tipo-id" name="id">
 					<div class="modal-buttons">
-						<button type="submit" class="btn btn-danger">Excluir</button>
+						
 						<button type="button" class="btn btn-secondary"
-							onclick="closeDeleteTipoModal()">Cancelar</button>
+							onclick="closeDeleteDevModal()">Voltar</button>
 					</div>
-				</form>
+				
 			</div>
 		</div>
 
 		<div class="text-center">
-			<a href="${pageContext.request.contextPath}/paginas/adm/homeAdm.jsp"
+			<a href="${pageContext.request.contextPath}/paginas/desenvolvedor/homeDev.jsp"
 				class="btn">Voltar</a>
 		</div>
 

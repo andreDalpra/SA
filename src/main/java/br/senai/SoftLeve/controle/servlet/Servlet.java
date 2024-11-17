@@ -173,6 +173,10 @@ public class Servlet extends HttpServlet {
 			case "atualizar-tarefa":
 				atualizarTarefa(request, response);
 				break;
+			case "atualizar-tarefa-dev":
+				atualizarTarefaDev(request, response);
+				break;
+			
 			default:
 				response.sendRedirect(request.getContextPath() + "/error.jsp");
 				break;
@@ -427,6 +431,30 @@ public class Servlet extends HttpServlet {
 		}
 		
 	
+	}
+	
+	private void atualizarTarefaDev(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Tarefa t = new Tarefa();
+		int id = Integer.parseInt(request.getParameter("id"));
+		String desc = request.getParameter("descricao");
+		String status = request.getParameter("status");
+		
+		t.setId(id);
+		t.setDescricao(desc);
+		t.setStatus(Tarefa.Status.fromString(status));
+		
+		try {
+			if (t.alterarTarefaDev()) { // Chamada correta para o método
+				response.sendRedirect(request.getContextPath() + "/paginas/desenvolvedor/tarefaDev.jsp");
+			} else {
+				response.sendRedirect(request.getContextPath() + "/paginas/desenvolvedor/listaTarefaDev.jsp?error");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTarefa.jsp?error" + e.getMessage());
+		}
+		
 	}
 	
 	

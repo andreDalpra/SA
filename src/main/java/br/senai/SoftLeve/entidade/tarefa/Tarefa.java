@@ -99,6 +99,20 @@ public class Tarefa {
         }
     }
     
+    public boolean alterarTarefaDev() throws ClassNotFoundException {
+        String sql = "UPDATE tarefa SET descricao = ?, status = ? WHERE id = ?";
+        try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
+            stm.setString(1, this.getDescricao());
+            stm.setString(2, this.getStatus().getValue()); // Usa getValue() para garantir a correspondência
+            stm.setInt(3, this.getId());
+            int rowsUpdated = stm.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            System.out.println("Erro na alteração da tarefa: " + e.getMessage());
+            return false;
+        }
+    }
+    
     public boolean excluirTarefa() throws ClassNotFoundException {
         String sql = "DELETE FROM tarefa WHERE id = ?";
         try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
