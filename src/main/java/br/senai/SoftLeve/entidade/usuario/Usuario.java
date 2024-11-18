@@ -105,6 +105,27 @@ public class Usuario {
 
         return desenvolvedor;
     }
+    
+    public int buscarUsuarioPorNivel(int id) throws ClassNotFoundException {
+        int nivel = -1; // Valor padrão para "não encontrado"
+
+        String sql = "SELECT nivel FROM usuario WHERE id = ?";
+
+        try (Connection con = Conexao.conectar();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                nivel = rs.getInt("nivel"); // Pega o nível diretamente
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar nível do usuário: " + e.getMessage());
+        }
+
+        return nivel; // Retorna o nível como int
+    }
+
 
 
 
@@ -154,7 +175,7 @@ public class Usuario {
     // Listar usuários ativos
     private List<Usuario> listarUsuarios(boolean bloqueado) throws ClassNotFoundException {
         List<Usuario> listarUsuarios = new ArrayList<>();
-        String sql = "SELECT id, username, password FROM usuario WHERE bloqueado = ? ORDER BY id";
+        String sql = "SELECT id, username, password, email FROM usuario WHERE bloqueado = ? ORDER BY id";
         try (Connection con = Conexao.conectar(); PreparedStatement stm = con.prepareStatement(sql)) {
             stm.setBoolean(1, bloqueado);
             ResultSet rs = stm.executeQuery();
@@ -163,6 +184,7 @@ public class Usuario {
                 u.setId(rs.getInt("id"));
                 u.setUsername(rs.getString("username"));
                 u.setPassword(rs.getString("password"));
+                u.setEmail(rs.getString("email"));
                 listarUsuarios.add(u);
             }
         } catch (SQLException e) {

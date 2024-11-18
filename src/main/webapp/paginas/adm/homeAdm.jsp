@@ -34,10 +34,10 @@
 			</a>
 				<ul id="usuarios-dropdown" class="dropdown">
 					<li><a
-						href="${pageContext.request.contextPath}/paginas/usuario/usuariosAtivos.jsp">Usuários
+						href="${pageContext.request.contextPath}/paginas/adm/usuariosAtivos.jsp">Usuários
 							Ativos</a></li>
 					<li><a
-						href="${pageContext.request.contextPath}/paginas/usuario/usuariosBloqueados.jsp">Bloqueados</a></li>
+						href="${pageContext.request.contextPath}/paginas/adm/usuariosBloqueados.jsp">Bloqueados</a></li>
 				</ul></li>
 
 			<!-- Menu Dropdown de Desenvolvedores -->
@@ -104,7 +104,8 @@
 				%>
 			</H1>
 
-			<button class="btn">Dashboard</button>
+			<button class="btn" onclick="window.location.href='${pageContext.request.contextPath}/paginas/adm/dashboard.jsp'">Dashboard</button>
+
 		</div>
 
 	</header>
