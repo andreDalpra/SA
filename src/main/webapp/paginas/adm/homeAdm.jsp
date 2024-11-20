@@ -61,7 +61,7 @@
 
 			<!-- Menu Dropdown de Tipos de Tarefas -->
 			<li class="link"><a href="#" id="tipos-tarefas-link"
-				onclick="Dropdown(event, 'tipos-tarefas-dropdown')"> Tipos
+				onclick="toggleDropdown(event, 'tipos-tarefas-dropdown')"> Tipos
 					de Tarefas <span class="arrow">▾</span>
 			</a>
 				<ul id="tipos-tarefas-dropdown" class="dropdown">
@@ -77,7 +77,7 @@
 		<div class="profile">
 			<div>
 				<a href="#"> <%
- Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
+ Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
  if (usuarioLogado != null) {
  	out.println("<p>" + usuarioLogado.getUsername() + "</p>");
  } else {

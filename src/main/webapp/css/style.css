@@ -126,7 +126,7 @@ form img {
 /* Estilo dos botões */
 button,
 .btn-register {
-    /* Ajusta a largura para incluir margens */
+    width: calc(100% - 20px); /* Ajusta a largura para incluir margens */
     padding: 14px;
     letter-spacing: 1px;
     font-size: 17px;
@@ -166,7 +166,25 @@ a.btn-senha {
     margin-right: 10px; /* Margem direita */
 }
 
+a.btn-senha:hover {
+    text-decoration: underline; /* Sublinha no hover */
+    color: #0056b3; /* Cor mais escura no hover */
+}
 
+/* Estilo do botão Cadastrar */
+a.btn-register {
+    display: inline-block;
+    text-align: center;
+    background-color: #38383e; /* Azul vibrante */
+    color: white; /* Texto branco */
+    text-decoration: none;
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 8px; /* Borda arredondada */
+    font-weight: bold; /* Texto em negrito */
+    margin-left: 10px; /* Margem esquerda */
+    margin-right: 10px; /* Margem direita */
+}
 
 a.btn-register:hover {
     background-color: #1d1d1f; /* Azul mais escuro no hover */
