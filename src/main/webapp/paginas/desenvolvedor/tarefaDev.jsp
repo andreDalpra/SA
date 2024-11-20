@@ -69,7 +69,7 @@
 								<i class="fa-regular fa-pen-to-square"></i> Editar
 							</button>
 							<button type="button" class="btn btn-danger"
-								onclick="verTipoDevDelete(<%=t.getId()%>)">
+								onclick="verTipoDevDelete()">
 								<i class="fa-solid fa-trash-can"></i> Excluir
 							</button>
 						</td>

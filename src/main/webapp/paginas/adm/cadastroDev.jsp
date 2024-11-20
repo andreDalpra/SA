@@ -29,19 +29,7 @@
 			<b><label for="usuarioId">ID do Usuário:</label></b> <select
 				id="usuarioId" name="usuarioId" required>
 				<option value="" disabled selected>Selecione o ID do usuário</option>
-				<%
-				Usuario usuario = new Usuario();
-                List<Usuario> listaUsuariosDev = usuario.listarUsuariosDev();
-				if (listaUsuariosDev != null && !listaUsuariosDev.isEmpty()) {
-					for (Usuario usuarios : listaUsuariosDev) {
-				%>
-				<option value="<%=usuarios.getId()%>"><%=usuarios.getId()%> - <%=usuarios.getUsername()%></option>
-				<%
-				}
-				} else {
-				out.println("<option value=''>Nenhum usuário encontrado</option>");
-				}
-				%>
+				
 			</select>
 		</div>
 
