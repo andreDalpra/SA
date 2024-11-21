@@ -1,3 +1,4 @@
+<%--  Paigna que lista os devs --%>
 <%@ page import="java.util.List"%>
 <%@ page import="br.senai.SoftLeve.entidade.tarefa.Tarefa"%>
 <%@ page import="br.senai.SoftLeve.entidade.usuario.Usuario"%>
@@ -32,6 +33,7 @@
 			<table class="table" id="task-table">
 				<thead>
 					<tr>
+					<%--  Tabela --%>
 						<th>ID</th>
 						<th>Nome</th>
 						<th>Email</th>
@@ -40,6 +42,7 @@
 					</tr>
 				</thead>
 				<tbody id="task-list">
+				<%--  Lista a partir do método java --%>
 					<%
 					Desenvolvedor dev = new Desenvolvedor();
 					List<Desenvolvedor> listarDev = dev.listarDev();
@@ -47,11 +50,13 @@
 						for (Desenvolvedor d : listarDev) {
 					%>
 					<tr>
+					<%--  Dados da lista --%>
 						<td><%=d.getId()%></td>
 						<td><%=d.getNome()%></td>
 						<td><%=d.getUsuario_email()%></td>
 						<td><%=d.getUsuario_id()%></td>
 						<td>
+						<%--  Botao com modal para editar --%>
 							<button type="button" class="btn btn-editar"
 								onclick="openModal('edit-dev', null, {
         id: '<%=d.getId()%>',
@@ -61,7 +66,7 @@
 								<i class="fa-regular fa-pen-to-square"></i> Editar
 							</button>
 
-
+						<%--  Modal para confirma a exclusao --%>
 							<button type="button" class="btn btn-danger"
 								onclick="confirmDevDelete(<%=d.getId()%>)">
 								<i class="fa-solid fa-trash-can"></i> Excluir

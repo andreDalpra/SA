@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexao {
+	//Classe conexão ao banco com uma mensagem caso confirmando que a conexão ocorreu com exito
     public static Connection conectar() throws ClassNotFoundException {
         Connection con = null;
         String url = "jdbc:mysql://localhost:3306/softleve?useSSL=false&serverTimezone=UTC";

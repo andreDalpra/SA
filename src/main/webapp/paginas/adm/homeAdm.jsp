@@ -1,9 +1,9 @@
+<%--  Pagina home de adm --%>
 <%@ page import="br.senai.SoftLeve.entidade.usuario.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,12 +21,14 @@
 
 	<nav>
 		<div class="nav-logo">
+		<%--  Logo --%>
 			<a href="#"> <img
 				src="${pageContext.request.contextPath}/img/Logo.png" alt="Logo">
 			</a>
 		</div>
 
 		<ul class="nav-links">
+		<%--  Dropdowns --%>
 			<!-- Menu Dropdown de Usuários -->
 			<li class="link"><a href="#" id="usuarios-link"
 				onclick="toggleDropdown(event, 'usuarios-dropdown')"> Usuários <span
@@ -76,6 +78,7 @@
 
 		<div class="profile">
 			<div>
+			<%--  Definindo o usuario na sessão para aparecer na tela (a partir do servlet --%>
 				<a href="#"> <%
  Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
  if (usuarioLogado != null) {
@@ -90,7 +93,7 @@
 			</div>
 		</div>
 
-		<a href="${pageContext.request.contextPath}/servlet?action=logout">
+		<a href="${pageContext.request.contextPath}/servlet?action=logout"> <%--  Ação logout (servlet) --%>
 			<button class="btn">Logout</button>
 		</a>
 	</nav>
@@ -99,6 +102,7 @@
 		<div class="content">
 			<span class="blur"></span> <span class="blur"></span>
 			<H1>
+			<%--  Mensagem para o usuario da sessão --%>
 				<%
 				out.println("<h1>Olá, " + usuarioLogado.getUsername() + ".</h1>");
 				%>
@@ -109,7 +113,7 @@
 		</div>
 
 	</header>
-
+ <%--  Sessão bonitinha da página --%>
 	<section class="container">
 		<h2 class="header">TECNOLOGIAS USADAS</h2>
 		<div class="features">

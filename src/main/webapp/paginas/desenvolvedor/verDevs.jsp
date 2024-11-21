@@ -1,3 +1,4 @@
+<%--  Pagina que permite os devs verem os devs logados --%>
 <%@ page import="java.util.List"%>
 <%@ page import="br.senai.SoftLeve.entidade.tarefa.Tarefa"%>
 <%@ page import="br.senai.SoftLeve.entidade.usuario.Usuario"%>
@@ -32,6 +33,7 @@
 			<table class="table" id="task-table">
 				<thead>
 					<tr>
+					<%--  Tabela --%>
 						<th>ID</th>
 						<th>Nome</th>
 						<th>Email</th>
@@ -40,6 +42,7 @@
 					</tr>
 				</thead>
 				<tbody id="task-list">
+				<%--  Listagem --%>
 					<%
 					Desenvolvedor dev = new Desenvolvedor();
 					List<Desenvolvedor> listarDev = dev.listarDev();

@@ -1,4 +1,4 @@
-
+<%--  Pagina para fazer o cadastro do desenvolvedor --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="java.util.List"%>
 <%@ page import="br.senai.SoftLeve.entidade.usuario.Usuario"%>
@@ -12,8 +12,9 @@
 	href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
+<%--  Formulario para fazer o cadastro do desenvolvedor --%>
 	<form action="${pageContext.request.contextPath}/servlet" method="post">
-		<input type="hidden" name="action" value="cadastrar-dev">
+		<input type="hidden" name="action" value="cadastrar-dev"> <%--  define a ação --%>
 		<h2 class="card-title text-center">Cadastro</h2>
 		<div class="form-group">
 			<b><label for="nomeDev">Nome</label></b> <input type="text"
@@ -29,7 +30,9 @@
 			<b><label for="usuarioId">ID do Usuário:</label></b> <select
 				id="usuarioId" name="usuarioId" required>
 				<option value="" disabled selected>Selecione o ID do usuário</option>
+				<%--  Listagem de usuario aptos a serem desenvolvedores --%>
 				<%
+				
 				Usuario usuario = new Usuario();
                 List<Usuario> listaUsuariosDev = usuario.listarUsuariosDev();
 				if (listaUsuariosDev != null && !listaUsuariosDev.isEmpty()) {

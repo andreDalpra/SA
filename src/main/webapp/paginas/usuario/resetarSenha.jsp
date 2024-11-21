@@ -1,3 +1,4 @@
+<%--  Pagina que reseta a senha do usuario --%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

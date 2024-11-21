@@ -1,3 +1,4 @@
+<%--  Página que mostra os usuarios bloqueados no sistema --%>
 <%@ page import="java.util.List"%>
 <%@ page import="br.senai.SoftLeve.entidade.tarefa.Tarefa"%>
 <%@ page import="br.senai.SoftLeve.entidade.usuario.Usuario"%>
@@ -32,6 +33,7 @@
 			<table class="table" id="task-table">
 				<thead>
 					<tr>
+					<%--  Tabela --%>
 						<th>ID</th>
 						<th>Username</th>
 						<th>Senha</th>
@@ -41,6 +43,7 @@
 					</tr>
 				</thead>
 				<tbody id="task-list">
+				<%--  Listagem --%>
     <%
     Usuario usuario = new Usuario();
     List<Usuario> listarUsuarios = usuario.listarUsuariosBloqueados();
@@ -53,9 +56,12 @@
         	} catch (ClassNotFoundException e) {
         	    e.printStackTrace();
         	}
+        	
+        	
 
     %>
     <tr>
+    <%--  Dados da tabela --%>
         <td><%= u.getId() %></td>
         <td><%= u.getUsername()%></td>
         <td><%= u.getPassword() %></td>

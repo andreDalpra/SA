@@ -4,7 +4,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 92vh; /* Adicionado para que o body ocupe toda a altura da tela */
+    height: 92vh; 
 }
 
 .container {
@@ -28,9 +28,9 @@ h1 {
     border-radius: 5px;
     cursor: pointer;
     margin: 0 10px;
-    text-decoration: none; /* Removido o sublinhado */
+    text-decoration: none; 
 }
 
 .btn:hover {
     background-color: #3700b3;
-}@charset "ISO-8859-1";
+}

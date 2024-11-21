@@ -1,3 +1,4 @@
+<%--  Página home de desenvolvedor --%>
 <%@ page import="br.senai.SoftLeve.entidade.usuario.Usuario"%>
 <%@ page import="br.senai.SoftLeve.entidade.desenvolvedor.Desenvolvedor"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -61,6 +62,7 @@
 
 		<div class="profile">
 			<div>
+			<%--  Mostrando o usuario da sessao --%>
 				<a href="#"> <%
  Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
  if (usuarioLogado != null) {
@@ -84,11 +86,12 @@
 		<div class="content">
 			<span class="blur"></span> <span class="blur"></span>
 			<H1>
+			<%--  Mensagem para o dev da sessao --%>
 				<%
 				out.println("<h1>Olá, " + usuarioLogado.getUsername() + ".</h1>");
 				%>
 			</H1>
-
+	<%--  Pegando o id da tarefa --%>
 			<% 
     // Recupera o ID do desenvolvedor da sessão
     Integer idDev = (Integer) session.getAttribute("idDev");

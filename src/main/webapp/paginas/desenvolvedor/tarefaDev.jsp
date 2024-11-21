@@ -1,3 +1,4 @@
+<%--  Página que lista as tarefas somente do desenvolvedor --%>
 <%@ page import="java.util.List"%>
 <%@ page import="br.senai.SoftLeve.entidade.tarefa.Tarefa"%>
 <%@ page import="br.senai.SoftLeve.entidade.desenvolvedor.Desenvolvedor"%>
@@ -20,6 +21,7 @@
 	<div class="container">
 		<div class="header">
 			<h1>
+			<%--  Desenvolvedor da sessão --%>
 				Minhas Tarefas
 				<%
 			Desenvolvedor devLogado = (Desenvolvedor) session.getAttribute("devLogado");
@@ -39,6 +41,7 @@
 			<table class="table" id="task-table">
 				<thead>
 					<tr>
+					<%--  Tabela --%>
 						<th>Descrição</th>
 						<th>Status</th>
 						<th>Prazo</th>
@@ -46,10 +49,11 @@
 					</tr>
 				</thead>
 				<tbody id="task-list">
+				<%--  Listagem das tarefas --%>
 					<%
 					// Recupera as tarefas diretamente no JSP
 					List<Tarefa> listarTarefas = Tarefa.tarefasDevs(devLogado.getId());
-					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
 
 					if (listarTarefas != null && !listarTarefas.isEmpty()) {
 						for (Tarefa t : listarTarefas) {

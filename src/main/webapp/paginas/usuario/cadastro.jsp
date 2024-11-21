@@ -1,3 +1,4 @@
+<%--  Página de cadastro de usuario --%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

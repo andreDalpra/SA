@@ -20,6 +20,7 @@ import jakarta.servlet.http.HttpSession;
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	//Método que instancia as informações do usuario a partir dos request das páginas jsp
 	private Usuario instanciarUsuario(HttpServletRequest request) {
 		Usuario usu = new Usuario();
 		String vUser = request.getParameter("username");
@@ -35,6 +36,8 @@ public class Servlet extends HttpServlet {
 			System.out.println("Cargo não foi especificado. Definindo como 'desconhecido'.");
 			cargo = "desconhecido";
 		}
+		
+		//Verificando qual o cargo do usuario
 
 		int nivel = 10; // Nível padrão
 		switch (cargo) {
@@ -54,7 +57,7 @@ public class Servlet extends HttpServlet {
 		usu.setnivel(nivel);
 		return usu;
 	}
-
+	//Método que instancia as informações do desenvolvedor a partir dos request das páginas jsp
 	private Desenvolvedor instanciarDev(HttpServletRequest request) {
 		Desenvolvedor dev = new Desenvolvedor();
 
@@ -73,14 +76,15 @@ public class Servlet extends HttpServlet {
 		return dev;
 	}
 
+	//Método que instancia as informações da tarefa a partir dos request das páginas jsp 
 	private Tarefa instanciarTarefa(HttpServletRequest request) {
 		Tarefa tarefa = new Tarefa();
 
 		String vDescricao = request.getParameter("descricao");
 		String vStatus = request.getParameter("status");
 
-		// Adicione esta linha para depuração
-		System.out.println("Status recebido: " + vStatus); // Para depuração
+		
+		System.out.println("Status recebido: " + vStatus); // Console
 
 		// Tratamento da data
 		String prazoTarefaStr = request.getParameter("prazo");
@@ -90,8 +94,7 @@ public class Servlet extends HttpServlet {
 				prazoTarefa = Date.valueOf(prazoTarefaStr); // Converte para java.sql.Date
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
-				// Aqui você pode lidar com a exceção, como redirecionar ou enviar uma mensagem
-				// de erro
+				
 			}
 		}
 
@@ -113,11 +116,13 @@ public class Servlet extends HttpServlet {
 
 		return tarefa;
 	}
+	
+	//Método que instancia as informações do tipo tarefa a partir dos request das páginas jsp
 
 	private TipoTarefa instanciarTipoTarefa(HttpServletRequest request) {
 		TipoTarefa tipoTarefa = new TipoTarefa();
 
-		String vDescricao = request.getParameter("descricaoTipoTarefa"); // Nome do parâmetro
+		String vDescricao = request.getParameter("descricaoTipoTarefa");
 		tipoTarefa.setDescricao(vDescricao);
 
 		return tipoTarefa;
@@ -133,6 +138,8 @@ public class Servlet extends HttpServlet {
 		String action = request.getParameter("action");
 
 		try {
+			
+			//SWITCH PARA DETERMINAR A AÇÕES QUE O USUÁRIO DESEJA REALIZAR NO SISTEMA
 			switch (action) {
 			case "logar":
 				logar(request, response);
@@ -186,7 +193,7 @@ public class Servlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/index.jsp?error");
 		}
 	}
-
+	//Método de logar no sistema feito pelo usuario
 	private void logar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    try {
 	        Usuario usuario = instanciarUsuario(request);
@@ -201,7 +208,7 @@ public class Servlet extends HttpServlet {
 	                Desenvolvedor desenvolvedor = usuario.buscarDesenvolvedorPorId(usuario.getId());
 	                
 	                if (desenvolvedor != null) {
-	                    session.setAttribute("devLogado", desenvolvedor); // Salva o desenvolvedor completo
+	                    session.setAttribute("devLogado", desenvolvedor); // Salva o desenvolvedor ativo na sessão
 	                    System.out.println("Desenvolvedor encontrado: ID = " + desenvolvedor.getId());
 	                } else {
 	                    System.out.println("Nenhum desenvolvedor encontrado para o usuário com ID = " + usuario.getId());
@@ -221,7 +228,7 @@ public class Servlet extends HttpServlet {
 	}
 
 
-
+	//Método de logout no sistema feito pelo usuario
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Invalida a sessão do usuário
 		HttpSession session = request.getSession(false); // Evita criar uma nova sessão
@@ -232,7 +239,7 @@ public class Servlet extends HttpServlet {
 		// Redireciona para a página de login
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
 	}
-
+	//Método de registrar usuario no banco
 	private void registrar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Usuario usuario = instanciarUsuario(request);
@@ -247,7 +254,7 @@ public class Servlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/error.jsp");
 		}
 	}
-
+	//Método que desbloqueia o usuario
 	private void desbloquear(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Usuario usuario = instanciarUsuario(request);
@@ -262,7 +269,7 @@ public class Servlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/error.jsp");
 		}
 	}
-
+	//Método que cadastra o desenvelvedor no banco
 	private void cadastrarDev(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Desenvolvedor dev = instanciarDev(request);
@@ -274,11 +281,11 @@ public class Servlet extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroDev.jsp?error");
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace(); // Adicionei para debugar
+			e.printStackTrace(); 
 			response.sendRedirect(request.getContextPath() + "/paginas/adm/desenvolvedores.jsp");
 		}
 	}
-
+	//Método que exclui o desenvolvedor do banco
 	private void excluirDev(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Obtenha o ID diretamente do request
@@ -288,7 +295,7 @@ public class Servlet extends HttpServlet {
 			Desenvolvedor dev = new Desenvolvedor();
 			dev.setId(id); // Defina o ID do desenvolvedor a ser excluído
 
-			if (dev.excluirDev()) { // Chamada correta para o método
+			if (dev.excluirDev()) { 
 				response.sendRedirect(request.getContextPath() + "/paginas/adm/listaDev.jsp");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/paginas/adm/listaDev.jsp?error");
@@ -298,15 +305,15 @@ public class Servlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/paginas/adm/listaDev.jsp?error");
 		}
 	}
-
+	//Atualiza os desenvolvedor no banco
 	private void atualizarDev(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Desenvolvedor dev = instanciarDev(request);
-		dev.setId(id); // Defina o ID do desenvolvedor a ser atualizado
+		dev.setId(id); // Definindo o ID do desenvolvedor a ser atualizado
 
 		try {
-			if (dev.alterarDev()) { // Chamada correta para o método
+			if (dev.alterarDev()) { 
 				response.sendRedirect(request.getContextPath()
 						+ "/paginas/adm/listaDev.jsp?message=Atualização realizada com sucesso!");
 			} else {
@@ -319,7 +326,7 @@ public class Servlet extends HttpServlet {
 					+ "&message=Erro ao atualizar: " + e.getMessage());
 		}
 	}
-
+	//Cadastro do tipo de tarefa
 	private void cadastrarTipoTarefa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		TipoTarefa tt = instanciarTipoTarefa(request);
@@ -335,18 +342,18 @@ public class Servlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTipoTarefa.jsp?error");
 		}
 	}
-
+	//Exclui o tipo de tarefa no banco
 	private void excluirTipoTarefa(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
-		// Obtenha o ID diretamente do request
+		// Obtendo o ID diretamente do request
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		try {
 			TipoTarefa tt = new TipoTarefa();
 			tt.setId(id);
 
-			if (tt.excluirTipoTarefa()) { // Chamada correta para o método
+			if (tt.excluirTipoTarefa()) { 
 				response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTipoTarefa.jsp");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTipoTarefa.jsp?error");
@@ -356,15 +363,15 @@ public class Servlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTipoTarefa.jsp?error");
 		}
 	}
-
+	//Método para atualizar o tipo de tarefa no banco
 	private void atualizarTipoTarefa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		TipoTarefa tt = instanciarTipoTarefa(request);
-		tt.setId(id); // Defina o ID do desenvolvedor a ser atualizado
+		tt.setId(id); // Definindo o ID do desenvolvedor a ser atualizado
 
 		try {
-			if (tt.alterarTipoTarefa()) { // Chamada correta para o método
+			if (tt.alterarTipoTarefa()) { 
 				response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTipoTarefa.jsp");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTipoTarefa.jsp?error");
@@ -375,7 +382,7 @@ public class Servlet extends HttpServlet {
 					request.getContextPath() + "/paginas/tarefa/listaTipoTarefa.jsp?error" + e.getMessage());
 		}
 	}
-
+	//Método que cadastra uma tarefa que pode ser feita tanto pelo usuario quanto pelo adm
 	private void cadastrarTarefa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Tarefa t = instanciarTarefa(request);
@@ -391,18 +398,19 @@ public class Servlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/paginas/adm/cadastroTarefa.jsp?error");
 		}
 	}
-
+	
+	//Método de excluir tarefa
 	private void excluirTarefa(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
-		// Obtenha o ID diretamente do request
+		// Obtendo o ID diretamente do request
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		try {
 			Tarefa t = new Tarefa();
 			t.setId(id);
 
-			if (t.excluirTarefa()) { // Chamada correta para o método
+			if (t.excluirTarefa()) { 
 				response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTarefa.jsp");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTarefa.jsp?error");
@@ -412,15 +420,15 @@ public class Servlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTarefa.jsp?error");
 		}
 	}
-
+	//Método que faz o adm atualizar a tarefa
 	private void atualizarTarefa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Tarefa t = instanciarTarefa(request);
-		t.setId(id); // Defina o ID do desenvolvedor a ser atualizado
+		t.setId(id); // Definindo o ID do desenvolvedor a ser atualizado
 
 		try {
-			if (t.alterarTarefa()) { // Chamada correta para o método
+			if (t.alterarTarefa()) { 
 				response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTarefa.jsp");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/paginas/tarefa/listaTarefa.jsp?error");
@@ -432,7 +440,7 @@ public class Servlet extends HttpServlet {
 		
 	
 	}
-	
+	//Método que faz o desenolvedor atualizar a tarefa
 	private void atualizarTarefaDev(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Tarefa t = new Tarefa();
@@ -445,7 +453,7 @@ public class Servlet extends HttpServlet {
 		t.setStatus(Tarefa.Status.fromString(status));
 		
 		try {
-			if (t.alterarTarefaDev()) { // Chamada correta para o método
+			if (t.alterarTarefaDev()) { 
 				response.sendRedirect(request.getContextPath() + "/paginas/desenvolvedor/tarefaDev.jsp");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/paginas/desenvolvedor/listaTarefaDev.jsp?error");

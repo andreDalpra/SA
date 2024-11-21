@@ -1,5 +1,6 @@
-// Função para abrir a modal de cadastro ou edição
+// Função para abrir a modal de cadastro ou edição 
 function openModal(mode, task = null, dev = null) {
+	//caso for para editar tarefa
     if (mode === 'edit' && task) {
         // Modal de edição de tarefa
         document.getElementById('edit-id').value = task.id;
@@ -11,6 +12,7 @@ function openModal(mode, task = null, dev = null) {
         document.getElementById('edit-modal-title').innerText = "Editar Tarefa";
         document.getElementById('edit-modal-container').style.display = "flex";
     } 
+    //Caso for para editar o desenvolvedor
     else if (mode === 'edit-dev' && dev) {
         // Modal de edição de desenvolvedor
         document.getElementById('edit-id-dev').value = dev.id;

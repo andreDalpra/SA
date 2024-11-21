@@ -1,3 +1,4 @@
+<%--  Pagina que lista os tipos de tarefa para o desenvolvedor --%>
 <%@ page import="java.util.List"%>
 <%@ page import="br.senai.SoftLeve.entidade.tipotarefa.TipoTarefa"%>
 <%@ page import="br.senai.SoftLeve.entidade.usuario.Usuario"%>
@@ -32,12 +33,14 @@
 			<table class="table" id="task-table">
 				<thead>
 					<tr>
+					<%--  Tabela --%>
 						<th>ID</th>
 						<th>Descrição</th>
 						<th>Ações</th>
 					</tr>
 				</thead>
 				<tbody id="task-list">
+				<%--  Listagem --%>
 					<%
 					// Recuperando a lista de tipos de tarefa
 					TipoTarefa tipoTarefa = new TipoTarefa();
@@ -50,6 +53,7 @@
 						<td><%=tt.getDescricao()%></td>
 
 						<td>
+						<%--  Modal --%>
 							<button type="button" class="btn btn-editar"
 								onclick="openModalVerTipoDev({
             id: '<%=tt.getId()%>',

@@ -1,3 +1,4 @@
+<%--  Lista do tipo de tarefa --%>
 <%@ page import="java.util.List"%>
 <%@ page import="br.senai.SoftLeve.entidade.tipotarefa.TipoTarefa"%>
 <%@ page import="br.senai.SoftLeve.entidade.usuario.Usuario"%>
@@ -32,12 +33,14 @@
 			<table class="table" id="task-table">
 				<thead>
 					<tr>
+					<%--  Tabela --%>
 						<th>ID</th>
 						<th>Descrição</th>
 						<th>Ações</th>
 					</tr>
 				</thead>
 				<tbody id="task-list">
+				<%--  Listagem --%>
 					<%
 					// Recuperando a lista de tipos de tarefa
 					TipoTarefa tipoTarefa = new TipoTarefa();

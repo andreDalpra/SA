@@ -20,7 +20,7 @@
         </div>
         <div class="right-login">
             <form action="${pageContext.request.contextPath}/servlet" method="post">
-                <input type="hidden" name="action" value="logar"> <!-- Define a ação como 'logar' -->
+                <input type="hidden" name="action" value="logar"> <!-- Define a ação do servlet como 'logar' -->
                 <h1 class="titulo-center">Login</h1>
                 <div class="form-group">
                     <b><label for="username">User       :</label></b>
@@ -36,6 +36,7 @@
                         <img width="25" height="27" src="https://img.icons8.com/ios/50/lock--v1.png" alt="lock--v1"/>
                     </div>
                 </div>
+                <!-- Após o Usuario logar enviara as informações ao servlet -->
                 <button type="submit" class="btn-login">Login</button>
                 <a href="${pageContext.request.contextPath}/paginas/usuario/cadastro.jsp" class="btn-register">Cadastrar-se</a>
                 <a href="${pageContext.request.contextPath}/paginas/usuario/resetarSenha.jsp" class="btn-senha">Esqueceu sua senha?</a>

@@ -1,3 +1,4 @@
+<%--  Página de listagem de tarefa para adms --%>
 <%@ page import="java.util.List"%>
 <%@ page import="br.senai.SoftLeve.entidade.tarefa.Tarefa"%>
 <%@ page import="br.senai.SoftLeve.entidade.tipotarefa.TipoTarefa"%>
@@ -29,6 +30,7 @@
 		<div class="table-container">
 			<table class="table" id="task-table">
 				<thead>
+				<%--  Tabela --%>
 					<tr>
 						<th>ID</th>
 						<th>Descrição</th>
@@ -40,6 +42,7 @@
 					</tr>
 				</thead>
 				<tbody id="task-list">
+				<%-- Listagem de tarefas  --%>
 					<%
 					Tarefa tarefa = new Tarefa();
 					List<Tarefa> listarTarefas = tarefa.listarTarefas();
@@ -50,6 +53,7 @@
 							String prazoFormatado = (t.getPrazo() != null) ? sdf.format(t.getPrazo()) : "Sem prazo";
 					%>
 					<tr>
+					<%--  Dados da tabela --%>
 						<td><%=t.getId()%></td>
 						<td><%=t.getDescricao()%></td>
 						<td><%=t.getStatus()%></td>
@@ -125,6 +129,7 @@
 							id="desenvolvedor_id" name="desenvolvedor_id" required>
 							<option value="" disabled selected>Selecione o ID do
 								desenvolvedor</option>
+								<%--  Lista de devs --%>
 							<%
 							Desenvolvedor dev = new Desenvolvedor();
 							List<Desenvolvedor> listarDev = dev.listarDev();
@@ -147,6 +152,7 @@
 							id="tipo_tarefa_id" name="tipo_tarefa_id" required>
 							<option value="" disabled selected>Selecione o ID do
 								tipo da tarefa</option>
+								<%--  Lista de tipo de tarefas --%>
 							<%
 							TipoTarefa tt = new TipoTarefa();
 							List<TipoTarefa> listarTipoTarefas = tt.listarTiposTarefa();
@@ -206,6 +212,7 @@
 							id="edit-desenvolvedor_id" name="desenvolvedor_id" required>
 							<option value="" disabled selected>Selecione o ID do
 								desenvolvedor</option>
+								<%--  Listagem de devs --%>
 							<%
 							if (listarDev != null && !listarDev.isEmpty()) {
 								for (Desenvolvedor d : listarDev) {
@@ -227,6 +234,7 @@
 							id="edit-tipo_tarefa_id" name="tipo_tarefa_id" required>
 							<option value="" disabled selected>Selecione o ID do
 								tipo da tarefa</option>
+								<%--  Listagem de tipos de tarefas --%>
 							<%
 							if (listarTipoTarefas != null && !listarTipoTarefas.isEmpty()) {
 								for (TipoTarefa t : listarTipoTarefas) {

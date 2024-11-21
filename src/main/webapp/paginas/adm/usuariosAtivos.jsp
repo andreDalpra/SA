@@ -1,3 +1,4 @@
+<%--  Pagina que lista os usuarios ativos no sistema --%>
 <%@ page import="java.util.List"%>
 <%@ page import="br.senai.SoftLeve.entidade.tarefa.Tarefa"%>
 <%@ page import="br.senai.SoftLeve.entidade.usuario.Usuario"%>
@@ -32,6 +33,7 @@
 			<table class="table" id="task-table">
 				<thead>
 					<tr>
+					<%--  Tabela --%>
 						<th>ID</th>
 						<th>Username</th>
 						<th>Senha</th>
@@ -41,7 +43,9 @@
 					</tr>
 				</thead>
 				<tbody id="task-list">
+				<%--  listagem --%>
     <%
+    
     Usuario usuario = new Usuario();
     List<Usuario> listarUsuarios = usuario.listarUsuariosAtivos();
 
@@ -55,12 +59,15 @@
         	}
 
     %>
+    <%--  dados da tabela --%>
     <tr>
         <td><%= u.getId() %></td>
         <td><%= u.getUsername()%></td>
         <td><%= u.getPassword() %></td>
         <td><%= u.getEmail() %></td>
         <td>
+        
+        <%--  Colocando na tela qual o cargo do usuario a partir do nivel dele no banco --%>
     <% 
         String descricaoNivel;
         if (nivelUsuario == 0) {
@@ -75,7 +82,7 @@
     %>
     <%= descricaoNivel %>
 </td>
-
+	<%--  Modal de editar --%>
         <td>
             <button type="button" class="btn btn-editar"
                 onclick="openMoal('edit-dev', null, {

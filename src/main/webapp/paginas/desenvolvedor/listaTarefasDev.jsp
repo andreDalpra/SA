@@ -1,3 +1,4 @@
+<%--  Listagem de tarefa para o dev --%>
 <%@ page import="java.util.List"%>
 <%@ page import="br.senai.SoftLeve.entidade.tarefa.Tarefa"%>
 <%@ page import="br.senai.SoftLeve.entidade.tipotarefa.TipoTarefa"%>
@@ -32,7 +33,7 @@
 			<table class="table" id="task-table">
 				<thead>
 					<tr>
-
+			<%--  Tabela --%>
 						<th>Descrição</th>
 						<th>Status</th>
 						<th>Prazo</th>
@@ -42,6 +43,7 @@
 					</tr>
 				</thead>
 				<tbody id="task-list">
+				<%--  Listagem --%>
 					<%
 					Tarefa tarefa = new Tarefa();
 					List<Tarefa> listarTarefas = tarefa.listarTarefas();
@@ -49,7 +51,7 @@
 
 					if (listarTarefas != null && !listarTarefas.isEmpty()) {
 						for (Tarefa t : listarTarefas) {
-							String prazoFormatado = (t.getPrazo() != null) ? sdf.format(t.getPrazo()) : "Sem prazo";
+							String prazoFormatado = (t.getPrazo() != null) ? sdf.format(t.getPrazo()) : "Sem prazo"; 
 							String descTipoTarefa = null;
 							try{
 								descTipoTarefa = Tarefa.buscarTipoTarefaPorId(t.getTipotarefa_id());
@@ -66,6 +68,7 @@
 							}
 					%>
 					<tr>
+					<%--  Tabela --%>
 						<td><%=t.getDescricao()%></td>
 						<td><%=t.getStatus()%></td>
 						<td><%=prazoFormatado%></td>
@@ -79,6 +82,7 @@
                 descricao: '<%=t.getDescricao()%>',
                 status: '<%=t.getStatus()%>'
             })">
+            <%--  Modal --%>
 								<i class="fa-regular fa-pen-to-square"></i> Editar
 							</button>
 							<button type="button" class="btn btn-danger"
